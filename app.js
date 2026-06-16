@@ -53,6 +53,7 @@ function openModule(id) {
     preSortIdx:0, preSortPlaced:[], preSortDone:false,
     extractViewed:false,
     sortIdx:0, sortPlaced:[], sortDone:false,
+    customSortCards:[],
     mirrorIdx:0, mirrorSecond:[], mirrorPhase:'sort', mirrorDone:false,
     formationPage:0, formationDone:false,
     libraryDone:false,
@@ -243,10 +244,75 @@ function renderWatchSortCardsHTML(m) {
         ${actionRow}
       </div>`;
   }).join('');
+  const customCards = (moduleState.customSortCards || []).map((card, idx) => {
+    const isPlaced  = card.placed !== null;
+    const pFrame    = card.placed;
+    const cwKey     = `${m.id}:cws:${idx}`;
+    const noteText  = watchNotes[cwKey] || '';
+    const noteOpen  = noteText ? 'block' : 'none';
+    const isHearted = heartedItems.some(h => h.moduleId === m.id && h.argIdx === `cws:${idx}`);
+    const heartFill = isHearted ? "'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24" : "'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24";
+    const heartColor = isHearted ? '#c0392b' : '#7A7570';
+    const escapedText = card.text.replace(/'/g, "\\'");
+
+    const inlineFrameBtns = isPlaced ? '' : `
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px;">
+        ${[1,2,3,4,5].map(i => {
+          const iconInner = FRAME_ICONS[i] === '≈'
+            ? `<div style="font-size:18px;color:${FRAME_COLORS[i]};font-weight:700;line-height:1;">≈</div>`
+            : `<span class="material-symbols-outlined" style="font-size:20px;color:${FRAME_COLORS[i]};${FRAME_FILL[i] ? "font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;" : ''}">${FRAME_ICONS[i]}</span>`;
+          return `<button onclick="sortCustomCard(${idx},${i})"
+            style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 4px;background:${FRAME_BG[i]};border:1px solid ${FRAME_COLORS[i]}33;border-radius:12px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">
+            ${iconInner}
+            <span style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:${FRAME_COLORS[i]};line-height:1.2;text-align:center;">${['','Essential','Lies','Non-Ess.','Wisdom','Unclean'][i]}</span>
+          </button>`;
+        }).join('')}
+      </div>`;
+
+    const actionRow = isPlaced ? `
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:10px;padding-top:8px;border-top:1px solid #EFEFED;">
+        <button onclick="toggleCustomCardNote(${idx},'${m.id}')" title="Add a note"
+          style="display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:8px;color:#7A7570;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;">
+          <span class="material-symbols-outlined" style="font-size:17px;">edit_note</span>
+          Note
+        </button>
+        <button id="cwh-${idx}" onclick="toggleCustomCardHeart(${idx},'${m.id}','${escapedText}','${card.timestamp}')" title="Add to altar of your heart"
+          style="display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:8px;color:${heartColor};font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;">
+          <span class="material-symbols-outlined" style="font-size:17px;color:${heartColor};font-variation-settings:${heartFill};">favorite</span>
+          ${isHearted ? 'Loved' : 'Love'}
+        </button>
+      </div>
+      <div id="cwn-${idx}" style="display:${noteOpen};margin-top:8px;">
+        <textarea rows="3" placeholder="Your note on this statement…"
+          oninput="watchNotes['${cwKey}']=this.value"
+          style="width:100%;background:#f8f7f5;border:1px solid #D4A574;border-radius:8px;padding:10px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;resize:none;line-height:1.5;box-sizing:border-box;">${noteText}</textarea>
+      </div>` : '';
+
+    return `
+      <div id="cws-card-${idx}" style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1.5px solid ${isPlaced ? FRAME_COLORS[pFrame] : '#D4A574'};">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:30px;height:30px;background:#fffbf3;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #D4A574;">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#B8860B;">add_circle</span>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <p style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B8860B;margin-bottom:5px;">My Statement</p>
+            <p style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#2A2824;line-height:1.4;margin-bottom:6px;">${card.text}</p>
+            <button onclick="playExtractAt('${m.videoId}','${card.timestamp}')" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:4px;">
+              <span class="material-symbols-outlined" style="font-size:13px;color:#0B3D91;">play_circle</span>
+              <span style="font-size:11px;color:#0B3D91;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;">${card.timestamp}</span>
+            </button>
+          </div>
+          ${isPlaced ? `<span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:${FRAME_COLORS[pFrame]};font-family:'Plus Jakarta Sans',sans-serif;flex-shrink:0;padding-top:3px;">${FRAME_NAMES[pFrame]}</span>` : ''}
+        </div>
+        ${inlineFrameBtns}
+        ${actionRow}
+      </div>`;
+  }).join('');
+
   const doneBtn = allDone
     ? `<button onclick="advancePipeline()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;margin-top:4px;">Begin Formation Study →</button>`
     : '';
-  return cards + doneBtn;
+  return cards + customCards + doneBtn;
 }
 
 function toggleWatchHeart(moduleId, argIdx, quote, timestamp) {
@@ -274,6 +340,84 @@ function toggleWatchHeart(moduleId, argIdx, quote, timestamp) {
 
 function toggleWatchNote(moduleId, argIdx) {
   const el = document.getElementById(`wn-${moduleId}-${argIdx}`);
+  if (!el) return;
+  const isOpen = el.style.display === 'block';
+  el.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) { const ta = el.querySelector('textarea'); if (ta) ta.focus(); }
+}
+
+function toggleCustomCardForm() {
+  const form = document.getElementById('custom-card-form');
+  if (!form) return;
+  const isOpen = form.style.display !== 'none';
+  form.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) {
+    const ts = document.getElementById('custom-ts');
+    if (ts) ts.focus();
+  }
+}
+
+function addCustomCard() {
+  const textEl = document.getElementById('custom-text');
+  const tsEl   = document.getElementById('custom-ts');
+  const text   = textEl ? textEl.value.trim() : '';
+  const ts     = tsEl   ? tsEl.value.trim()   : '';
+
+  if (!text) {
+    if (textEl) { textEl.style.borderColor = '#A0523D'; textEl.focus(); }
+    return;
+  }
+
+  moduleState.customSortCards.push({ text, timestamp: ts || '0:00', placed: null });
+
+  if (textEl) { textEl.value = ''; textEl.style.borderColor = '#c4c6d3'; }
+  if (tsEl)   { tsEl.value = ''; }
+  toggleCustomCardForm();
+
+  const m  = MODULES[moduleState.moduleId];
+  const el = document.getElementById('pipeline-content');
+  if (m && el) renderWatchSort(m, el);
+
+  setTimeout(() => {
+    const newCard = document.getElementById(`cws-card-${moduleState.customSortCards.length - 1}`);
+    if (newCard) newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 80);
+}
+
+function sortCustomCard(idx, frame) {
+  if (!moduleState.customSortCards[idx]) return;
+  moduleState.customSortCards[idx].placed = frame;
+  const m  = MODULES[moduleState.moduleId];
+  const el = document.getElementById('pipeline-content');
+  if (m && el) renderWatchSort(m, el);
+}
+
+function toggleCustomCardHeart(idx, moduleId, quote, timestamp) {
+  const m = MODULES[moduleId];
+  const argIdx = `cws:${idx}`;
+  const existingIdx = heartedItems.findIndex(h => h.moduleId === moduleId && h.argIdx === argIdx);
+  const btn = document.getElementById(`cwh-${idx}`);
+  if (existingIdx >= 0) {
+    heartedItems.splice(existingIdx, 1);
+    if (btn) {
+      btn.querySelector('span').style.fontVariationSettings = "'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24";
+      btn.querySelector('span').style.color = '#7A7570';
+      btn.style.color = '#7A7570';
+      btn.childNodes[btn.childNodes.length - 1].textContent = ' Love';
+    }
+  } else {
+    heartedItems.push({ moduleId, argIdx, quote, timestamp, moduleTitle: m ? m.title : moduleId });
+    if (btn) {
+      btn.querySelector('span').style.fontVariationSettings = "'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24";
+      btn.querySelector('span').style.color = '#c0392b';
+      btn.style.color = '#c0392b';
+      btn.childNodes[btn.childNodes.length - 1].textContent = ' Loved';
+    }
+  }
+}
+
+function toggleCustomCardNote(idx, moduleId) {
+  const el = document.getElementById(`cwn-${idx}`);
   if (!el) return;
   const isOpen = el.style.display === 'block';
   el.style.display = isOpen ? 'none' : 'block';
@@ -309,6 +453,32 @@ function renderWatchSort(m, el) {
       </div>
 
       <p style="font-size:12px;color:#52504B;line-height:1.5;margin-bottom:12px;">Tap a number to jump to that moment in the sermon. Place each argument into a frame.</p>
+
+      <button onclick="toggleCustomCardForm()"
+        style="width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:#fffbf3;border:1.5px dashed #D4A574;border-radius:12px;padding:11px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;color:#B8860B;font-size:13px;font-weight:700;margin-bottom:10px;">
+        <span class="material-symbols-outlined" style="font-size:18px;">add_circle</span>
+        Make that a statement
+      </button>
+
+      <div id="custom-card-form" style="display:none;background:#fffbf3;border:1px solid #D4A574;border-radius:14px;padding:14px;margin-bottom:12px;">
+        <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B8860B;margin-bottom:10px;">What did you just hear?</p>
+        <div style="display:flex;gap:8px;margin-bottom:10px;align-items:flex-start;">
+          <div style="width:80px;flex-shrink:0;">
+            <p style="font-size:10px;color:#7A7570;margin-bottom:4px;">Timestamp</p>
+            <input id="custom-ts" type="text" placeholder="17:40"
+              style="width:100%;background:#fff;border:1px solid #D4A574;border-radius:8px;padding:8px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;box-sizing:border-box;">
+          </div>
+          <div style="flex:1;">
+            <p style="font-size:10px;color:#7A7570;margin-bottom:4px;">Statement</p>
+            <textarea id="custom-text" rows="3" placeholder="Write the statement or idea you just heard…"
+              style="width:100%;background:#fff;border:1px solid #c4c6d3;border-radius:8px;padding:8px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="toggleCustomCardForm()" style="flex:1;background:transparent;border:1px solid #c4c6d3;border-radius:100px;padding:10px;font-size:13px;font-weight:600;color:#7A7570;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Cancel</button>
+          <button onclick="addCustomCard()" style="flex:2;background:#0B3D91;color:#fff;border-radius:100px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Add Statement →</button>
+        </div>
+      </div>
 
       <div id="ws-cards"></div>
     </div>`;
@@ -622,6 +792,11 @@ function renderLibrary(m, el) {
     moduleState.sortPlaced.forEach(p => {
       if (!libraryItems.find(l => l.text === p.stmt.text)) {
         libraryItems.push({ text:p.stmt.text, frame:p.placed, correct:p.stmt.correct, module:m.title, favorited:false, notes:'' });
+      }
+    });
+    (moduleState.customSortCards || []).forEach(card => {
+      if (card.placed !== null && !libraryItems.find(l => l.text === card.text)) {
+        libraryItems.push({ text:card.text, frame:card.placed, correct:null, module:m.title, favorited:false, notes:'', isCustom:true });
       }
     });
     moduleState.libraryDone = true;
