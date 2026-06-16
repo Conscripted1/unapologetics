@@ -105,11 +105,11 @@
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <span class="material-symbols-outlined icon-fill" style="font-size:18px;color:#fff;">bookmark</span>
+          <span class="material-symbols-outlined icon-fill" style="font-size:18px;color:#fff;">monitoring</span>
         </div>
         <div>
-          <p style="font-weight:700;font-size:14px;color:#fff;margin-bottom:2px;">Grow</p>
-          <p style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;">Build your personal belief library. Track your formation over time.</p>
+          <p style="font-weight:700;font-size:14px;color:#fff;margin-bottom:2px;">Growth</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;">See everything you've loved, sorted, and built — your formation over time.</p>
         </div>
       </div>
     </div>
@@ -284,48 +284,6 @@
   </div>
 </div>
 
-<!-- ═══ NAVIGATE TAB ═════════════════════════════════════════════════════════ -->
-<div id="screen-today" class="screen" style="padding:16px 16px 100px;">
-  <h1 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#0B3D91;margin-bottom:4px;">Navigate</h1>
-  <p style="font-size:13px;color:#52504B;margin-bottom:20px;">Your formation path and daily practice.</p>
-
-  <div style="background:#fff;border-radius:20px;padding:20px;margin-bottom:14px;border:1.5px solid #D4A574;" class="lifted">
-    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#B8860B;margin-bottom:10px;">Today's Anchor</p>
-    <p style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#2A2824;line-height:1.5;margin-bottom:8px;">"We demolish arguments and every pretension that sets itself up against the knowledge of God, and we take captive every thought to make it obedient to Christ."</p>
-    <p style="font-size:12px;color:#7A7570;font-weight:600;">2 Corinthians 10:5</p>
-  </div>
-
-  <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;border:1px solid #c4c6d3;" class="mono-shadow">
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;">
-      <div style="width:44px;height:44px;background:#dae2ff;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <span class="material-symbols-outlined icon-fill" style="color:#0B3D91;font-size:22px;">balance</span>
-      </div>
-      <div>
-        <p style="font-size:13px;font-weight:700;color:#2A2824;">Today's Practice</p>
-        <p style="font-size:11px;color:#7A7570;">10 statements · ~5 minutes</p>
-      </div>
-    </div>
-    <button onclick="switchTab('discern')" style="background:#0B3D91;color:#fff;border-radius:100px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
-      Begin Discernment Session
-    </button>
-  </div>
-
-  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;" class="mono-shadow">
-    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:12px;">Next in Learn</p>
-    <div style="display:flex;gap:12px;align-items:flex-start;">
-      <div style="width:48px;height:48px;background:#0B3D91;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <span class="material-symbols-outlined icon-fill" style="color:#fff;font-size:22px;">directions_walk</span>
-      </div>
-      <div style="flex:1;">
-        <p style="font-size:13px;font-weight:700;color:#2A2824;margin-bottom:2px;">You Can't Bring Egypt With You</p>
-        <p style="font-size:11px;color:#7A7570;margin-bottom:10px;">Numbers 13 · 7 steps · 28 min</p>
-        <button onclick="openModule('egypt')" style="border:1.5px solid #0B3D91;color:#0B3D91;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:700;cursor:pointer;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;">
-          Open Module →
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══ LEARN TAB ════════════════════════════════════════════════════════════ -->
 <div id="screen-learn" class="screen" style="padding:0 0 100px;">
@@ -339,6 +297,15 @@
     <div style="background:#f0ede8;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;">
       <span class="material-symbols-outlined" style="font-size:18px;color:#747783;">search</span>
       <span style="font-size:14px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Search the tradition...</span>
+    </div>
+  </div>
+
+  <!-- Today's Anchor -->
+  <div style="padding:16px 16px 0;">
+    <div style="background:#fff;border-radius:16px;padding:18px;border:1.5px solid #D4A574;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#B8860B;margin-bottom:10px;">Today's Anchor</p>
+      <p style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#2A2824;line-height:1.55;margin-bottom:8px;">"We demolish arguments and every pretension that sets itself up against the knowledge of God, and we take captive every thought to make it obedient to Christ."</p>
+      <p style="font-size:12px;color:#7A7570;font-weight:600;">2 Corinthians 10:5</p>
     </div>
   </div>
 
@@ -408,6 +375,72 @@
     </button>
   </div>
 
+  <!-- The Remnant Christian Network community -->
+  <div style="padding:0 16px 0;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#747783;margin-bottom:16px;">From your Community</p>
+
+    <!-- RCN community header -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:42px;height:42px;background:#1F4D2F;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span style="color:#fff;font-size:14px;font-weight:900;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-0.03em;">RCN</span>
+      </div>
+      <div>
+        <p style="font-size:14px;font-weight:700;color:#1c1c19;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:1px;">The Remnant Christian Network</p>
+        <p style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Arome Osayi · Collection</p>
+      </div>
+    </div>
+
+    <!-- Module card: How to Seek God -->
+    <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;border:1px solid #c4c6d3;cursor:pointer;" class="mono-shadow" onclick="openModule('how-to-seek-god')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#345baf;font-family:'Plus Jakarta Sans',sans-serif;background:#dae2ff44;padding:3px 8px;border-radius:100px;border:1px solid #b1c5ff;">Formation</span>
+        <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">RCN Archives</span>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">How to Seek God</h3>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Jeremiah 29:13 · Arome Osayi</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;gap:14px;">
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">schedule</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">55 min</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+          </div>
+        </div>
+        <button onclick="event.stopPropagation();openModule('how-to-seek-god')" style="background:#1F4D2F;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+      </div>
+    </div>
+
+    <!-- Module card: Demonic Ranks -->
+    <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;border:1px solid #c4c6d3;cursor:pointer;" class="mono-shadow" onclick="openModule('demonic-ranks')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7c572d;font-family:'Plus Jakarta Sans',sans-serif;background:#fecb9722;padding:3px 8px;border-radius:100px;border:1px solid #fecb97;">Theology</span>
+        <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">RCN Archives</span>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">Demonic Ranks and How to Deal With Them</h3>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Ephesians 6:12 · Arome Osayi</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;gap:14px;">
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">schedule</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">62 min</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+          </div>
+        </div>
+        <button onclick="event.stopPropagation();openModule('demonic-ranks')" style="background:#1F4D2F;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+      </div>
+    </div>
+
+    <button style="width:100%;background:transparent;border:1.5px solid #c4c6d3;border-radius:100px;padding:11px;font-size:12px;font-weight:700;color:#434652;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-top:4px;margin-bottom:28px;">
+      View All Resources
+    </button>
+  </div>
+
   <!-- Coming Soon divider -->
   <div style="padding:0 16px;">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
@@ -468,10 +501,16 @@
 
 <!-- ═══ GROWTH TAB ════════════════════════════════════════════════════════════ -->
 <div id="screen-growth" class="screen" style="padding:16px 16px 100px;">
-  <h1 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#0B3D91;margin-bottom:4px;">Growth</h1>
-  <p style="font-size:13px;color:#52504B;margin-bottom:20px;">Your formation journey over time.</p>
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+      <img src="Branding/Favicon.png" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;" />
+      <h1 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#0B3D91;margin:0;">Growth</h1>
+    </div>
+    <p style="font-size:13px;color:#52504B;">Your formation record — everything you've loved, sorted, and built.</p>
+  </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+  <!-- Stats row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
     <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;text-align:center;" class="mono-shadow">
       <p style="font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:#0B3D91;" id="growth-sorted">0</p>
       <p style="font-size:11px;color:#7A7570;font-weight:600;margin-top:2px;">Statements Sorted</p>
@@ -482,20 +521,59 @@
     </div>
   </div>
 
-  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;margin-bottom:14px;" class="mono-shadow">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-      <p style="font-size:13px;font-weight:700;color:#2A2824;">The Stones of My Foundation</p>
-      <span style="font-size:11px;color:#7A7570;" id="library-count">0 stones laid</span>
+  <!-- Altar of Your Heart -->
+  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #fecb97;margin-bottom:14px;" class="mono-shadow">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span class="material-symbols-outlined icon-fill" style="font-size:18px;color:#c0392b;">favorite</span>
+      <p style="font-size:13px;font-weight:700;color:#2A2824;">Altar of Your Heart</p>
     </div>
-    <div id="library-preview">
-      <p style="font-size:13px;color:#7A7570;text-align:center;padding:16px 0;">Complete a module to populate your library.</p>
+    <div id="growth-hearted">
+      <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Points you love during Watch & Sort will appear here.</p>
     </div>
   </div>
 
-  <div style="background:#0B3D91;border-radius:16px;padding:20px;">
-    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">My Credo</p>
-    <p style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:4px;">"I take every thought captive."</p>
-    <p style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5;">Complete your first module to begin building your personal statement of belief.</p>
+  <!-- Discernment Log -->
+  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;margin-bottom:14px;" class="mono-shadow">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span class="material-symbols-outlined" style="font-size:18px;color:#0B3D91;">balance</span>
+      <p style="font-size:13px;font-weight:700;color:#2A2824;">Discernment Log</p>
+    </div>
+    <div id="growth-discern-log">
+      <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a Discern session to build your log.</p>
+    </div>
+  </div>
+
+  <!-- My Stones -->
+  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;margin-bottom:14px;" class="mono-shadow">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#B8860B;">layers</span>
+        <p style="font-size:13px;font-weight:700;color:#2A2824;">My Stones</p>
+      </div>
+      <span style="font-size:11px;color:#7A7570;" id="growth-stone-count">0 stones laid</span>
+    </div>
+    <div id="library-preview">
+      <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a module to lay your first stones.</p>
+    </div>
+  </div>
+
+  <!-- Community & Coaching — coming soon -->
+  <div style="background:#f4f3f1;border-radius:16px;padding:20px;border:1px dashed #c4c6d3;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#c4c6d3;margin-bottom:8px;">Coming Soon</p>
+    <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#c4c6d3;margin-top:1px;">groups</span>
+      <div>
+        <p style="font-size:13px;font-weight:700;color:#c4c6d3;margin-bottom:2px;">Join a Community</p>
+        <p style="font-size:12px;color:#c4c6d3;line-height:1.5;">Connect with a church or cohort that curates content for you.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start;">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#c4c6d3;margin-top:1px;">psychology</span>
+      <div>
+        <p style="font-size:13px;font-weight:700;color:#c4c6d3;margin-bottom:2px;">Coaching Modules</p>
+        <p style="font-size:12px;color:#c4c6d3;line-height:1.5;">Guided formation with a trusted spiritual leader.</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -506,16 +584,12 @@
       <span class="material-symbols-outlined nav-icon">balance</span>
       <span class="nav-label">Discern</span>
     </button>
-    <button class="nav-tab" id="tab-navigate" onclick="switchTab('navigate')">
-      <span class="material-symbols-outlined nav-icon">explore</span>
-      <span class="nav-label">Navigate</span>
-    </button>
     <button class="nav-tab" id="tab-learn" onclick="switchTab('learn')">
       <span class="material-symbols-outlined nav-icon">school</span>
       <span class="nav-label">Learn</span>
     </button>
     <button class="nav-tab" id="tab-growth" onclick="switchTab('growth')">
-      <span class="material-symbols-outlined nav-icon">menu_book</span>
+      <span class="material-symbols-outlined nav-icon">monitoring</span>
       <span class="nav-label">Growth</span>
     </button>
   </div>

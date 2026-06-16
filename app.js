@@ -4,6 +4,10 @@ let lastTab = 'learn';
 let totalSorted = 0;
 let modulesComplete = 0;
 let libraryItems = [];
+let heartedItems = [];      // { moduleId, argIdx, quote, timestamp, moduleTitle }
+let watchNotes = {};         // key: 'moduleId:argIdx', value: string
+let formationReflections = {}; // key: 'moduleId:pageIdx', value: string
+let discernLog = [];         // accumulated placed statements from general discern sessions
 
 let discernState = { statements:[], idx:0, placed:[], streak:0 };
 
@@ -23,16 +27,16 @@ window._frameCallback = null;
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
 function switchTab(tab) {
   currentTab = tab;
-  ['screen-sort','screen-today','screen-learn','screen-growth'].forEach(id => {
+  ['screen-sort','screen-learn','screen-growth'].forEach(id => {
     document.getElementById(id).classList.remove('active');
   });
-  ['tab-discern','tab-navigate','tab-learn','tab-growth'].forEach(id => {
+  ['tab-discern','tab-learn','tab-growth'].forEach(id => {
     document.getElementById(id).classList.remove('active');
   });
   document.getElementById('bottom-nav').style.display = 'block';
 
-  const screenMap = { discern:'screen-sort', navigate:'screen-today', learn:'screen-learn', growth:'screen-growth' };
-  const tabMap    = { discern:'tab-discern', navigate:'tab-navigate', learn:'tab-learn',    growth:'tab-growth' };
+  const screenMap = { discern:'screen-sort', learn:'screen-learn', growth:'screen-growth' };
+  const tabMap    = { discern:'tab-discern', learn:'tab-learn',    growth:'tab-growth' };
   document.getElementById(screenMap[tab]).classList.add('active');
   document.getElementById(tabMap[tab]).classList.add('active');
 
@@ -188,6 +192,35 @@ function renderWatchSortCardsHTML(m) {
     const isPlaced = i < placedCount;
     const isActive = i === placedCount && !allDone;
     const pFrame   = isPlaced ? moduleState.sortPlaced[i].placed : null;
+
+    const isHearted = heartedItems.some(h => h.moduleId === m.id && h.argIdx === i);
+    const heartFill = isHearted ? "'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24" : "'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24";
+    const heartColor = isHearted ? '#c0392b' : '#7A7570';
+    const noteText = watchNotes[`${m.id}:${i}`] || '';
+    const noteOpen = noteText ? 'block' : 'none';
+
+    // Escape single quotes in the quote for inline onclick
+    const escapedQuote = arg.text.replace(/'/g, "\\'");
+
+    const actionRow = isPlaced ? `
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:10px;padding-top:8px;border-top:1px solid #EFEFED;">
+        <button onclick="toggleWatchNote('${m.id}',${i})" title="Add a note"
+          style="display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:8px;color:#7A7570;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;">
+          <span class="material-symbols-outlined" style="font-size:17px;">edit_note</span>
+          Note
+        </button>
+        <button id="wh-${m.id}-${i}" onclick="toggleWatchHeart('${m.id}',${i},'${escapedQuote}','${arg.timestamp}')" title="Add to altar of your heart"
+          style="display:flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:8px;color:${heartColor};font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;">
+          <span class="material-symbols-outlined" style="font-size:17px;color:${heartColor};font-variation-settings:${heartFill};">favorite</span>
+          ${isHearted ? 'Loved' : 'Love'}
+        </button>
+      </div>
+      <div id="wn-${m.id}-${i}" style="display:${noteOpen};margin-top:8px;">
+        <textarea rows="3" placeholder="Your note on this point…"
+          oninput="watchNotes['${m.id}:${i}']=this.value"
+          style="width:100%;background:#f8f7f5;border:1px solid #D4A574;border-radius:8px;padding:10px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;resize:none;line-height:1.5;box-sizing:border-box;">${noteText}</textarea>
+      </div>` : '';
+
     return `
       <div id="ws-card-${i}" style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1.5px solid ${isPlaced ? FRAME_COLORS[pFrame] : (isActive ? '#0B3D91' : '#EFEFED')};${i > placedCount && !allDone ? 'opacity:0.45;' : ''}">
         <div style="display:flex;gap:10px;align-items:flex-start;${isActive ? 'margin-bottom:12px;' : ''}">
@@ -205,12 +238,44 @@ function renderWatchSortCardsHTML(m) {
           ${isPlaced ? `<span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:${FRAME_COLORS[pFrame]};font-family:'Plus Jakarta Sans',sans-serif;flex-shrink:0;padding-top:3px;">${FRAME_NAMES[pFrame]}</span>` : ''}
         </div>
         ${isActive ? `<div id="es-frame-list" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;"></div>` : ''}
+        ${actionRow}
       </div>`;
   }).join('');
   const doneBtn = allDone
     ? `<button onclick="advancePipeline()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;margin-top:4px;">Begin Formation Study →</button>`
     : '';
   return cards + doneBtn;
+}
+
+function toggleWatchHeart(moduleId, argIdx, quote, timestamp) {
+  const m = MODULES[moduleId];
+  const existingIdx = heartedItems.findIndex(h => h.moduleId === moduleId && h.argIdx === argIdx);
+  const btn = document.getElementById(`wh-${moduleId}-${argIdx}`);
+  if (existingIdx >= 0) {
+    heartedItems.splice(existingIdx, 1);
+    if (btn) {
+      btn.querySelector('span').style.fontVariationSettings = "'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24";
+      btn.querySelector('span').style.color = '#7A7570';
+      btn.style.color = '#7A7570';
+      btn.childNodes[btn.childNodes.length - 1].textContent = ' Love';
+    }
+  } else {
+    heartedItems.push({ moduleId, argIdx, quote, timestamp, moduleTitle: m ? m.title : moduleId });
+    if (btn) {
+      btn.querySelector('span').style.fontVariationSettings = "'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24";
+      btn.querySelector('span').style.color = '#c0392b';
+      btn.style.color = '#c0392b';
+      btn.childNodes[btn.childNodes.length - 1].textContent = ' Loved';
+    }
+  }
+}
+
+function toggleWatchNote(moduleId, argIdx) {
+  const el = document.getElementById(`wn-${moduleId}-${argIdx}`);
+  if (!el) return;
+  const isOpen = el.style.display === 'block';
+  el.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) { const ta = el.querySelector('textarea'); if (ta) ta.focus(); }
 }
 
 function renderWatchSort(m, el) {
@@ -283,21 +348,44 @@ function renderFormation(m, el) {
   const points = m.formation;
   const pt     = points[page];
   const isLast = page === points.length - 1;
+  const ptKey  = `${m.id}:${page}`;
+  const reflection = formationReflections[ptKey] || '';
+
+  const scriptureBlock = pt.verseText
+    ? `<div style="margin-bottom:16px;">
+        <button onclick="toggleScriptureText('${ptKey}')"
+          style="display:flex;align-items:center;gap:6px;background:#f4f3f1;border:1px solid #D4A574;border-radius:10px;padding:8px 12px;cursor:pointer;width:100%;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;">
+          <span class="material-symbols-outlined" style="font-size:16px;color:#B8860B;flex-shrink:0;">menu_book</span>
+          <span style="font-size:12px;font-weight:700;color:#B8860B;flex:1;">${pt.scripture}</span>
+          <span class="material-symbols-outlined" id="st-icon-${ptKey}" style="font-size:16px;color:#7A7570;">expand_more</span>
+        </button>
+        <div id="st-${ptKey}" style="display:none;background:#fffbf3;border:1px solid #D4A574;border-top:none;border-radius:0 0 10px 10px;padding:12px 14px;">
+          <p style="font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:#2A2824;line-height:1.7;">"${pt.verseText}"</p>
+          <p style="font-size:11px;font-weight:700;color:#B8860B;margin-top:6px;">— ${pt.scripture}</p>
+        </div>
+      </div>`
+    : `<p style="font-size:11px;color:#7A7570;font-weight:600;margin-bottom:16px;">${pt.scripture}</p>`;
 
   el.innerHTML = `<div class="fade-in">
     <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">Formation · ${page + 1} of ${points.length}</p>
     <div class="progress-bar" style="margin-bottom:20px;"><div class="progress-fill" style="width:${((page+1)/points.length)*100}%"></div></div>
-    <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:20px;">
+    <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;">
       <div style="width:44px;height:44px;background:#0B3D91;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
         <span class="material-symbols-outlined icon-fill" style="color:#fff;font-size:22px;">${pt.icon}</span>
       </div>
       <div>
-        <p style="font-size:11px;color:#7A7570;font-weight:600;margin-bottom:3px;">${pt.scripture}</p>
         <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#2A2824;line-height:1.3;">${pt.title}</h2>
       </div>
     </div>
+    ${scriptureBlock}
     <div class="formation-point">
       <p style="font-size:15px;color:#2A2824;line-height:1.75;">${pt.body}</p>
+    </div>
+    <div style="margin-top:20px;border-top:1px solid #EFEFED;padding-top:16px;">
+      <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#7A7570;margin-bottom:8px;">What is this saying in my life?</p>
+      <textarea rows="4" placeholder="Write your personal reflection…"
+        oninput="formationReflections['${ptKey}']=this.value"
+        style="width:100%;background:#f8f7f5;border:1px solid #c4c6d3;border-radius:10px;padding:12px;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;resize:none;line-height:1.6;box-sizing:border-box;">${reflection}</textarea>
     </div>
     <div style="height:20px;"></div>
     <button onclick="${isLast ? 'formationDone()' : 'formationNext()'}"
@@ -306,6 +394,15 @@ function renderFormation(m, el) {
     </button>
     ${page > 0 ? `<button onclick="formationPrev()" style="background:transparent;color:#7A7570;border:1px solid #c4c6d3;border-radius:100px;padding:12px;font-size:13px;cursor:pointer;width:100%;margin-top:8px;font-family:'Plus Jakarta Sans',sans-serif;">← Previous</button>` : ''}
   </div>`;
+}
+
+function toggleScriptureText(ptKey) {
+  const panel = document.getElementById(`st-${ptKey}`);
+  const icon  = document.getElementById(`st-icon-${ptKey}`);
+  if (!panel) return;
+  const open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'block';
+  if (icon) icon.textContent = open ? 'expand_more' : 'expand_less';
 }
 
 function formationNext() {
@@ -670,6 +767,8 @@ function nextCard() {
   const total = discernState.statements.length;
 
   if (discernState.idx >= total) {
+    // Save completed session to persistent log
+    discernLog.push(...discernState.placed);
     document.getElementById('sort-card-area').style.display  = 'none';
     document.getElementById('community-breakdown').style.display = 'none';
     document.getElementById('sort-complete').style.display   = 'block';
@@ -713,11 +812,44 @@ function resetDiscern() {
 function updateGrowthScreen() {
   document.getElementById('growth-sorted').textContent  = totalSorted;
   document.getElementById('growth-modules').textContent = modulesComplete;
-  document.getElementById('library-count').textContent  = `${libraryItems.length} stone${libraryItems.length !== 1 ? 's' : ''} laid`;
+
+  // Altar of Your Heart — hearted sermon moments
+  const altarEl = document.getElementById('growth-hearted');
+  if (heartedItems.length === 0) {
+    altarEl.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Points you love during Watch & Sort will appear here.</p>';
+  } else {
+    altarEl.innerHTML = heartedItems.map(item => `
+      <div style="padding:12px 0;border-bottom:1px solid #EFEFED;">
+        <p style="font-family:'Playfair Display',serif;font-size:14px;color:#2A2824;line-height:1.5;margin-bottom:4px;">${item.quote}</p>
+        <p style="font-size:11px;color:#7A7570;">${item.moduleTitle} · ${item.timestamp}</p>
+      </div>`).join('');
+  }
+
+  // Discernment Log — history of general discern sessions
+  const logEl = document.getElementById('growth-discern-log');
+  if (discernLog.length === 0) {
+    logEl.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a Discern session to build your log.</p>';
+  } else {
+    const shown = discernLog.slice(-10).reverse();
+    logEl.innerHTML = shown.map(p => {
+      const ok = p.placed === p.stmt.correct;
+      return `<div style="display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #EFEFED;">
+        <span class="material-symbols-outlined icon-fill" style="font-size:13px;color:${ok ? '#1F4D2F' : '#A0523D'};flex-shrink:0;margin-top:3px;">${ok ? 'check_circle' : 'cancel'}</span>
+        <div style="flex:1;min-width:0;">
+          <p style="font-size:12px;color:#2A2824;line-height:1.4;">${p.stmt.text.length > 90 ? p.stmt.text.slice(0,90)+'…' : p.stmt.text}</p>
+          <p style="font-size:10px;color:${FRAME_COLORS[p.placed]};font-weight:700;margin-top:2px;">${FRAME_NAMES[p.placed]}${!ok ? ` · Correct: ${FRAME_NAMES[p.stmt.correct]}` : ''}</p>
+        </div>
+      </div>`;
+    }).join('') + (discernLog.length > 10 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">Showing last 10 of ${discernLog.length}</p>` : '');
+  }
+
+  // My Stones — library from module Watch & Sort
+  const stoneCount = document.getElementById('growth-stone-count');
+  if (stoneCount) stoneCount.textContent = `${libraryItems.length} stone${libraryItems.length !== 1 ? 's' : ''} laid`;
 
   const preview = document.getElementById('library-preview');
   if (libraryItems.length === 0) {
-    preview.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:16px 0;">Complete a module to lay your first stones.</p>';
+    preview.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a module to lay your first stones.</p>';
   } else {
     const shown = libraryItems.slice(0, 4);
     preview.innerHTML = shown.map(item => `
