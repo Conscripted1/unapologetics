@@ -917,6 +917,7 @@ const PIPELINE_STEPS = [
 
 // ── GLOBAL STATE ──────────────────────────────────────────────────────────────
 let currentTab = 'discern';
+let lastTab = 'learn';
 let totalSorted = 0;
 let modulesComplete = 0;
 let libraryItems = [];
@@ -958,6 +959,7 @@ function switchTab(tab) {
 function openModule(id) {
   const m = MODULES[id];
   if (!m) return;
+  lastTab = currentTab;
   moduleState = {
     moduleId:id, step:0,
     preSortIdx:0, preSortPlaced:[], preSortDone:false,
@@ -972,13 +974,14 @@ function openModule(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-module').classList.add('active');
   document.getElementById('bottom-nav').style.display = 'none';
+  history.pushState({ inModule: true, moduleId: id }, '');
   renderPipelineStep();
 }
 
 function goBack() {
   document.getElementById('screen-module').classList.remove('active');
   document.getElementById('bottom-nav').style.display = 'block';
-  switchTab('learn');
+  switchTab(lastTab);
 }
 
 // ── PIPELINE ──────────────────────────────────────────────────────────────────
@@ -1672,6 +1675,12 @@ function startApp() {
 document.addEventListener('DOMContentLoaded', function() {
   // Frame buttons for Discern tab are rendered after onboarding completes (startApp → initDiscernSort)
   // Show onboarding on first load
+});
+
+window.addEventListener('popstate', function(e) {
+  if (document.getElementById('screen-module').classList.contains('active')) {
+    goBack();
+  }
 });
 </script>
 </body>
