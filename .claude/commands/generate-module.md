@@ -137,12 +137,16 @@ Analyze the full transcript deeply. Then generate the complete JavaScript module
 
     // ARGUMENTS — key claims extracted directly from the sermon
     // Rules:
-    //   - 4–6 items matching the most important sermon moments
+    //   - 3–8 items; let the sermon's actual structure determine the count
+    //   - Use judgment: a tightly focused sermon may have 3–4 major claims;
+    //     a wide-ranging or narrative sermon may have 6–8
+    //   - Each argument should represent a distinct claim or turning point,
+    //     not just a sub-point of another entry on the list
     //   - text: a quotable one-liner in double-quotes, as if the preacher said it
     //   - timestamp: real timestamp from the transcript in M:SS format
     arguments: [
       { text:'"Quotable claim."', timestamp:'2:36' },
-      // × 4–6
+      // × 3–8 (match the sermon's natural structure)
     ],
 
     // SORT STATEMENTS — appear during Watch & Sort step alongside the video
@@ -199,6 +203,7 @@ Analyze the full transcript deeply. Then generate the complete JavaScript module
 
 Before outputting, verify:
 - [ ] `preSortStatements` has exactly 8 entries
+- [ ] `arguments` count is between 3 and 8, reflecting the sermon's actual structure
 - [ ] `arguments` and `sortStatements` have the same count
 - [ ] All timestamps in `arguments` are real timestamps from the transcript
 - [ ] `community` arrays each sum to approximately 100
