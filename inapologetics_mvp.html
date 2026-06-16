@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>inApologetics.ai</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B3D91'/><text x='19' y='74' font-family='Georgia,serif' font-size='64' font-weight='700' fill='white' opacity='0.55' letter-spacing='-4'>A</text><text x='37' y='74' font-family='Georgia,serif' font-size='64' font-weight='700' fill='white' letter-spacing='-4'>A</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
@@ -170,11 +171,17 @@ body {
 <!-- ═══ ONBOARDING ═══════════════════════════════════════════════════════════ -->
 <div id="onboarding">
   <div id="ob-1" class="text-center w-full" style="max-width:340px;">
-    <div style="width:64px;height:64px;margin:0 auto 24px;border-radius:20px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
-      <span class="material-symbols-outlined icon-fill" style="font-size:32px;color:#fff;">balance</span>
+    <!-- Logo mark -->
+    <div style="margin:0 auto 20px;display:flex;align-items:center;justify-content:center;gap:12px;">
+      <svg width="56" height="56" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="20" fill="rgba(255,255,255,0.15)"/>
+        <text x="19" y="74" font-family="Georgia,serif" font-size="64" font-weight="700" fill="white" opacity="0.5" letter-spacing="-4">A</text>
+        <text x="37" y="74" font-family="Georgia,serif" font-size="64" font-weight="700" fill="white" letter-spacing="-4">A</text>
+      </svg>
     </div>
-    <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Welcome to</p>
-    <h1 style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.1;">inApologetics<span style="color:rgba(255,255,255,0.5);">.ai</span></h1>
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px;">Welcome to</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.1;">inApologetics<span style="color:rgba(255,255,255,0.5);">.ai</span></h1>
+    <p style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:14px;">Unapologetic Ideas. Intelligent Impact.</p>
     <p style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;">"Casting down arguments and every high thing that exalts itself against the knowledge of God."</p>
     <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:40px;">2 Corinthians 10:5</p>
     <button onclick="document.getElementById('ob-1').style.display='none';document.getElementById('ob-2').style.display='block'"
@@ -228,7 +235,7 @@ body {
     <div style="margin-bottom:24px;margin-top:8px;">
       <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">Before You Begin</p>
       <h2 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#2A2824;margin-bottom:8px;">The Five Frames</h2>
-      <p style="font-size:14px;color:#52504B;line-height:1.6;">You will sort statements into one of these five categories:</p>
+      <p style="font-size:14px;color:#52504B;line-height:1.6;">Each frame describes the posture you take toward a statement. Ask: what does my honest gut say — and what would that response require of me?</p>
     </div>
     <!-- Essentials -->
     <div style="background:#fff;border:1px solid #D4A574;border-radius:16px;padding:16px;display:flex;gap:14px;align-items:flex-start;margin-bottom:10px;">
@@ -237,7 +244,8 @@ body {
       </div>
       <div>
         <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#0B3D91;margin-bottom:4px;">Essentials</h3>
-        <p style="font-size:13px;color:#52504B;line-height:1.55;">The non-negotiable core pillars of the Christian faith and gospel. "We cannot disagree and serve the same God"</p>
+        <p style="font-size:12px;font-weight:700;color:#0B3D91;font-style:italic;margin-bottom:6px;">I agree, and it's central.</p>
+        <p style="font-size:13px;color:#52504B;line-height:1.55;">I hold this as core to the faith. If another believer disagreed, I'd lovingly contend for it — not to win, but because their understanding of God's nature depends on it. To be wrong here is to worship a different God.</p>
       </div>
     </div>
     <!-- Lies -->
@@ -247,7 +255,8 @@ body {
       </div>
       <div>
         <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#1F4D2F;margin-bottom:4px;">Lies</h3>
-        <p style="font-size:13px;color:#52504B;line-height:1.55;">Statements that directly oppose God's word. We must reject them and replace them with the truth.</p>
+        <p style="font-size:12px;font-weight:700;color:#1F4D2F;font-style:italic;margin-bottom:6px;">I disagree, and it must be named.</p>
+        <p style="font-size:13px;color:#52504B;line-height:1.55;">This statement misrepresents who God is. For the sake of the church's unity in truth, I'd feel compelled to refute it and replace it with God's truth.</p>
       </div>
     </div>
     <!-- Non-Essentials -->
@@ -257,7 +266,8 @@ body {
       </div>
       <div>
         <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#D4A574;margin-bottom:4px;">Non-Essentials</h3>
-        <p style="font-size:13px;color:#52504B;line-height:1.55;">Matters of preference. Reasonable Christians can disagree and should meet differences with love and grace.</p>
+        <p style="font-size:12px;font-weight:700;color:#D4A574;font-style:italic;margin-bottom:6px;">I lean, but hold it loosely.</p>
+        <p style="font-size:13px;color:#52504B;line-height:1.55;">I have an opinion, but Scripture isn't decisive here, and I can see faithful Christians landing differently. Where a position draws someone closer to God, grace is the right response.</p>
       </div>
     </div>
     <!-- Wisdom -->
@@ -267,7 +277,8 @@ body {
       </div>
       <div>
         <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#D4A574;margin-bottom:4px;">Wisdom</h3>
-        <p style="font-size:13px;color:#52504B;line-height:1.55;">A statement that is sometimes true but for a people or a season. Requires the wisdom of God's Word, the Holy Spirit and wise counsel.</p>
+        <p style="font-size:12px;font-weight:700;color:#D4A574;font-style:italic;margin-bottom:6px;">It depends.</p>
+        <p style="font-size:13px;color:#52504B;line-height:1.55;">The right answer is reached by applying biblical wisdom to a specific people, season, or situation — and it may not be the same for everyone. This calls for the Word, the Spirit, and wise counsel rather than a fixed verdict.</p>
       </div>
     </div>
     <!-- Unclean -->
@@ -277,8 +288,12 @@ body {
       </div>
       <div>
         <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#A0523D;margin-bottom:4px;">Unclean</h3>
-        <p style="font-size:13px;color:#52504B;line-height:1.55;">Dangerous and possibly deceptive blending of truth and lies. A clear yes and a clear no both misrepresent God.</p>
+        <p style="font-size:12px;font-weight:700;color:#A0523D;font-style:italic;margin-bottom:6px;">Neither yes nor no is safe.</p>
+        <p style="font-size:13px;color:#52504B;line-height:1.55;">Both answers, as the statement is worded, misrepresent God — so the statement itself must be reframed. Left as-is, it pulls well-meaning Christians into disharmony that doesn't glorify God.</p>
       </div>
+    </div>
+    <div style="margin-top:14px;padding:14px;background:#f4f3f1;border-radius:12px;">
+      <p style="font-size:12px;color:#7A7570;line-height:1.6;"><strong style="color:#2A2824;">Wisdom vs. Unclean:</strong> Wisdom says the answer varies by context. Unclean says the question is malformed and must be rebuilt before it can be answered at all.</p>
     </div>
   </div>
   <!-- Onboarding footer (shown during ob flow) -->
@@ -305,8 +320,17 @@ body {
 
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
     <div>
-      <h1 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#0B3D91;line-height:1.1;">inApologetics.ai</h1>
-      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-top:2px;">Discernment Training</p>
+      <div style="display:flex;align-items:center;gap:9px;">
+        <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+          <rect width="100" height="100" rx="20" fill="#0B3D91"/>
+          <text x="19" y="74" font-family="Georgia,serif" font-size="64" font-weight="700" fill="white" opacity="0.45" letter-spacing="-4">A</text>
+          <text x="37" y="74" font-family="Georgia,serif" font-size="64" font-weight="700" fill="white" letter-spacing="-4">A</text>
+        </svg>
+        <div>
+          <h1 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#0B3D91;line-height:1.1;">inApologetics.ai</h1>
+          <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-top:1px;">Discernment Training</p>
+        </div>
+      </div>
     </div>
     <div style="background:#0B3D91;color:#fff;border-radius:100px;padding:5px 12px;display:flex;align-items:center;gap:5px;">
       <span class="material-symbols-outlined icon-fill" style="font-size:14px;color:#fff;">local_fire_department</span>
@@ -556,7 +580,13 @@ const FRAME_COLORS = ['','#0B3D91','#1F4D2F','#D4A574','#D4A574','#A0523D'];
 const FRAME_ICONS  = ['','bolt','close','≈','balance','warning'];
 const FRAME_BG     = ['','rgba(11,61,145,0.1)','rgba(11,61,145,0.1)','rgba(212,165,116,0.1)','rgba(212,165,116,0.1)','rgba(160,82,61,0.1)'];
 const FRAME_FILL   = ['',true,false,false,false,true];
-const FRAME_DESCS  = ['','Foundational Christian Doctrine','Clear Deception','Christian Liberty — Grace Space','Discernment Required','Mixed Truth & Error'];
+const FRAME_DESCS  = ['',
+  'I agree, and it\'s central. To be wrong here is to know a different God.',
+  'I disagree, and it must be named. This misrepresents who God is.',
+  'I lean, but hold it loosely. Faithful Christians land differently; grace fits.',
+  'It depends. The right answer shifts with people, season, and situation.',
+  'Neither yes nor no is safe. The question itself is malformed and must be reframed.'
+];
 
 // ── GENERAL STATEMENTS POOL ──────────────────────────────────────────────────
 const GENERAL_STATEMENTS = [
