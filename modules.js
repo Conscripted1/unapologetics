@@ -40,14 +40,14 @@ const MODULES = {
     videoId: '-S-t7QdMGNE',
 
     preSortStatements: [
-      { text:"True wisdom is not just knowing God's Word — it is putting it into practice.", topic:"Discipleship", correct:1, community:[80,3,5,8,4] },
-      { text:"The most important parts of what you are building are the parts that people cannot see.", topic:"Foundation", correct:1, community:[68,3,10,14,5] },
-      { text:"A believer can genuinely agree with what God says and still never align their life to actually reflect it.", topic:"Obedience", correct:1, community:[73,5,7,10,5] },
-      { text:"Obedience to God's Word exempts a faithful believer from life's storms.", topic:"Trials", correct:2, community:[5,70,4,12,9] },
-      { text:"If someone is going through a painful storm, it is most likely because of sin or spiritual failure in their life.", topic:"Suffering", correct:2, community:[4,55,5,26,10] },
-      { text:"The specific spiritual disciplines a believer practices — daily devotionals vs. weekly study, liturgical prayer vs. spontaneous — is a matter of personal tradition and preference.", topic:"Spiritual Practices", correct:3, community:[10,6,48,30,6] },
-      { text:"A storm in your life can sometimes be a gift from God, revealing cracks in your foundation while you are still at a level where they can be repaired.", topic:"Trials", correct:4, community:[20,8,5,57,10] },
-      { text:"Visible success is a reliable indicator that a person has built their life on the right foundation.", topic:"Foundation", correct:5, community:[6,44,4,15,31] },
+      { text:"True wisdom is not just knowing God's Word — it is putting it into practice.", topic:"Discipleship", correct:1, community:[80,3,5,8,4], mirrorNote:"You can never trust the construction when you already ignore the instruction. Hearing and knowing are not the same as doing — and doing is what determines whether your house stands." },
+      { text:"The most important parts of what you are building are the parts that people cannot see.", topic:"Foundation", correct:1, community:[68,3,10,14,5], mirrorNote:"The support beams had to be drilled deep so that the building could be built tall. The invisible work of prayer, obedience, and private surrender is the foundation everything else stands on." },
+      { text:"A believer can genuinely agree with what God says and still never align their life to actually reflect it.", topic:"Obedience", correct:1, community:[73,5,7,10,5], mirrorNote:"Don't just agree with the Word — align with it. You can shout over a sermon you never plan to submit to. Agreement is in a moment; alignment is over a lifetime." },
+      { text:"Obedience to God's Word exempts a faithful believer from life's storms.", topic:"Trials", correct:2, community:[5,70,4,12,9], mirrorNote:"Both builders faced the same storm. Obedience did not remove the storm — it determined whether the house stood. The storm is a test of the foundation, not a reward withheld from the faithful." },
+      { text:"If someone is going through a painful storm, it is most likely because of sin or spiritual failure in their life.", topic:"Suffering", correct:2, community:[4,55,5,26,10], mirrorNote:"Storms don't create foundations — they expose them. The storm is not a verdict on your behavior; it is a diagnostic on your foundation. Both the wise and foolish builder faced the same storm." },
+      { text:"The specific spiritual disciplines a believer practices — daily devotionals vs. weekly study, liturgical prayer vs. spontaneous — is a matter of personal tradition and preference.", topic:"Spiritual Practices", correct:3, community:[10,6,48,30,6], mirrorNote:"Height without depth is a disaster waiting to happen. The form of disciplines may vary by tradition, but the commitment to invisible formation is not optional — it is the foundation of everything visible." },
+      { text:"A storm in your life can sometimes be a gift from God, revealing cracks in your foundation while you are still at a level where they can be repaired.", topic:"Trials", correct:4, community:[20,8,5,57,10], mirrorNote:"A storm before the house is built too high can save a life. Whether a storm becomes gift or destruction depends on what you do with what it exposes — a matter of wisdom applied to specific circumstance." },
+      { text:"Visible success is a reliable indicator that a person has built their life on the right foundation.", topic:"Foundation", correct:5, community:[6,44,4,15,31], mirrorNote:"Height without depth is a disaster waiting to happen. Some visible success is built on sand, some on rock — and you cannot tell from the outside before the storm hits. This question is malformed." },
     ],
 
     arguments: [
@@ -174,14 +174,14 @@ const MODULES = {
     videoId: '_wSqePjcVf0?si=ttdAl97VpO1oZiTr',
 
     preSortStatements: [
-      { text:"God does not waste wilderness seasons — the pain, waiting, and testing are purposeful formation, not pointless suffering.", topic:"Formation", correct:1, community:[71,4,4,14,7] },
-      { text:"A person can be physically free from a painful season while still mentally enslaved to it.", topic:"Identity & Mindset", correct:1, community:[78,4,4,9,5] },
-      { text:"What kept Israel from the Promised Land was not the giants — it was Israel's fear of the giants.", topic:"Numbers 13", correct:1, community:[76,4,3,10,7] },
-      { text:"Not one word of all of God's good promises has ever failed.", topic:"God's Faithfulness", correct:1, community:[82,3,3,7,5] },
-      { text:"New seasons from God always feel peaceful and free of fear — if something feels scary, it probably isn't from Him.", topic:"Discernment", correct:5, community:[6,23,5,14,52] },
-      { text:"Returning to a familiar situation after God has called you forward always means you have failed in faith.", topic:"Discernment", correct:5, community:[8,22,7,20,43] },
-      { text:"What others have named you — failure, grasshopper, slave — is more accurate than what God says about you.", topic:"Identity", correct:2, community:[3,73,4,6,14] },
-      { text:"If God has not fulfilled His promise to you yet, He has probably moved on to someone more faithful.", topic:"God's Faithfulness", correct:2, community:[2,78,3,5,12] },
+      { text:"God does not waste wilderness seasons — the pain, waiting, and testing are purposeful formation, not pointless suffering.", topic:"Formation", correct:1, community:[71,4,4,14,7], mirrorNote:"Wilderness seasons are God's classroom, not His punishment. God led Israel through the wilderness to humble and test them — to reveal what was in their hearts. The wilderness was never a detour. It was the plan." },
+      { text:"A person can be physically free from a painful season while still mentally enslaved to it.", topic:"Identity & Mindset", correct:1, community:[78,4,4,9,5], mirrorNote:"You cannot carry Egypt's mindsets into the Promised Land. God's deliverance changes your location. Only His formation changes your self-perception. You can leave Egypt while still carrying Egypt inside you." },
+      { text:"What kept Israel from the Promised Land was not the giants — it was Israel's fear of the giants.", topic:"Numbers 13", correct:1, community:[76,4,3,10,7], mirrorNote:"Israel named themselves 'grasshoppers' before the giants did. The giants didn't disqualify Israel — Israel disqualified themselves by believing a slave identity that no longer applied to them." },
+      { text:"Not one word of all of God's good promises has ever failed.", topic:"God's Faithfulness", correct:1, community:[82,3,3,7,5], mirrorNote:"God's promises are not canceled by delay — not a word has failed. Joshua 21:45 declares this over Israel's entire history. The first generation didn't make it in, but the promise was never canceled." },
+      { text:"New seasons from God always feel peaceful and free of fear — if something feels scary, it probably isn't from Him.", topic:"Discernment", correct:5, community:[6,23,5,14,52], mirrorNote:"Crossing the Jordan was terrifying. The Promised Land required confronting giants. God's seasons often feel exactly like what they require — courage, not comfort. Demanding peace as proof of God's leading is a malformed question." },
+      { text:"Returning to a familiar situation after God has called you forward always means you have failed in faith.", topic:"Discernment", correct:5, community:[8,22,7,20,43], mirrorNote:"Wilderness seasons are God's classroom, not His punishment. Whether returning represents retreat or redemption depends on context, motive, and what God is specifically doing. Neither 'always' nor 'never' captures the full picture." },
+      { text:"What others have named you — failure, grasshopper, slave — is more accurate than what God says about you.", topic:"Identity", correct:2, community:[3,73,4,6,14], mirrorNote:"Israel named themselves 'grasshoppers' before the giants did. The question every believer must answer is whose word they will believe about themselves. God had already spoken — the spies chose to override it with a slave identity." },
+      { text:"If God has not fulfilled His promise to you yet, He has probably moved on to someone more faithful.", topic:"God's Faithfulness", correct:2, community:[2,78,3,5,12], mirrorNote:"God's promises are not canceled by delay — not a word has failed. Hebrews 10:35-36 says perseverance is needed to receive what God has promised. The delay is formation, not abandonment." },
     ],
 
     arguments: [
@@ -302,14 +302,14 @@ const MODULES = {
     videoId: 'LReHMIpivBw',
 
     preSortStatements: [
-      { text:"Seeking God is primarily about mastering the right spiritual disciplines in the correct order.", topic:"Spiritual Formation", correct:2, community:[14,52,6,18,10] },
-      { text:"You can have genuine love for God without necessarily developing knowledge of how He operates in the spiritual realm.", topic:"Spiritual Knowledge", correct:2, community:[12,55,8,18,7] },
-      { text:"Prayer is most effective when a believer clearly articulates their needs and petitions to God.", topic:"Prayer", correct:4, community:[30,5,6,52,7] },
-      { text:"True saving faith anchors you to what God has said regardless of what your circumstances appear to communicate.", topic:"Faith", correct:1, community:[76,3,4,12,5] },
-      { text:"A person who does not feel ready for a calling is most likely not called to it.", topic:"Preparation", correct:2, community:[8,60,6,18,8] },
-      { text:"Personal consecration and holiness determine the depth of a believer's access to God.", topic:"Consecration", correct:1, community:[72,4,5,14,5] },
-      { text:"Seeking God will always produce the same predictable emotional experience — peace, warmth, or a felt sense of His presence.", topic:"Seeking God", correct:5, community:[10,22,7,15,46] },
-      { text:"A believer who hungers for God more than they hunger for results will always find Him.", topic:"Seeking God", correct:1, community:[78,3,4,10,5] },
+      { text:"Seeking God is primarily about mastering the right spiritual disciplines in the correct order.", topic:"Spiritual Formation", correct:2, community:[14,52,6,18,10], mirrorNote:"Seeking God has no regimented pattern — it is, first and fundamentally, a matter of your quest for God. The issue is not technique. It is hunger. Reducing seeking to a formula is the precise thing the sermon argues against." },
+      { text:"You can have genuine love for God without necessarily developing knowledge of how He operates in the spiritual realm.", topic:"Spiritual Knowledge", correct:2, community:[12,55,8,18,7], mirrorNote:"You cannot sustain a real relationship with what you have no knowledge of. Hosea 4:6 warns that God's people are destroyed for lack of knowledge — not for lack of sincerity. Sincerity without knowledge cannot navigate a world where invisible forces have visible consequences." },
+      { text:"Prayer is most effective when a believer clearly articulates their needs and petitions to God.", topic:"Prayer", correct:4, community:[30,5,6,52,7], mirrorNote:"Prayer is not informing God of what He doesn't know. Prayer is the believer cooperating with heaven to actualize what God has already purposed on earth. Articulating needs is not wrong — but that is not what makes prayer effective." },
+      { text:"True saving faith anchors you to what God has said regardless of what your circumstances appear to communicate.", topic:"Faith", correct:1, community:[76,3,4,12,5], mirrorNote:"Sovereign faith is becoming scarce in our generation — a faith that holds its ground when what you see contradicts what you believe. This statement captures exactly what the sermon calls sovereign faith." },
+      { text:"A person who does not feel ready for a calling is most likely not called to it.", topic:"Preparation", correct:2, community:[8,60,6,18,8], mirrorNote:"Every man God used significantly was processed in obscurity before he was displayed in impact. The season of hiddenness is not punishment — it is sacred investment. Moses did not feel ready at the burning bush." },
+      { text:"Personal consecration and holiness determine the depth of a believer's access to God.", topic:"Consecration", correct:1, community:[72,4,5,14,5], mirrorNote:"To seek God authentically is to reckon that without Him you are undone. That reckoning — the honest acknowledgment of dependence — is what consecration produces. It is not a performance; it is a posture." },
+      { text:"Seeking God will always produce the same predictable emotional experience — peace, warmth, or a felt sense of His presence.", topic:"Seeking God", correct:5, community:[10,22,7,15,46], mirrorNote:"Seeking God has no regimented pattern. God is not contained in a predictable emotional signature. Demanding a particular feeling as proof of encounter is a malformed expectation that the sermon's entire argument dismantles." },
+      { text:"A believer who hungers for God more than they hunger for results will always find Him.", topic:"Seeking God", correct:1, community:[78,3,4,10,5], mirrorNote:"Seeking God is, first and fundamentally, a matter of your quest for God. Jeremiah 29:13 says 'when you seek me with all your heart.' Hunger for God Himself — not His benefits — is precisely the posture the sermon calls the true way of seeking." },
     ],
 
     arguments: [
@@ -432,14 +432,14 @@ const MODULES = {
     videoId: 'X3R-ajnmLdE',
 
     preSortStatements: [
-      { text:"The demonic realm is organized into ranks and hierarchies specifically assigned to resist the purposes of God.", topic:"Spiritual Warfare", correct:1, community:[72,3,4,16,5] },
-      { text:"A believer's struggles are primarily social and psychological — prayer matters but the real battles happen in the natural realm.", topic:"Spiritual Warfare", correct:2, community:[4,72,6,12,6] },
-      { text:"Ignorance of how the enemy operates is one of the primary reasons believers live below their God-given authority.", topic:"Spiritual Warfare", correct:1, community:[75,3,4,13,5] },
-      { text:"Only specially anointed leaders — apostles and prophets — are equipped to engage in serious spiritual warfare.", topic:"Spiritual Authority", correct:2, community:[5,70,6,15,4] },
-      { text:"Personal consecration is a prerequisite for effective spiritual warfare — an unholy life cannot carry genuine spiritual authority.", topic:"Consecration", correct:1, community:[74,3,4,14,5] },
-      { text:"Nations and territories are spiritually contested — there are demonic forces assigned to resist the gospel's advance in specific regions.", topic:"Territorial Warfare", correct:1, community:[68,4,5,17,6] },
-      { text:"If a believer consistently faces spiritual difficulty, it most likely means they have committed a sin that is blocking God's blessing.", topic:"Suffering", correct:5, community:[7,28,5,10,50] },
-      { text:"Spiritual warfare is mainly about speaking loudly in prayer — volume and persistence are the primary factors.", topic:"Prayer", correct:5, community:[5,30,8,12,45] },
+      { text:"The demonic realm is organized into ranks and hierarchies specifically assigned to resist the purposes of God.", topic:"Spiritual Warfare", correct:1, community:[72,3,4,16,5], mirrorNote:"Satan's kingdom is not disorganized chaos. Principalities, powers, rulers of darkness, spiritual wickedness in high places — these are ranks. This is a military structure deployed against the advancement of God's kingdom." },
+      { text:"A believer's struggles are primarily social and psychological — prayer matters but the real battles happen in the natural realm.", topic:"Spiritual Warfare", correct:2, community:[4,72,6,12,6], mirrorNote:"Our warfare is not against flesh and blood — and until you settle that conviction in your mind, you will always be fighting the wrong enemy. Ephesians 6:12 names four tiers of spiritual opposition. Reducing the battle to the social is precisely the lie Paul corrects." },
+      { text:"Ignorance of how the enemy operates is one of the primary reasons believers live below their God-given authority.", topic:"Spiritual Warfare", correct:1, community:[75,3,4,13,5], mirrorNote:"Two ignorances rob believers of their authority: ignorance of the enemy's devices, and ignorance of how to conduct spiritual warfare. Together, they produce a believer who was designed to win but lives as though they are losing." },
+      { text:"Only specially anointed leaders — apostles and prophets — are equipped to engage in serious spiritual warfare.", topic:"Spiritual Authority", correct:2, community:[5,70,6,15,4], mirrorNote:"Consecration, not title, is what qualifies a believer to engage in warfare. The sons of Sceva had a title — they lost badly. Every consecrated believer carries the authority of the One in whose name they stand." },
+      { text:"Personal consecration is a prerequisite for effective spiritual warfare — an unholy life cannot carry genuine spiritual authority.", topic:"Consecration", correct:1, community:[74,3,4,14,5], mirrorNote:"The believer who is not consecrated has no business going into battle. Consecration is not a spiritual luxury — it is your credential in the war. Acts 19 shows what happens when someone tries to exercise spiritual authority without it." },
+      { text:"Nations and territories are spiritually contested — there are demonic forces assigned to resist the gospel's advance in specific regions.", topic:"Territorial Warfare", correct:1, community:[68,4,5,17,6], mirrorNote:"Nations are not casually evangelized. Every territory on this earth is supernaturally contested. You do not waltz into a city and reap the harvest without confronting what has been assigned there to resist you." },
+      { text:"If a believer consistently faces spiritual difficulty, it most likely means they have committed a sin that is blocking God's blessing.", topic:"Suffering", correct:5, community:[7,28,5,10,50], mirrorNote:"Spiritual difficulty may reflect the enemy's targeted resistance — especially when a believer is advancing God's kingdom. The question 'what sin caused this?' is often the wrong place to start. Two ignorances rob believers of their authority." },
+      { text:"Spiritual warfare is mainly about speaking loudly in prayer — volume and persistence are the primary factors.", topic:"Prayer", correct:5, community:[5,30,8,12,45], mirrorNote:"Volume is not the credential. Holiness is. The sons of Sceva were loud — they lost badly. Acts 19 shows that the enemy responds not to noise but to the authority of a life aligned with Christ." },
     ],
 
     arguments: [
@@ -553,9 +553,10 @@ const MODULES = {
 
 // ── PIPELINE STEPS ────────────────────────────────────────────────────────────
 const PIPELINE_STEPS = [
-  { id:'pre-sort',    label:'Discern', icon:'balance',      title:'Pre-Sort'    },
-  { id:'watch-sort',  label:'Watch',   icon:'play_circle',  title:'Watch & Sort' },
-  { id:'formation',   label:'Study',   icon:'menu_book',    title:'Formation'   },
-  { id:'library',     label:'Stones',  icon:'layers',       title:'My Stones'   },
-  { id:'assess',      label:'Assess',  icon:'fact_check',   title:'Assess'      },
+  { id:'pre-sort',    label:'Discern', icon:'balance',         title:'Pre-Sort'    },
+  { id:'watch-sort',  label:'Watch',   icon:'play_circle',     title:'Watch & Sort' },
+  { id:'mirror',      label:'Mirror',  icon:'compare_arrows',  title:'The Mirror'  },
+  { id:'formation',   label:'Study',   icon:'menu_book',       title:'Formation'   },
+  { id:'library',     label:'Stones',  icon:'layers',          title:'My Stones'   },
+  { id:'assess',      label:'Assess',  icon:'fact_check',      title:'Assess'      },
 ];

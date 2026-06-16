@@ -8,6 +8,7 @@ let heartedItems = [];      // { moduleId, argIdx, quote, timestamp, moduleTitle
 let watchNotes = {};         // key: 'moduleId:argIdx', value: string
 let formationReflections = {}; // key: 'moduleId:pageIdx', value: string
 let discernLog = [];         // accumulated placed statements from general discern sessions
+let mirrorLog  = [];         // { text, topic, firstFrame, secondFrame, finalFrame, note, moduleTitle }
 
 let discernState = { statements:[], idx:0, placed:[], streak:0 };
 
@@ -52,6 +53,7 @@ function openModule(id) {
     preSortIdx:0, preSortPlaced:[], preSortDone:false,
     extractViewed:false,
     sortIdx:0, sortPlaced:[], sortDone:false,
+    mirrorIdx:0, mirrorSecond:[], mirrorPhase:'sort', mirrorDone:false,
     formationPage:0, formationDone:false,
     libraryDone:false,
     assessIdx:0, assessAnswers:[], assessDone:false,
@@ -89,7 +91,7 @@ function renderPipelineStep() {
   content.innerHTML = '';
   content.scrollTop = 0;
 
-  const renderers = [renderPreSort, renderWatchSort, renderFormation, renderLibrary, renderAssess];
+  const renderers = [renderPreSort, renderWatchSort, renderMirror, renderFormation, renderLibrary, renderAssess];
   if (renderers[step]) renderers[step](m, content);
 }
 
@@ -342,7 +344,180 @@ function renderWatchSort(m, el) {
   }
 }
 
-// ── STEP 3: FORMATION ────────────────────────────────────────────────────────
+// ── STEP 3: THE MIRROR ───────────────────────────────────────────────────────
+function renderMirror(m, el) {
+  if (moduleState.mirrorDone) {
+    el.innerHTML = `<div class="fade-in">
+      <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #D4A574;text-align:center;margin-bottom:20px;" class="lifted">
+        <div style="width:52px;height:52px;background:#dae2ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
+          <span class="material-symbols-outlined" style="color:#0B3D91;font-size:26px;">compare_arrows</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#0B3D91;margin-bottom:6px;">Mirror Complete</h2>
+        <p style="font-size:14px;color:#52504B;line-height:1.6;">Your reflections have been written to your Growth section.</p>
+      </div>
+      <button onclick="advancePipeline()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+        Continue to Formation Study →
+      </button>
+    </div>`;
+    return;
+  }
+
+  const idx   = moduleState.mirrorIdx;
+  const stmts = m.preSortStatements;
+  const total = stmts.length;
+  const stmt  = stmts[idx];
+  const firstPlaced  = moduleState.preSortPlaced[idx]?.placed;
+  const secondPlaced = moduleState.mirrorSecond[idx];
+  const phase = moduleState.mirrorPhase;
+
+  const firstColor = FRAME_COLORS[firstPlaced] || '#7A7570';
+  const firstBg    = FRAME_BG[firstPlaced] || '#f4f3f1';
+  const firstName  = FRAME_NAMES[firstPlaced] || '—';
+
+  const progressPct = (idx / total) * 100;
+
+  if (phase === 'sort') {
+    el.innerHTML = `<div class="fade-in">
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">The Mirror · ${idx + 1} of ${total}</p>
+      <div class="progress-bar" style="margin-bottom:16px;"><div class="progress-fill" style="width:${progressPct}%"></div></div>
+
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:8px;">Before watching, you placed this as:</p>
+      <div style="background:#f8f7f5;border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid #EFEFED;">
+        <span style="display:inline-block;background:${firstBg};color:${firstColor};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:100px;border:1px solid ${firstColor}33;margin-bottom:8px;">${firstName}</span>
+        <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:#52504B;line-height:1.55;">${stmt.text}</p>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin:14px 0;">
+        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,#D4A574,transparent);"></div>
+        <div style="display:flex;align-items:center;gap:5px;padding:5px 12px;background:#fffbf3;border:1px solid #D4A574;border-radius:100px;">
+          <span class="material-symbols-outlined" style="font-size:14px;color:#B8860B;">compare_arrows</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B8860B;">The Mirror</span>
+        </div>
+        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,#D4A574,transparent);"></div>
+      </div>
+
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:8px;">Having watched the sermon, place this statement again:</p>
+      <div style="background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;border:1.5px solid #D4A574;">
+        <p style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#2A2824;line-height:1.45;">${stmt.text}</p>
+      </div>
+
+      <div id="mirror-frame-list" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;"></div>
+    </div>`;
+
+    renderExtractSortFrameButtons('mirror-frame-list', function(frame) {
+      moduleState.mirrorSecond[idx] = frame;
+      moduleState.mirrorPhase = 'review';
+      el.scrollTop = 0;
+      renderMirror(m, el);
+    });
+
+  } else {
+    const secondColor = FRAME_COLORS[secondPlaced];
+    const secondBg    = FRAME_BG[secondPlaced];
+    const secondName  = FRAME_NAMES[secondPlaced];
+    const mirrorNote  = stmt.mirrorNote || '';
+    const changed     = firstPlaced !== secondPlaced;
+
+    const frameOpts = [1,2,3,4,5].map(i =>
+      `<option value="${i}" ${i === secondPlaced ? 'selected' : ''}>${FRAME_NAMES[i]}</option>`
+    ).join('');
+
+    el.innerHTML = `<div class="fade-in">
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">The Mirror · ${idx + 1} of ${total}</p>
+      <div class="progress-bar" style="margin-bottom:16px;"><div class="progress-fill" style="width:${progressPct}%"></div></div>
+
+      <!-- 1st Assessment card -->
+      <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">1st Assessment</p>
+      <div style="background:#f8f7f5;border-radius:14px;padding:14px;border:1px solid #EFEFED;">
+        <span style="display:inline-block;background:${firstBg};color:${firstColor};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:100px;border:1px solid ${firstColor}33;margin-bottom:8px;">${firstName}</span>
+        <p style="font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:#52504B;line-height:1.55;">${stmt.text}</p>
+      </div>
+
+      <!-- Mirror divider -->
+      <div style="display:flex;align-items:center;gap:8px;margin:10px 0;">
+        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,#D4A574,transparent);"></div>
+        ${changed
+          ? `<span class="material-symbols-outlined" style="font-size:18px;color:#D4A574;">swap_vert</span>`
+          : `<span class="material-symbols-outlined" style="font-size:18px;color:#1F4D2F;">check_circle</span>`}
+        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,#D4A574,transparent);"></div>
+      </div>
+
+      <!-- 2nd Assessment card -->
+      <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">2nd Assessment</p>
+      <div style="background:#fff;border-radius:14px;padding:14px;border:1.5px solid #D4A574;margin-bottom:14px;">
+        <span style="display:inline-block;background:${secondBg};color:${secondColor};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:100px;border:1px solid ${secondColor}33;margin-bottom:8px;">${secondName}</span>
+        <p style="font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:#2A2824;line-height:1.55;">${stmt.text}</p>
+      </div>
+
+      <!-- Sermon Note -->
+      ${mirrorNote ? `<div style="background:#fffbf3;border-radius:12px;padding:14px;border-left:3px solid #D4A574;margin-bottom:14px;position:relative;overflow:hidden;">
+        <span class="material-symbols-outlined" style="position:absolute;right:10px;top:8px;font-size:40px;color:#D4A574;opacity:0.15;pointer-events:none;">history_edu</span>
+        <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#B8860B;margin-bottom:8px;">Sermon Note</p>
+        <p style="font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:#2A2824;line-height:1.7;">"${mirrorNote}"</p>
+      </div>` : ''}
+
+      <!-- Finalize Selection -->
+      <div style="margin-bottom:12px;">
+        <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">Finalize Selection</p>
+        <div style="position:relative;">
+          <select id="mirror-final-frame"
+            style="width:100%;appearance:none;background:#fff;border:1.5px solid #D4A574;border-radius:12px;padding:12px 36px 12px 14px;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;cursor:pointer;">
+            ${frameOpts}
+          </select>
+          <span class="material-symbols-outlined" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:18px;color:#B8860B;pointer-events:none;">expand_more</span>
+        </div>
+      </div>
+
+      <!-- Reflection -->
+      <div style="margin-bottom:16px;">
+        <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">Reflection</p>
+        <textarea id="mirror-reflection" rows="3"
+          placeholder="Add these notes to your Growth section…"
+          style="width:100%;background:#f8f7f5;border:1px solid #c4c6d3;border-radius:10px;padding:12px;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;resize:none;line-height:1.6;box-sizing:border-box;"></textarea>
+      </div>
+
+      <button onclick="saveMirrorEntry(${idx},${total})"
+        style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+        Write to Growth Log &amp; Continue →
+      </button>
+
+      <p style="font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:#7A7570;text-align:center;margin-top:16px;line-height:1.6;">"We all, with unveiled face, beholding the glory of the Lord, are being transformed into the same image."<br>— 2 Corinthians 3:18</p>
+    </div>`;
+  }
+}
+
+function saveMirrorEntry(idx, total) {
+  const m    = MODULES[moduleState.moduleId];
+  const stmt = m.preSortStatements[idx];
+  const finalFrameEl = document.getElementById('mirror-final-frame');
+  const reflEl       = document.getElementById('mirror-reflection');
+  const finalFrame   = finalFrameEl ? parseInt(finalFrameEl.value) : (moduleState.mirrorSecond[idx] || 1);
+  const note         = reflEl ? reflEl.value.trim() : '';
+
+  mirrorLog.push({
+    text:        stmt.text,
+    topic:       stmt.topic,
+    firstFrame:  moduleState.preSortPlaced[idx]?.placed,
+    secondFrame: moduleState.mirrorSecond[idx],
+    finalFrame,
+    note,
+    moduleTitle: m.title,
+    moduleId:    m.id,
+  });
+
+  moduleState.mirrorIdx++;
+  moduleState.mirrorPhase = 'sort';
+
+  if (moduleState.mirrorIdx >= total) {
+    moduleState.mirrorDone = true;
+  }
+
+  const content = document.getElementById('pipeline-content');
+  if (content) content.scrollTop = 0;
+  renderMirror(m, content || document.getElementById('pipeline-content'));
+}
+
+// ── STEP 4: FORMATION ────────────────────────────────────────────────────────
 function renderFormation(m, el) {
   const page   = moduleState.formationPage;
   const points = m.formation;
@@ -420,7 +595,7 @@ function formationDone() {
   advancePipeline();
 }
 
-// ── STEP 4: LIBRARY ──────────────────────────────────────────────────────────
+// ── STEP 5: LIBRARY ──────────────────────────────────────────────────────────
 function toggleLibraryFavorite(idx) {
   if (!libraryItems[idx]) return;
   libraryItems[idx].favorited = !libraryItems[idx].favorited;
@@ -503,7 +678,7 @@ function renderLibrary(m, el) {
   </div>`;
 }
 
-// ── STEP 5: ASSESS ───────────────────────────────────────────────────────────
+// ── STEP 6: ASSESS ───────────────────────────────────────────────────────────
 function renderAssess(m, el) {
   if (moduleState.assessDone) { renderAssessResults(m, el); return; }
 
@@ -841,6 +1016,35 @@ function updateGrowthScreen() {
         </div>
       </div>`;
     }).join('') + (discernLog.length > 10 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">Showing last 10 of ${discernLog.length}</p>` : '');
+  }
+
+  // Mirror Log — finalized mirror entries from module pipeline
+  const mirrorEl = document.getElementById('growth-mirror-log');
+  if (mirrorEl) {
+    if (mirrorLog.length === 0) {
+      mirrorEl.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete The Mirror step in a module to see your reflections here.</p>';
+    } else {
+      const shown = mirrorLog.slice(-6).reverse();
+      mirrorEl.innerHTML = shown.map(entry => {
+        const fc = FRAME_COLORS[entry.firstFrame]  || '#7A7570';
+        const fb = FRAME_BG[entry.firstFrame]      || '#f4f3f1';
+        const fn = FRAME_NAMES[entry.firstFrame]   || '—';
+        const lc = FRAME_COLORS[entry.finalFrame]  || '#7A7570';
+        const lb = FRAME_BG[entry.finalFrame]      || '#f4f3f1';
+        const ln = FRAME_NAMES[entry.finalFrame]   || '—';
+        const changed = entry.firstFrame !== entry.finalFrame;
+        return `<div style="padding:12px 0;border-bottom:1px solid #EFEFED;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap;">
+            <span style="background:${fb};color:${fc};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:2px 8px;border-radius:100px;border:1px solid ${fc}33;">${fn}</span>
+            ${changed ? `<span class="material-symbols-outlined" style="font-size:13px;color:#D4A574;">arrow_forward</span>
+            <span style="background:${lb};color:${lc};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:2px 8px;border-radius:100px;border:1px solid ${lc}33;">${ln}</span>` : `<span class="material-symbols-outlined" style="font-size:13px;color:#1F4D2F;">check_circle</span>`}
+          </div>
+          <p style="font-size:13px;color:#2A2824;line-height:1.4;margin-bottom:3px;">${entry.text.length > 85 ? entry.text.slice(0,85)+'…' : entry.text}</p>
+          ${entry.note ? `<p style="font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:#52504B;margin-top:4px;line-height:1.5;">"${entry.note}"</p>` : ''}
+          <p style="font-size:11px;color:#7A7570;margin-top:3px;">${entry.moduleTitle}</p>
+        </div>`;
+      }).join('') + (mirrorLog.length > 6 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">Showing last 6 of ${mirrorLog.length}</p>` : '');
+    }
   }
 
   // My Stones — library from module Watch & Sort
