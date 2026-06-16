@@ -22,78 +22,48 @@ Extract:
 
 ## Step 2 — Fetch the transcript with timestamps
 
-Run this Python script using the Bash tool. Replace `VIDEO_ID_HERE` with the bare video ID (no query params for the fetch itself):
+First ensure the library is available, then run:
+
+```bash
+pip3 install youtube-transcript-api --break-system-packages --quiet 2>&1 | tail -2
+```
+
+Then fetch the transcript:
 
 ```python
 import re, urllib.request, html as html_mod, sys
 
 video_id = "VIDEO_ID_HERE"
-url = f"https://www.youtube.com/watch?v={video_id}"
 
+# Get title + description from the video page
+url = f"https://www.youtube.com/watch?v={video_id}"
 req = urllib.request.Request(url, headers={
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     'Accept-Language': 'en-US,en;q=0.9',
 })
 try:
     page = urllib.request.urlopen(req, timeout=15).read().decode('utf-8')
+    title_m = re.search(r'"title":\{"runs":\[{"text":"(.*?)"\}', page)
+    title = html_mod.unescape(title_m.group(1)) if title_m else "Unknown"
+    desc_m = re.search(r'"shortDescription":"(.*?)"(?:,"isCrawlable")', page, re.S)
+    desc = html_mod.unescape(desc_m.group(1).replace('\\n', '\n')) if desc_m else ""
+    print(f"=== TITLE: {title} ===")
+    print(f"=== DESCRIPTION (first 600 chars):\n{desc[:600]} ===")
 except Exception as e:
-    print(f"FETCH_ERROR: {e}"); sys.exit(1)
+    print(f"Page fetch error (non-fatal): {e}")
 
-# Title
-title_m = re.search(r'"title":\{"runs":\[{"text":"(.*?)"\}', page)
-title = html_mod.unescape(title_m.group(1)) if title_m else "Unknown"
-
-# Description
-desc_m = re.search(r'"shortDescription":"(.*?)"(?:,"isCrawlable")', page, re.S)
-desc = html_mod.unescape(desc_m.group(1).replace('\\n', '\n')) if desc_m else ""
-
-print(f"=== TITLE: {title} ===")
-print(f"=== DESCRIPTION (first 600 chars): {desc[:600]} ===")
-
-# Caption track
-cap_m = re.search(r'"captionTracks":\[{"baseUrl":"(.*?)"', page)
-if not cap_m:
-    # Try ASR (auto-generated)
-    cap_m = re.search(r'"baseUrl":"(https://www\.youtube\.com/api/timedtext[^"]+)"', page)
-if not cap_m:
-    print("NO_CAPTIONS_FOUND — transcript unavailable for this video")
-    sys.exit(0)
-
-cap_url = cap_m.group(1).replace('\\u0026', '&')
-if '&fmt=vtt' not in cap_url:
-    cap_url += '&fmt=vtt'
-
+# Fetch transcript via youtube-transcript-api (most reliable method)
 try:
-    vtt = urllib.request.urlopen(cap_url, timeout=15).read().decode('utf-8')
-except Exception as e:
-    print(f"CAPTION_FETCH_ERROR: {e}"); sys.exit(1)
-
-# Parse VTT timestamps and text
-entries = re.findall(r'(\d+:\d+:\d+\.\d+) --> .*?\n(.*?)(?=\n\n|\Z)', vtt, re.S)
-if not entries:
-    # Fallback: XML format
-    cap_url2 = cap_url.replace('&fmt=vtt', '')
-    xml = urllib.request.urlopen(cap_url2, timeout=15).read().decode('utf-8')
-    entries_xml = re.findall(r'<text start="([\d.]+)"[^>]*>(.*?)</text>', xml)
+    from youtube_transcript_api import YouTubeTranscriptApi
+    ytt = YouTubeTranscriptApi()
+    transcript = ytt.fetch(video_id)
     def to_ts(s):
-        s=float(s); m=int(s//60); sec=int(s%60)
-        return f"{m}:{sec:02d}"
-    entries = [(to_ts(t), html_mod.unescape(re.sub(r'<[^>]+>','',txt)).strip()) for t,txt in entries_xml]
-    for ts, text in entries:
-        if text: print(f"[{ts}] {text}")
-else:
-    def vtt_to_ts(ts):
-        parts = ts.split(':')
-        h,m,s = int(parts[0]),int(parts[1]),float(parts[2])
-        total = h*3600+m*60+s
-        mins=int(total//60); secs=int(total%60)
-        return f"{mins}:{secs:02d}"
-    seen = set()
-    for ts, text in entries:
-        clean = html_mod.unescape(re.sub(r'<[^>]+>','',text)).strip()
-        if clean and clean not in seen:
-            seen.add(clean)
-            print(f"[{vtt_to_ts(ts)}] {clean}")
+        s=float(s); m=int(s//60); sec=int(s%60); return f"{m}:{sec:02d}"
+    for entry in transcript:
+        print(f"[{to_ts(entry.start)}] {entry.text}")
+except Exception as e:
+    print(f"TRANSCRIPT_ERROR: {e}")
+    print("NO_CAPTIONS_FOUND — ask user to paste transcript manually")
 ```
 
 If `NO_CAPTIONS_FOUND`, tell the user and ask them to paste the transcript manually, then continue from Step 3.

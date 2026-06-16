@@ -457,6 +457,29 @@ body {
     </div>
   </div>
 
+  <div style="background:#1F4D2F;border-radius:20px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;" onclick="openModule('built-different')">
+    <div style="position:absolute;top:-24px;right:-24px;width:120px;height:120px;background:rgba(255,255,255,0.05);border-radius:50%;pointer-events:none;"></div>
+    <div style="position:absolute;bottom:-32px;right:16px;width:90px;height:90px;background:rgba(255,255,255,0.04);border-radius:50%;pointer-events:none;"></div>
+    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Union Church · Matthew 7</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;">I'm Built Different</h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:18px;line-height:1.5;">Storms don't create weak foundations — they expose them. True wisdom is not just hearing God's Word; it's aligning your life with it.</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;gap:14px;">
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span class="material-symbols-outlined" style="font-size:14px;color:rgba(255,255,255,0.55);">schedule</span>
+          <span style="font-size:11px;color:rgba(255,255,255,0.55);">34 min</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span class="material-symbols-outlined" style="font-size:14px;color:rgba(255,255,255,0.55);">stairs</span>
+          <span style="font-size:11px;color:rgba(255,255,255,0.55);">5 steps</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.15);color:#fff;border-radius:100px;padding:8px 18px;font-size:12px;font-weight:700;">
+        Begin →
+      </div>
+    </div>
+  </div>
+
   <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:10px;">Coming Soon</p>
 
   <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid #c4c6d3;display:flex;gap:12px;align-items:flex-start;" class="mono-shadow">
@@ -594,6 +617,130 @@ const GENERAL_STATEMENTS = [
 
 // ── EGYPT MODULE ──────────────────────────────────────────────────────────────
 const MODULES = {
+  'built-different': {
+    id: 'built-different',
+    title: "I'm Built Different",
+    series: 'Union Church',
+    scripture: 'Matthew 7:24–27',
+    videoId: '-S-t7QdMGNE',
+
+    preSortStatements: [
+      { text:"True wisdom is not just knowing God's Word — it is putting it into practice.", topic:"Discipleship", correct:1, community:[80,3,5,8,4] },
+      { text:"The most important parts of what you are building are the parts that people cannot see.", topic:"Foundation", correct:1, community:[68,3,10,14,5] },
+      { text:"A believer can genuinely agree with what God says and still never align their life to actually reflect it.", topic:"Obedience", correct:1, community:[73,5,7,10,5] },
+      { text:"Obedience to God's Word exempts a faithful believer from life's storms.", topic:"Trials", correct:2, community:[5,70,4,12,9] },
+      { text:"If someone is going through a painful storm, it is most likely because of sin or spiritual failure in their life.", topic:"Suffering", correct:2, community:[4,55,5,26,10] },
+      { text:"The specific spiritual disciplines a believer practices — daily devotionals vs. weekly study, liturgical prayer vs. spontaneous — is a matter of personal tradition and preference.", topic:"Spiritual Practices", correct:3, community:[10,6,48,30,6] },
+      { text:"A storm in your life can sometimes be a gift from God, revealing cracks in your foundation while you are still at a level where they can be repaired.", topic:"Trials", correct:4, community:[20,8,5,57,10] },
+      { text:"Visible success is a reliable indicator that a person has built their life on the right foundation.", topic:"Foundation", correct:5, community:[6,44,4,15,31] },
+    ],
+
+    arguments: [
+      { text:'"The support beams had to be drilled deep so that the building could be built tall."', timestamp:'3:29' },
+      { text:'"We have become obsessed with elevation while ignoring excavation."', timestamp:'4:27' },
+      { text:'"Height without depth is a disaster waiting to happen."', timestamp:'6:54' },
+      { text:'"You can never trust the construction when you already ignore the instruction."', timestamp:'10:57' },
+      { text:'"Don\'t just agree with the Word — align with it."', timestamp:'16:54' },
+      { text:'"Storms don\'t create foundations — they expose them."', timestamp:'24:07' },
+      { text:'"Obedience doesn\'t make you storm-exempt — it makes you storm-proof."', timestamp:'25:11' },
+    ],
+
+    sortStatements: [
+      { text:'"You can\'t build it tall until you first build it deep."', topic:"Foundation", correct:1, community:[75,4,5,11,5] },
+      { text:'"Most people are obsessed with elevation while ignoring excavation."', topic:"Priorities", correct:1, community:[71,4,6,13,6] },
+      { text:'"Height without depth is a disaster waiting to happen."', topic:"Foundation", correct:1, community:[77,3,4,11,5] },
+      { text:'"You cannot trust the construction when you have ignored the instructions."', topic:"Obedience", correct:1, community:[74,3,5,13,5] },
+      { text:'"Don\'t just agree with God\'s Word — align your life with it."', topic:"Discipleship", correct:1, community:[81,3,3,9,4] },
+      { text:'"Storms don\'t create weak foundations — they expose them."', topic:"Trials", correct:1, community:[76,3,4,12,5] },
+      { text:'"Obedience to God doesn\'t make you storm-exempt — it makes you storm-proof."', topic:"Trials", correct:4, community:[20,5,5,60,10] },
+    ],
+
+    formation: [
+      {
+        title: "Excavation Before Elevation",
+        icon: "anchor",
+        scripture: "Ephesians 3:17–19",
+        body: "In 2014, engineers drilling the foundation for One World Trade Center sent steel beams 150 feet into Manhattan bedrock before a single visible floor was added. No ribbon-cutting. No ceremony. Just invisible work that would make everything visible possible. Jesus understood this principle long before architects did. In Matthew 7, He doesn't describe two builders with different blueprints — they both build, they both face storms. The only difference is what they built on. This is the paradox of spiritual formation: the most important work you will ever do is the work no one will ever see. Your prayer life before sunrise, your Scripture study in private, your repentance when no one's watching, your surrender in secret — these are not preparation for the real work. They are the real work. Ephesians 3:17–19 prays that believers would be 'rooted and grounded' before they are fully grasped. Paul's order is deliberate: the root comes before the grasp. Everything else is just the part people can see. The question isn't 'Will I build?' — it's 'Am I willing to dig?'"
+      },
+      {
+        title: "Agreement vs. Alignment",
+        icon: "auto_stories",
+        scripture: "James 1:22–25",
+        body: "Dallas Willard observed in The Divine Conspiracy that modern Christianity has collapsed discipleship into either believing the right thing or doing the right thing, when the goal is actually becoming — having belief and behavior fuse into who you are. Pastor Hollis draws the same line with sharper language: it is entirely possible to agree with what God says and never align your life to reflect it. Agreement happens in a moment. Alignment happens over a lifetime. You can agree that prayer matters without praying. You can agree that forgiveness is required without forgiving. You can shout over a sermon you never plan to submit to. James 1:22 calls this self-deception: being a hearer only, looking at your face in a mirror and immediately forgetting what you saw. The alignment test is concrete: does your calendar, your closest relationships, and what you do with your money look like the life of someone who is actually submitting to God's Word? Your agreement can't answer that. Only your alignment can."
+      },
+      {
+        title: "Storms Reveal, They Don't Create",
+        icon: "shield",
+        scripture: "Romans 5:3–5",
+        body: "One of the sermon's most disorienting claims is that both builders faced the same storm. Obedience did not exempt the wise builder from rain, rising streams, and wind — it only determined whether the house stood. This completely reframes what a storm is for. If obedience doesn't prevent the storm, then the storm is not a verdict on your behavior. It is a diagnostic on your foundation. Storms expose what was already true: cracks you didn't know existed, structures you assumed were solid, depth that hadn't been tested. Romans 5 goes further — Paul says we rejoice in our sufferings because suffering produces perseverance, perseverance produces character, and character produces hope. The storm isn't undoing you. It is forming you — but only if you built on the rock. The wise builder doesn't dread the storm because the storm only confirms what was already true before it arrived. The question to bring into every storm is not 'Why is this happening to me?' but 'What is this revealing in me?'"
+      },
+      {
+        title: "Three Storms That Test Your Foundation",
+        icon: "psychology",
+        scripture: "1 Peter 1:6–7",
+        body: "Pastor Hollis names three storms that expose a believer's foundation. The storm of suffering asks whether your trust can survive your disappointment — whether unmet expectations will make you walk away from God entirely. The storm of temptation asks who you become when your flesh is weak. He catalogs the great figures of faith: David ran to murder, Samson to Delilah, Abraham to deception, Noah to a bottle, Elijah to suicidal despair. None were storm-exempt. Where you run when your flesh is failing reveals what you are actually built on. The storm of pressure asks whether your faith can survive the weight — not just its heaviness, but its duration. First Peter 1:7 says these trials prove the genuineness of your faith, 'of greater worth than gold, which perishes even though refined by fire.' The storm is not the interruption of your story. In the hands of a wise builder who has dug deep, the storm becomes the proof. The house stood. And everyone knew it."
+      }
+    ],
+
+    assessment: [
+      {
+        q:"According to the sermon, what made the wise builder different from the foolish builder?",
+        options:[
+          "The wise builder chose a safer location for his house",
+          "The wise builder had greater natural ability and resources",
+          "The wise builder heard the Word and put it into practice",
+          "The wise builder prayed harder before the storm arrived"
+        ],
+        correct:2,
+        explanation:"Jesus makes clear in Matthew 7:24 that both builders heard the Word — the difference was not exposure but response. The wise builder 'put it into practice.' The sermon's entire argument flows from this: the distinction is not between those who hear and those who don't, but between those who obey and those who don't."
+      },
+      {
+        q:"What does the sermon mean by 'obsessed with elevation while ignoring excavation'?",
+        options:[
+          "Christians focus too much on praise and worship and not enough on theology",
+          "We celebrate visible results while neglecting the invisible foundation that makes them possible",
+          "Church buildings are being built for appearance rather than function",
+          "People pursue career advancement while ignoring spiritual practices"
+        ],
+        correct:1,
+        explanation:"The sermon uses the One World Trade Center metaphor to argue that most people celebrate the height of a building while ignoring the 150 feet of support beams beneath it. Spiritually, this means we prize visible success, influence, and growth while neglecting the invisible disciplines — prayer, obedience, character formation — that make any of it sustainable."
+      },
+      {
+        q:"A believer who affirms that God calls them to forgive others, shouts 'Amen' when the pastor preaches it, but has never actually forgiven anyone who hurt them — best illustrates which problem from the sermon?",
+        options:[
+          "The storm of suffering",
+          "Confusing visibility with value",
+          "The gap between agreement and alignment",
+          "Height without depth"
+        ],
+        correct:2,
+        explanation:"The sermon's sharpest diagnostic is the gap between agreement and alignment. You can agree with God's Word — affirm it, celebrate it, shout over it — without ever aligning your life to reflect it. Dallas Willard's insight from The Divine Conspiracy is cited directly: Christianity is meant to be believing and doing that leads to becoming. Agreement that never becomes alignment is self-deception."
+      },
+      {
+        q:"According to the sermon, what is the primary purpose of a storm in the life of a believer?",
+        options:[
+          "To punish sin and motivate repentance",
+          "To remove people from positions God hasn't assigned them",
+          "To reveal the strength or weakness of the foundation already in place",
+          "To give believers an opportunity to demonstrate their faith publicly"
+        ],
+        correct:2,
+        explanation:"The sermon is explicit: 'Storms don't create foundations — they expose them.' Both the wise and foolish builder faced the same storm. The storm did not produce the outcome — it revealed it. The wise builder's house stood not because the storm was different, but because the foundation was. The storm's function is diagnostic, not punitive."
+      },
+      {
+        q:"The sermon says obedience to God's Word does not make you storm-exempt, but makes you storm-proof. What is the key difference?",
+        options:[
+          "Storm-exempt means no storms; storm-proof means you enjoy the storms",
+          "Storm-exempt means God removes all hardship; storm-proof means you stand through hardship because of what you're built on",
+          "Storm-exempt applies to physical storms; storm-proof applies to spiritual ones",
+          "There is no meaningful difference — both describe the same outcome"
+        ],
+        correct:1,
+        explanation:"Both builders in Matthew 7 experienced the same storm — rain, rising streams, wind. Obedience removed none of it. What obedience provided was a foundation strong enough to stand when the storm hit. Storm-proof doesn't mean no storm; it means the storm cannot bring down what was built on the rock. The wise builder's house 'did not fall' — not because the storm was gentle, but because the foundation held."
+      }
+    ]
+  },
+
   egypt: {
     id: 'egypt',
     title: "You Can't Bring Egypt With You",
