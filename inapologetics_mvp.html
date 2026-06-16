@@ -430,85 +430,122 @@ body {
 </div>
 
 <!-- ═══ LEARN TAB ════════════════════════════════════════════════════════════ -->
-<div id="screen-learn" class="screen" style="padding:16px 16px 100px;">
-  <h1 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#0B3D91;margin-bottom:4px;">Learn</h1>
-  <p style="font-size:13px;color:#52504B;margin-bottom:20px;">Formation modules for deeper discipleship.</p>
+<div id="screen-learn" class="screen" style="padding:0 0 100px;">
 
-  <div style="background:#0B3D91;border-radius:20px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;" onclick="openModule('egypt')">
-    <div style="position:absolute;top:-24px;right:-24px;width:120px;height:120px;background:rgba(255,255,255,0.05);border-radius:50%;pointer-events:none;"></div>
-    <div style="position:absolute;bottom:-32px;right:16px;width:90px;height:90px;background:rgba(255,255,255,0.04);border-radius:50%;pointer-events:none;"></div>
-    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Formation Series · Numbers 13</p>
-    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;">You Can't Bring Egypt With You</h2>
-    <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:18px;line-height:1.5;">God delivers you from Egypt in a moment. The wilderness is where He gets Egypt out of you.</p>
-    <div style="display:flex;align-items:center;justify-content:space-between;">
-      <div style="display:flex;gap:14px;">
-        <div style="display:flex;align-items:center;gap:4px;">
-          <span class="material-symbols-outlined" style="font-size:14px;color:rgba(255,255,255,0.55);">schedule</span>
-          <span style="font-size:11px;color:rgba(255,255,255,0.55);">28 min</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:4px;">
-          <span class="material-symbols-outlined" style="font-size:14px;color:rgba(255,255,255,0.55);">stairs</span>
-          <span style="font-size:11px;color:rgba(255,255,255,0.55);">7 steps</span>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,0.15);color:#fff;border-radius:100px;padding:8px 18px;font-size:12px;font-weight:700;">
-        Begin →
-      </div>
+  <!-- Top bar: logo + search -->
+  <div style="padding:16px 16px 14px;background:#fcf9f4;border-bottom:1px solid #e5e2dd;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <img src="Branding/Favicon.png" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;" />
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#002869;flex:1;">Unapologetics.ai</span>
+    </div>
+    <div style="background:#f0ede8;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;">
+      <span class="material-symbols-outlined" style="font-size:18px;color:#747783;">search</span>
+      <span style="font-size:14px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Search the tradition...</span>
     </div>
   </div>
 
-  <div style="background:#1F4D2F;border-radius:20px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;" onclick="openModule('built-different')">
-    <div style="position:absolute;top:-24px;right:-24px;width:120px;height:120px;background:rgba(255,255,255,0.05);border-radius:50%;pointer-events:none;"></div>
-    <div style="position:absolute;bottom:-32px;right:16px;width:90px;height:90px;background:rgba(255,255,255,0.04);border-radius:50%;pointer-events:none;"></div>
-    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Union Church · Matthew 7</p>
-    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;">I'm Built Different</h2>
-    <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:18px;line-height:1.5;">Storms don't create weak foundations — they expose them. True wisdom is not just hearing God's Word; it's aligning your life with it.</p>
-    <div style="display:flex;align-items:center;justify-content:space-between;">
-      <div style="display:flex;gap:14px;">
-        <div style="display:flex;align-items:center;gap:4px;">
-          <span class="material-symbols-outlined" style="font-size:14px;color:rgba(255,255,255,0.55);">schedule</span>
-          <span style="font-size:11px;color:rgba(255,255,255,0.55);">34 min</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:4px;">
-          <span class="material-symbols-outlined" style="font-size:14px;color:rgba(255,255,255,0.55);">stairs</span>
-          <span style="font-size:11px;color:rgba(255,255,255,0.55);">5 steps</span>
-        </div>
+  <!-- From your Community -->
+  <div style="padding:20px 16px 0;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#747783;margin-bottom:16px;">From your Community</p>
+
+    <!-- Union Church community header -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:42px;height:42px;background:#111;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span style="color:#fff;font-size:17px;font-weight:900;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-0.04em;">U</span>
       </div>
-      <div style="background:rgba(255,255,255,0.15);color:#fff;border-radius:100px;padding:8px 18px;font-size:12px;font-weight:700;">
-        Begin →
+      <div>
+        <p style="font-size:14px;font-weight:700;color:#1c1c19;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:1px;">Union Church</p>
+        <p style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Collection</p>
       </div>
     </div>
+
+    <!-- Module card: I'm Built Different (Jun 14) -->
+    <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;border:1px solid #c4c6d3;cursor:pointer;" class="mono-shadow" onclick="openModule('built-different')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7c572d;font-family:'Plus Jakarta Sans',sans-serif;background:#fecb9722;padding:3px 8px;border-radius:100px;border:1px solid #fecb97;">Theology</span>
+        <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Jun 14, 2026</span>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">I'm Built Different</h3>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Matthew 7:24–27 · Union Church</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;gap:14px;">
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">schedule</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">34 min</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+          </div>
+        </div>
+        <button onclick="event.stopPropagation();openModule('built-different')" style="background:#002869;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+      </div>
+    </div>
+
+    <!-- Module card: You Can't Bring Egypt With You (Jun 7) -->
+    <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;border:1px solid #c4c6d3;cursor:pointer;" class="mono-shadow" onclick="openModule('egypt')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#345baf;font-family:'Plus Jakarta Sans',sans-serif;background:#dae2ff44;padding:3px 8px;border-radius:100px;border:1px solid #b1c5ff;">Formation</span>
+        <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Jun 7, 2026</span>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">You Can't Bring Egypt With You</h3>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Numbers 13:26–33 · Union Church</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;gap:14px;">
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">schedule</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">28 min</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+          </div>
+        </div>
+        <button onclick="event.stopPropagation();openModule('egypt')" style="background:#002869;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+      </div>
+    </div>
+
+    <button style="width:100%;background:transparent;border:1.5px solid #c4c6d3;border-radius:100px;padding:11px;font-size:12px;font-weight:700;color:#434652;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-top:4px;margin-bottom:28px;">
+      View All Resources
+    </button>
   </div>
 
-  <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:10px;">Coming Soon</p>
+  <!-- Coming Soon divider -->
+  <div style="padding:0 16px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+      <div style="flex:1;height:1px;background:#e5e2dd;"></div>
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#c4c6d3;flex-shrink:0;">More Coming</p>
+      <div style="flex:1;height:1px;background:#e5e2dd;"></div>
+    </div>
 
-  <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid #c4c6d3;display:flex;gap:12px;align-items:flex-start;" class="mono-shadow">
-    <div style="width:44px;height:44px;background:#f4f3f1;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-      <span class="material-symbols-outlined" style="color:#7A7570;font-size:20px;">lock</span>
+    <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid #e5e2dd;display:flex;gap:12px;align-items:flex-start;">
+      <div style="width:42px;height:42px;background:#f6f3ee;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span class="material-symbols-outlined" style="color:#c4c6d3;font-size:20px;">lock</span>
+      </div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:700;color:#c4c6d3;margin-bottom:2px;font-family:'Plus Jakarta Sans',sans-serif;">The Sin of Sodom Was Not What You Think</p>
+        <p style="font-size:11px;color:#c4c6d3;font-family:'Plus Jakarta Sans',sans-serif;">Ezekiel 16 · Apologetics</p>
+      </div>
     </div>
-    <div style="flex:1;">
-      <p style="font-size:13px;font-weight:700;color:#52504B;margin-bottom:2px;">The Sin of Sodom Was Not What You Think</p>
-      <p style="font-size:11px;color:#7A7570;">Ezekiel 16 · Apologetics Series</p>
-    </div>
-  </div>
 
-  <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid #c4c6d3;display:flex;gap:12px;align-items:flex-start;" class="mono-shadow">
-    <div style="width:44px;height:44px;background:#f4f3f1;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-      <span class="material-symbols-outlined" style="color:#7A7570;font-size:20px;">lock</span>
+    <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid #e5e2dd;display:flex;gap:12px;align-items:flex-start;">
+      <div style="width:42px;height:42px;background:#f6f3ee;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span class="material-symbols-outlined" style="color:#c4c6d3;font-size:20px;">lock</span>
+      </div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:700;color:#c4c6d3;margin-bottom:2px;font-family:'Plus Jakarta Sans',sans-serif;">Pride and the Prejudiced</p>
+        <p style="font-size:11px;color:#c4c6d3;font-family:'Plus Jakarta Sans',sans-serif;">Daniel 4 · Cultural Apologetics</p>
+      </div>
     </div>
-    <div style="flex:1;">
-      <p style="font-size:13px;font-weight:700;color:#52504B;margin-bottom:2px;">Pride and the Prejudiced</p>
-      <p style="font-size:11px;color:#7A7570;">Daniel 4 · Cultural Apologetics</p>
-    </div>
-  </div>
 
-  <div style="background:#fff;border-radius:14px;padding:14px;border:1px solid #c4c6d3;display:flex;gap:12px;align-items:flex-start;" class="mono-shadow">
-    <div style="width:44px;height:44px;background:#f4f3f1;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-      <span class="material-symbols-outlined" style="color:#7A7570;font-size:20px;">lock</span>
-    </div>
-    <div style="flex:1;">
-      <p style="font-size:13px;font-weight:700;color:#52504B;margin-bottom:2px;">The Unseen War: Who Is Fighting for Your Territory</p>
-      <p style="font-size:11px;color:#7A7570;">Deuteronomy 32 · Spiritual Warfare</p>
+    <div style="background:#fff;border-radius:14px;padding:14px;border:1px solid #e5e2dd;display:flex;gap:12px;align-items:flex-start;">
+      <div style="width:42px;height:42px;background:#f6f3ee;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span class="material-symbols-outlined" style="color:#c4c6d3;font-size:20px;">lock</span>
+      </div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:700;color:#c4c6d3;margin-bottom:2px;font-family:'Plus Jakarta Sans',sans-serif;">The Unseen War: Who Is Fighting for Your Territory</p>
+        <p style="font-size:11px;color:#c4c6d3;font-family:'Plus Jakarta Sans',sans-serif;">Deuteronomy 32 · Spiritual Warfare</p>
+      </div>
     </div>
   </div>
 </div>
@@ -621,6 +658,10 @@ const MODULES = {
     id: 'built-different',
     title: "I'm Built Different",
     series: 'Union Church',
+    community: 'Union Church',
+    date: 'Jun 14, 2026',
+    type: 'Theology',
+    duration: '34 min',
     scripture: 'Matthew 7:24–27',
     videoId: '-S-t7QdMGNE',
 
@@ -747,6 +788,10 @@ const MODULES = {
     id: 'egypt',
     title: "You Can't Bring Egypt With You",
     series: 'Formation Series',
+    community: 'Union Church',
+    date: 'Jun 7, 2026',
+    type: 'Formation',
+    duration: '28 min',
     scripture: 'Numbers 13:26–33',
     videoId: '_wSqePjcVf0?si=ttdAl97VpO1oZiTr',
 
