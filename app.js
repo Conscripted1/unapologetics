@@ -302,8 +302,34 @@ function renderWatchSortCardsHTML(m) {
               <span style="font-size:11px;color:#0B3D91;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;">${card.timestamp}</span>
             </button>
           </div>
-          ${isPlaced ? `<span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:${FRAME_COLORS[pFrame]};font-family:'Plus Jakarta Sans',sans-serif;flex-shrink:0;padding-top:3px;">${FRAME_NAMES[pFrame]}</span>` : ''}
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">
+            <button onclick="toggleCustomCardEdit(${idx})" title="Edit this statement"
+              style="background:none;border:none;cursor:pointer;padding:3px;display:flex;align-items:center;justify-content:center;border-radius:6px;">
+              <span class="material-symbols-outlined" style="font-size:16px;color:#7A7570;">edit</span>
+            </button>
+            ${isPlaced ? `<span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:${FRAME_COLORS[pFrame]};font-family:'Plus Jakarta Sans',sans-serif;">${FRAME_NAMES[pFrame]}</span>` : ''}
+          </div>
         </div>
+
+        <div id="cws-edit-form-${idx}" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid #EFEFED;">
+          <div style="display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;">
+            <div style="width:80px;flex-shrink:0;">
+              <p style="font-size:10px;color:#7A7570;margin-bottom:4px;">Timestamp</p>
+              <input id="cws-edit-ts-${idx}" type="text" value="${card.timestamp}"
+                style="width:100%;background:#fff;border:1px solid #D4A574;border-radius:8px;padding:8px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;box-sizing:border-box;">
+            </div>
+            <div style="flex:1;">
+              <p style="font-size:10px;color:#7A7570;margin-bottom:4px;">Statement</p>
+              <textarea id="cws-edit-text-${idx}" rows="3"
+                style="width:100%;background:#fff;border:1px solid #c4c6d3;border-radius:8px;padding:8px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:#2A2824;resize:none;line-height:1.5;box-sizing:border-box;">${card.text}</textarea>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button onclick="toggleCustomCardEdit(${idx})" style="flex:1;background:transparent;border:1px solid #c4c6d3;border-radius:100px;padding:9px;font-size:13px;font-weight:600;color:#7A7570;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Cancel</button>
+            <button onclick="saveCustomCardEdit(${idx})" style="flex:2;background:#0B3D91;color:#fff;border-radius:100px;padding:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Save Changes</button>
+          </div>
+        </div>
+
         ${inlineFrameBtns}
         ${actionRow}
       </div>`;
@@ -422,6 +448,35 @@ function toggleCustomCardNote(idx, moduleId) {
   const isOpen = el.style.display === 'block';
   el.style.display = isOpen ? 'none' : 'block';
   if (!isOpen) { const ta = el.querySelector('textarea'); if (ta) ta.focus(); }
+}
+
+function toggleCustomCardEdit(idx) {
+  const form = document.getElementById(`cws-edit-form-${idx}`);
+  if (!form) return;
+  const isOpen = form.style.display !== 'none';
+  form.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) {
+    const ta = document.getElementById(`cws-edit-text-${idx}`);
+    if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }
+  }
+}
+
+function saveCustomCardEdit(idx) {
+  const card = moduleState.customSortCards[idx];
+  if (!card) return;
+  const textEl = document.getElementById(`cws-edit-text-${idx}`);
+  const tsEl   = document.getElementById(`cws-edit-ts-${idx}`);
+  const newText = textEl ? textEl.value.trim() : '';
+  const newTs   = tsEl   ? tsEl.value.trim()   : '';
+  if (!newText) {
+    if (textEl) { textEl.style.borderColor = '#A0523D'; textEl.focus(); }
+    return;
+  }
+  card.text      = newText;
+  card.timestamp = newTs || card.timestamp;
+  const m  = MODULES[moduleState.moduleId];
+  const el = document.getElementById('pipeline-content');
+  if (m && el) renderWatchSort(m, el);
 }
 
 function renderWatchSort(m, el) {
