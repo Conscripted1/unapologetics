@@ -8,7 +8,9 @@ let heartedItems = [];      // { moduleId, argIdx, quote, timestamp, moduleTitle
 let watchNotes = {};         // key: 'moduleId:argIdx', value: string
 let formationReflections = {}; // key: 'moduleId:pageIdx', value: string
 let discernLog = [];         // accumulated placed statements from general discern sessions
-let mirrorLog  = [];         // { text, topic, firstFrame, secondFrame, finalFrame, note, moduleTitle }
+let mirrorLog  = [];         // { text, topic, firstFrame, secondFrame, finalFrame, note, moduleTitle, moduleId }
+let formationPool = [];      // { id, text, moduleId, moduleTitle, source, frame, algorithmWeight, userFloor, interactions, addedAt }
+let growthExpanded = { altar: false, mirror: false, stones: false, discernLog: false };
 
 let discernState = { statements:[], idx:0, placed:[], streak:0 };
 
@@ -962,6 +964,7 @@ function renderAssessResults(m, el) {
   const correct = answers.filter((a, i) => a === m.assessment[i].correct).length;
   const pct     = Math.round((correct / total) * 100);
   modulesComplete++;
+  populateFormationPool(m);
 
   const color  = pct >= 80 ? '#1F4D2F' : pct >= 60 ? '#0B3D91' : '#A0523D';
   const icon   = pct >= 80 ? 'verified' : 'fact_check';
@@ -1214,41 +1217,235 @@ function resetDiscern() {
 }
 
 // ── GROWTH SCREEN ─────────────────────────────────────────────────────────────
+// ── FORMATION POOL ────────────────────────────────────────────────────────────
+function poolEffectiveWeight(item) {
+  return Math.max(item.userFloor, item.algorithmWeight);
+}
+
+function getPoolItemStatus(item) {
+  if (item.userFloor > item.algorithmWeight)
+    return { label:'Anchored',      icon:'lock',          color:'#1F4D2F', bg:'#d4edda' };
+  const eff = poolEffectiveWeight(item);
+  if (eff >= 8)
+    return { label:'High Priority', icon:'priority_high', color:'#8B4513', bg:'#fecb97' };
+  if (eff >= 5)
+    return { label:'Maintenance',   icon:'repeat',        color:'#0B3D91', bg:'#dae2ff' };
+  return   { label:'Resting',       icon:'bedtime',       color:'#7A7570', bg:'#f4f3f1' };
+}
+
+function renderPoolDots(item) {
+  const floor = item.userFloor;
+  const algo  = item.algorithmWeight;
+  return [1,2,3,4,5,6,7,8,9,10].map(n => {
+    let bg, border;
+    if (n <= floor) {
+      bg = '#D4A574'; border = '#D4A574';
+    } else if (n <= algo) {
+      bg = 'rgba(11,61,145,0.18)'; border = '#0B3D91';
+    } else {
+      bg = 'transparent'; border = '#c4c6d3';
+    }
+    return `<button onclick="setPoolItemFloor('${item.id}',${n})" title="Set floor to ${n}"
+      style="width:22px;height:22px;border-radius:3px;cursor:pointer;background:${bg};border:1.5px solid ${border};flex-shrink:0;padding:0;"></button>`;
+  }).join('');
+}
+
+function poolItemCardHTML(item) {
+  const status = getPoolItemStatus(item);
+  const fc = FRAME_COLORS[item.frame] || '#7A7570';
+  const fb = FRAME_BG[item.frame]    || '#f4f3f1';
+  const fn = FRAME_NAMES[item.frame] || '—';
+  const sourceLabel = {
+    'watch-sort-review':  'Watch & Sort · Needs Review',
+    'watch-sort-correct': 'Watch & Sort · Correct',
+    'pre-sort-incorrect': 'Pre-Sort · Incorrect',
+    'mirror':             'The Mirror',
+    'custom':             'My Statement',
+  }[item.source] || item.source;
+  const noteText = item.userFloor > item.algorithmWeight
+    ? `Anchored above algorithm (${item.algorithmWeight})`
+    : item.algorithmWeight > item.userFloor
+    ? `Algorithm suggests ${item.algorithmWeight} · Your floor: ${item.userFloor}`
+    : `Frequency: ${poolEffectiveWeight(item)} of 10`;
+
+  return `
+    <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;border:1.5px solid ${fc}22;box-shadow:0 2px 8px rgba(42,40,36,0.05);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span style="background:${fb};color:${fc};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 10px;border-radius:100px;border:1px solid ${fc}33;">${fn}</span>
+        <span id="pool-status-${item.id}" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:${status.color};background:${status.bg};padding:3px 8px;border-radius:100px;display:inline-flex;align-items:center;gap:3px;">
+          <span class="material-symbols-outlined" style="font-size:11px;">${status.icon}</span>${status.label}
+        </span>
+      </div>
+      <p style="font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:#2A2824;line-height:1.55;margin-bottom:8px;">"${item.text}"</p>
+      <p style="font-size:11px;color:#7A7570;margin-bottom:14px;">${item.moduleTitle} · ${sourceLabel}</p>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#D4A574;">Your Floor</span>
+          <span style="font-size:10px;font-weight:600;color:#52504B;">Algorithm: ${item.algorithmWeight}</span>
+        </div>
+        <div id="pool-dots-${item.id}" style="display:flex;gap:4px;">${renderPoolDots(item)}</div>
+        <p id="pool-note-${item.id}" style="font-size:10px;color:#7A7570;margin-top:6px;font-style:italic;">${noteText}</p>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #EFEFED;display:flex;justify-content:flex-end;">
+        <button onclick="removeFromPool('${item.id}')" style="background:none;border:none;cursor:pointer;font-size:11px;color:#7A7570;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:3px;">
+          <span class="material-symbols-outlined" style="font-size:14px;">remove_circle_outline</span>Remove
+        </button>
+      </div>
+    </div>`;
+}
+
+function renderFormationPool() {
+  const el = document.getElementById('growth-pool-list');
+  if (!el) return;
+  if (formationPool.length === 0) {
+    el.innerHTML = `
+      <div style="text-align:center;padding:24px 0;">
+        <span class="material-symbols-outlined" style="font-size:36px;color:#c4c6d3;display:block;margin-bottom:10px;">inbox</span>
+        <p style="font-size:13px;color:#7A7570;line-height:1.6;">Your formation pool fills as you complete modules. The content you need to revisit most will surface here, weighted by your performance and engagement.</p>
+      </div>`;
+    return;
+  }
+  const sorted = [...formationPool].sort((a, b) => poolEffectiveWeight(b) - poolEffectiveWeight(a));
+  const high   = sorted.filter(x => { const s = getPoolItemStatus(x); return s.label === 'High Priority'; });
+  const anchor = sorted.filter(x => { const s = getPoolItemStatus(x); return s.label === 'Anchored'; });
+  const maint  = sorted.filter(x => { const s = getPoolItemStatus(x); return s.label === 'Maintenance'; });
+  const rest   = sorted.filter(x => { const s = getPoolItemStatus(x); return s.label === 'Resting'; });
+  let html = '';
+  const sectionHdr = (label, mt) =>
+    `<p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#7A7570;margin:${mt ? '16px' : '0'} 0 10px;">${label}</p>`;
+  if (high.length || anchor.length) {
+    html += sectionHdr('Priority Formation', false);
+    html += [...high, ...anchor].map(poolItemCardHTML).join('');
+  }
+  if (maint.length) {
+    html += sectionHdr('Maintenance', high.length || anchor.length);
+    html += maint.map(poolItemCardHTML).join('');
+  }
+  if (rest.length) {
+    html += sectionHdr('Resting', high.length || anchor.length || maint.length);
+    html += rest.map(poolItemCardHTML).join('');
+  }
+  el.innerHTML = html;
+}
+
+function populateFormationPool(m) {
+  const now = Date.now();
+  const mId = m.id;
+
+  (moduleState.sortPlaced || []).forEach((p, i) => {
+    const id = `${mId}-ws-${i}`;
+    if (formationPool.find(x => x.id === id)) return;
+    const isCorrect = p.placed === p.stmt.correct;
+    const isHearted = heartedItems.some(h => h.moduleId === mId && h.argIdx === i);
+    const hasNote   = !!watchNotes[`${mId}:${i}`];
+    const source    = (!isCorrect || isHearted || hasNote) ? 'watch-sort-review' : 'watch-sort-correct';
+    const aw = source === 'watch-sort-review' ? 9 : 5;
+    const uf = source === 'watch-sort-review' ? 6 : 3;
+    formationPool.push({ id, text:p.stmt.text, moduleId:mId, moduleTitle:m.title, source, frame:p.placed, algorithmWeight:aw, userFloor:uf, interactions:0, addedAt:now });
+  });
+
+  (moduleState.preSortPlaced || []).forEach((p, i) => {
+    if (p.placed === p.stmt.correct) return;
+    const id = `${mId}-ps-${i}`;
+    if (formationPool.find(x => x.id === id)) return;
+    formationPool.push({ id, text:p.stmt.text, moduleId:mId, moduleTitle:m.title, source:'pre-sort-incorrect', frame:p.stmt.correct, algorithmWeight:2, userFloor:1, interactions:0, addedAt:now });
+  });
+
+  (moduleState.customSortCards || []).forEach((card, i) => {
+    if (card.placed === null) return;
+    const id = `${mId}-cws-${i}`;
+    if (formationPool.find(x => x.id === id)) return;
+    formationPool.push({ id, text:card.text, moduleId:mId, moduleTitle:m.title, source:'custom', frame:card.placed, algorithmWeight:8, userFloor:5, interactions:0, addedAt:now });
+  });
+
+  mirrorLog.filter(e => e.moduleId === mId).forEach((entry, i) => {
+    const id = `${mId}-mirror-${i}`;
+    if (formationPool.find(x => x.id === id)) return;
+    formationPool.push({ id, text:entry.text, moduleId:mId, moduleTitle:m.title, source:'mirror', frame:entry.finalFrame, algorithmWeight:4, userFloor:2, interactions:0, addedAt:now });
+  });
+}
+
+function setPoolItemFloor(id, floor) {
+  const item = formationPool.find(x => x.id === id);
+  if (!item) return;
+  item.userFloor = floor;
+  const dotsEl = document.getElementById(`pool-dots-${id}`);
+  if (dotsEl) dotsEl.innerHTML = renderPoolDots(item);
+  const noteEl = document.getElementById(`pool-note-${id}`);
+  if (noteEl) {
+    noteEl.textContent = item.userFloor > item.algorithmWeight
+      ? `Anchored above algorithm (${item.algorithmWeight})`
+      : item.algorithmWeight > item.userFloor
+      ? `Algorithm suggests ${item.algorithmWeight} · Your floor: ${item.userFloor}`
+      : `Frequency: ${poolEffectiveWeight(item)} of 10`;
+  }
+  const statusEl = document.getElementById(`pool-status-${id}`);
+  if (statusEl) {
+    const s = getPoolItemStatus(item);
+    statusEl.style.color = s.color;
+    statusEl.style.background = s.bg;
+    statusEl.innerHTML = `<span class="material-symbols-outlined" style="font-size:11px;">${s.icon}</span>${s.label}`;
+  }
+}
+
+function removeFromPool(id) {
+  formationPool = formationPool.filter(x => x.id !== id);
+  renderFormationPool();
+}
+
+function toggleGrowthSection(name) {
+  growthExpanded[name] = !growthExpanded[name];
+  const contentEl = document.getElementById(`growth-section-${name}`);
+  const iconEl    = document.getElementById(`growth-section-icon-${name}`);
+  if (contentEl) contentEl.style.display = growthExpanded[name] ? 'block' : 'none';
+  if (iconEl)    iconEl.textContent = growthExpanded[name] ? 'expand_less' : 'expand_more';
+}
+
 function updateGrowthScreen() {
   document.getElementById('growth-sorted').textContent  = totalSorted;
   document.getElementById('growth-modules').textContent = modulesComplete;
 
-  // Altar of Your Heart — hearted sermon moments
+  renderFormationPool();
+
+  // Altar of Your Heart
   const altarEl = document.getElementById('growth-hearted');
-  if (heartedItems.length === 0) {
-    altarEl.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Points you love during Watch & Sort will appear here.</p>';
-  } else {
-    altarEl.innerHTML = heartedItems.map(item => `
-      <div style="padding:12px 0;border-bottom:1px solid #EFEFED;">
-        <p style="font-family:'Playfair Display',serif;font-size:14px;color:#2A2824;line-height:1.5;margin-bottom:4px;">${item.quote}</p>
-        <p style="font-size:11px;color:#7A7570;">${item.moduleTitle} · ${item.timestamp}</p>
-      </div>`).join('');
+  if (altarEl) {
+    if (heartedItems.length === 0) {
+      altarEl.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Points you love during Watch & Sort will appear here.</p>';
+    } else {
+      altarEl.innerHTML = heartedItems.map(item => `
+        <div style="padding:12px 0;border-bottom:1px solid #EFEFED;">
+          <p style="font-family:'Playfair Display',serif;font-size:14px;color:#2A2824;line-height:1.5;margin-bottom:4px;">${item.quote}</p>
+          <p style="font-size:11px;color:#7A7570;">${item.moduleTitle} · ${item.timestamp}</p>
+        </div>`).join('');
+      const badge = document.getElementById('growth-altar-badge');
+      if (badge) { badge.textContent = heartedItems.length; badge.style.display = 'inline-block'; }
+    }
   }
 
-  // Discernment Log — history of general discern sessions
+  // Discernment Log
   const logEl = document.getElementById('growth-discern-log');
-  if (discernLog.length === 0) {
-    logEl.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a Discern session to build your log.</p>';
-  } else {
-    const shown = discernLog.slice(-10).reverse();
-    logEl.innerHTML = shown.map(p => {
-      const ok = p.placed === p.stmt.correct;
-      return `<div style="display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #EFEFED;">
-        <span class="material-symbols-outlined icon-fill" style="font-size:13px;color:${ok ? '#1F4D2F' : '#A0523D'};flex-shrink:0;margin-top:3px;">${ok ? 'check_circle' : 'cancel'}</span>
-        <div style="flex:1;min-width:0;">
-          <p style="font-size:12px;color:#2A2824;line-height:1.4;">${p.stmt.text.length > 90 ? p.stmt.text.slice(0,90)+'…' : p.stmt.text}</p>
-          <p style="font-size:10px;color:${FRAME_COLORS[p.placed]};font-weight:700;margin-top:2px;">${FRAME_NAMES[p.placed]}${!ok ? ` · Correct: ${FRAME_NAMES[p.stmt.correct]}` : ''}</p>
-        </div>
-      </div>`;
-    }).join('') + (discernLog.length > 10 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">Showing last 10 of ${discernLog.length}</p>` : '');
+  if (logEl) {
+    if (discernLog.length === 0) {
+      logEl.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a Discern session to build your log.</p>';
+    } else {
+      const shown = discernLog.slice(-10).reverse();
+      logEl.innerHTML = shown.map(p => {
+        const ok = p.placed === p.stmt.correct;
+        return `<div style="display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #EFEFED;">
+          <span class="material-symbols-outlined icon-fill" style="font-size:13px;color:${ok ? '#1F4D2F' : '#A0523D'};flex-shrink:0;margin-top:3px;">${ok ? 'check_circle' : 'cancel'}</span>
+          <div style="flex:1;min-width:0;">
+            <p style="font-size:12px;color:#2A2824;line-height:1.4;">${p.stmt.text.length > 90 ? p.stmt.text.slice(0,90)+'…' : p.stmt.text}</p>
+            <p style="font-size:10px;color:${FRAME_COLORS[p.placed]};font-weight:700;margin-top:2px;">${FRAME_NAMES[p.placed]}${!ok ? ` · Correct: ${FRAME_NAMES[p.stmt.correct]}` : ''}</p>
+          </div>
+        </div>`;
+      }).join('') + (discernLog.length > 10 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">Showing last 10 of ${discernLog.length}</p>` : '');
+      const badge = document.getElementById('growth-discern-badge');
+      if (badge) { badge.textContent = discernLog.length; badge.style.display = 'inline-block'; }
+    }
   }
 
-  // Mirror Log — finalized mirror entries from module pipeline
+  // Mirror Log
   const mirrorEl = document.getElementById('growth-mirror-log');
   if (mirrorEl) {
     if (mirrorLog.length === 0) {
@@ -1274,24 +1471,28 @@ function updateGrowthScreen() {
           <p style="font-size:11px;color:#7A7570;margin-top:3px;">${entry.moduleTitle}</p>
         </div>`;
       }).join('') + (mirrorLog.length > 6 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">Showing last 6 of ${mirrorLog.length}</p>` : '');
+      const badge = document.getElementById('growth-mirror-badge');
+      if (badge) { badge.textContent = mirrorLog.length; badge.style.display = 'inline-block'; }
     }
   }
 
-  // My Stones — library from module Watch & Sort
+  // My Stones
   const stoneCount = document.getElementById('growth-stone-count');
-  if (stoneCount) stoneCount.textContent = `${libraryItems.length} stone${libraryItems.length !== 1 ? 's' : ''} laid`;
+  if (stoneCount) stoneCount.textContent = `${libraryItems.length} stone${libraryItems.length !== 1 ? 's' : ''}`;
 
   const preview = document.getElementById('library-preview');
-  if (libraryItems.length === 0) {
-    preview.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a module to lay your first stones.</p>';
-  } else {
-    const shown = libraryItems.slice(0, 4);
-    preview.innerHTML = shown.map(item => `
-      <div style="padding:10px 0;border-bottom:1px solid #EFEFED;">
-        <p style="font-size:10px;font-weight:700;color:${FRAME_COLORS[item.frame]};margin-bottom:3px;text-transform:uppercase;letter-spacing:0.07em;">${FRAME_NAMES[item.frame]}</p>
-        <p style="font-size:13px;color:#2A2824;line-height:1.5;">${item.text}</p>
-      </div>`).join('')
-      + (libraryItems.length > 4 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">+${libraryItems.length - 4} more</p>` : '');
+  if (preview) {
+    if (libraryItems.length === 0) {
+      preview.innerHTML = '<p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a module to lay your first stones.</p>';
+    } else {
+      const shown = libraryItems.slice(0, 4);
+      preview.innerHTML = shown.map(item => `
+        <div style="padding:10px 0;border-bottom:1px solid #EFEFED;">
+          <p style="font-size:10px;font-weight:700;color:${FRAME_COLORS[item.frame]};margin-bottom:3px;text-transform:uppercase;letter-spacing:0.07em;">${FRAME_NAMES[item.frame]}</p>
+          <p style="font-size:13px;color:#2A2824;line-height:1.5;">${item.text}</p>
+        </div>`).join('')
+        + (libraryItems.length > 4 ? `<p style="font-size:12px;color:#7A7570;text-align:center;padding:8px 0;">+${libraryItems.length - 4} more</p>` : '');
+    }
   }
 }
 

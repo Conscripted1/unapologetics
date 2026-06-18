@@ -521,50 +521,81 @@
     </div>
   </div>
 
-  <!-- Altar of Your Heart -->
-  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #fecb97;margin-bottom:14px;" class="mono-shadow">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-      <span class="material-symbols-outlined icon-fill" style="font-size:18px;color:#c0392b;">favorite</span>
-      <p style="font-size:13px;font-weight:700;color:#2A2824;">Altar of Your Heart</p>
+  <!-- My Formation Pool -->
+  <div style="background:#fff;border-radius:16px;padding:16px;border:1.5px solid #D4A574;margin-bottom:14px;" class="mono-shadow">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+      <span class="material-symbols-outlined" style="font-size:18px;color:#B8860B;">grain</span>
+      <p style="font-size:13px;font-weight:700;color:#2A2824;">My Formation Pool</p>
     </div>
-    <div id="growth-hearted">
-      <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Points you love during Watch & Sort will appear here.</p>
-    </div>
+    <p style="font-size:11px;color:#7A7570;line-height:1.5;margin-bottom:14px;">Statements weighted by your performance and engagement. Tap the squares to set your floor — the algorithm suggests, you decide.</p>
+    <div id="growth-pool-list"></div>
   </div>
 
-  <!-- Discernment Log -->
-  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;margin-bottom:14px;" class="mono-shadow">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-      <span class="material-symbols-outlined" style="font-size:18px;color:#0B3D91;">balance</span>
-      <p style="font-size:13px;font-weight:700;color:#2A2824;">Discernment Log</p>
-    </div>
-    <div id="growth-discern-log">
-      <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a Discern session to build your log.</p>
-    </div>
-  </div>
-
-  <!-- Mirror Log -->
-  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #D4A574;margin-bottom:14px;" class="mono-shadow">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-      <span class="material-symbols-outlined" style="font-size:18px;color:#B8860B;">compare_arrows</span>
-      <p style="font-size:13px;font-weight:700;color:#2A2824;">The Mirror</p>
-    </div>
-    <div id="growth-mirror-log">
-      <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete The Mirror step in a module to see your reflections here.</p>
-    </div>
-  </div>
-
-  <!-- My Stones -->
-  <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;margin-bottom:14px;" class="mono-shadow">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+  <!-- Altar of Your Heart (collapsible) -->
+  <div style="background:#fff;border-radius:16px;border:1px solid #fecb97;margin-bottom:10px;" class="mono-shadow">
+    <button onclick="toggleGrowthSection('altar')" style="width:100%;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;">
       <div style="display:flex;align-items:center;gap:8px;">
-        <span class="material-symbols-outlined" style="font-size:18px;color:#B8860B;">layers</span>
-        <p style="font-size:13px;font-weight:700;color:#2A2824;">My Stones</p>
+        <span class="material-symbols-outlined icon-fill" style="font-size:16px;color:#c0392b;">favorite</span>
+        <p style="font-size:13px;font-weight:700;color:#2A2824;">Altar of Your Heart</p>
+        <span id="growth-altar-badge" style="display:none;background:#c0392b;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:100px;"></span>
       </div>
-      <span style="font-size:11px;color:#7A7570;" id="growth-stone-count">0 stones laid</span>
+      <span class="material-symbols-outlined" id="growth-section-icon-altar" style="font-size:20px;color:#7A7570;flex-shrink:0;">expand_more</span>
+    </button>
+    <div id="growth-section-altar" style="display:none;padding:0 16px 16px;">
+      <div id="growth-hearted">
+        <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Points you love during Watch &amp; Sort will appear here.</p>
+      </div>
     </div>
-    <div id="library-preview">
-      <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a module to lay your first stones.</p>
+  </div>
+
+  <!-- The Mirror (collapsible) -->
+  <div style="background:#fff;border-radius:16px;border:1px solid #D4A574;margin-bottom:10px;" class="mono-shadow">
+    <button onclick="toggleGrowthSection('mirror')" style="width:100%;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#B8860B;">compare_arrows</span>
+        <p style="font-size:13px;font-weight:700;color:#2A2824;">The Mirror</p>
+        <span id="growth-mirror-badge" style="display:none;background:#B8860B;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:100px;"></span>
+      </div>
+      <span class="material-symbols-outlined" id="growth-section-icon-mirror" style="font-size:20px;color:#7A7570;flex-shrink:0;">expand_more</span>
+    </button>
+    <div id="growth-section-mirror" style="display:none;padding:0 16px 16px;">
+      <div id="growth-mirror-log">
+        <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete The Mirror step in a module to see your reflections here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Stones (collapsible) -->
+  <div style="background:#fff;border-radius:16px;border:1px solid #c4c6d3;margin-bottom:10px;" class="mono-shadow">
+    <button onclick="toggleGrowthSection('stones')" style="width:100%;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#B8860B;">layers</span>
+        <p style="font-size:13px;font-weight:700;color:#2A2824;">My Stones</p>
+        <span id="growth-stone-count" style="font-size:11px;color:#7A7570;font-weight:500;">0 stones</span>
+      </div>
+      <span class="material-symbols-outlined" id="growth-section-icon-stones" style="font-size:20px;color:#7A7570;flex-shrink:0;">expand_more</span>
+    </button>
+    <div id="growth-section-stones" style="display:none;padding:0 16px 16px;">
+      <div id="library-preview">
+        <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a module to lay your first stones.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discernment Log (collapsible) -->
+  <div style="background:#fff;border-radius:16px;border:1px solid #c4c6d3;margin-bottom:14px;" class="mono-shadow">
+    <button onclick="toggleGrowthSection('discernLog')" style="width:100%;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#0B3D91;">balance</span>
+        <p style="font-size:13px;font-weight:700;color:#2A2824;">Discernment Log</p>
+        <span id="growth-discern-badge" style="display:none;background:#0B3D91;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:100px;"></span>
+      </div>
+      <span class="material-symbols-outlined" id="growth-section-icon-discernLog" style="font-size:20px;color:#7A7570;flex-shrink:0;">expand_more</span>
+    </button>
+    <div id="growth-section-discernLog" style="display:none;padding:0 16px 16px;">
+      <div id="growth-discern-log">
+        <p style="font-size:13px;color:#7A7570;text-align:center;padding:12px 0;">Complete a Discern session to build your log.</p>
+      </div>
     </div>
   </div>
 
