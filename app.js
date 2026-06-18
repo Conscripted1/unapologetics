@@ -102,6 +102,7 @@ function advancePipeline() {
   if (moduleState.step < PIPELINE_STEPS.length - 1) {
     moduleState.step++;
     renderPipelineStep();
+    saveState();
   }
 }
 
@@ -364,6 +365,7 @@ function toggleWatchHeart(moduleId, argIdx, quote, timestamp) {
       btn.childNodes[btn.childNodes.length - 1].textContent = ' Loved';
     }
   }
+  saveState();
 }
 
 function toggleWatchNote(moduleId, argIdx) {
@@ -410,6 +412,7 @@ function addCustomCard() {
     const newCard = document.getElementById(`cws-card-${moduleState.customSortCards.length - 1}`);
     if (newCard) newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, 80);
+  saveState();
 }
 
 function sortCustomCard(idx, frame) {
@@ -418,6 +421,7 @@ function sortCustomCard(idx, frame) {
   const m  = MODULES[moduleState.moduleId];
   const el = document.getElementById('pipeline-content');
   if (m && el) renderWatchSort(m, el);
+  saveState();
 }
 
 function toggleCustomCardHeart(idx, moduleId, quote, timestamp) {
@@ -442,6 +446,7 @@ function toggleCustomCardHeart(idx, moduleId, quote, timestamp) {
       btn.childNodes[btn.childNodes.length - 1].textContent = ' Loved';
     }
   }
+  saveState();
 }
 
 function toggleCustomCardNote(idx, moduleId) {
@@ -479,6 +484,7 @@ function saveCustomCardEdit(idx) {
   const m  = MODULES[moduleState.moduleId];
   const el = document.getElementById('pipeline-content');
   if (m && el) renderWatchSort(m, el);
+  saveState();
 }
 
 function renderWatchSort(m, el) {
@@ -741,6 +747,7 @@ function saveMirrorEntry(idx, total) {
 
   const content = document.getElementById('pipeline-content');
   if (content) content.scrollTop = 0;
+  saveState();
   renderMirror(m, content || document.getElementById('pipeline-content'));
 }
 
@@ -857,6 +864,7 @@ function renderLibrary(m, el) {
       }
     });
     moduleState.libraryDone = true;
+    saveState();
   }
 
   el.innerHTML = `<div class="fade-in">
@@ -965,6 +973,7 @@ function renderAssessResults(m, el) {
   const pct     = Math.round((correct / total) * 100);
   modulesComplete++;
   populateFormationPool(m);
+  saveState();
 
   const color  = pct >= 80 ? '#1F4D2F' : pct >= 60 ? '#0B3D91' : '#A0523D';
   const icon   = pct >= 80 ? 'verified' : 'fact_check';
@@ -1177,6 +1186,7 @@ function nextCard() {
   if (discernState.idx >= total) {
     // Save completed session to persistent log
     discernLog.push(...discernState.placed);
+    saveState();
     document.getElementById('sort-card-area').style.display  = 'none';
     document.getElementById('community-breakdown').style.display = 'none';
     document.getElementById('sort-complete').style.display   = 'block';
@@ -1386,11 +1396,13 @@ function setPoolItemFloor(id, floor) {
     statusEl.style.background = s.bg;
     statusEl.innerHTML = `<span class="material-symbols-outlined" style="font-size:11px;">${s.icon}</span>${s.label}`;
   }
+  saveState();
 }
 
 function removeFromPool(id) {
   formationPool = formationPool.filter(x => x.id !== id);
   renderFormationPool();
+  saveState();
 }
 
 function toggleGrowthSection(name) {
@@ -1521,9 +1533,61 @@ function startApp() {
   initDiscernSort();
 }
 
+// ── PERSISTENCE ───────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'inapologetics_v1';
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      v: 1,
+      totalSorted,
+      modulesComplete,
+      libraryItems,
+      heartedItems,
+      watchNotes,
+      formationReflections,
+      discernLog,
+      mirrorLog,
+      formationPool,
+      growthExpanded,
+    }));
+  } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    if (!s || s.v !== 1) return;
+    if (typeof s.totalSorted    === 'number') totalSorted    = s.totalSorted;
+    if (typeof s.modulesComplete === 'number') modulesComplete = s.modulesComplete;
+    if (Array.isArray(s.libraryItems))   libraryItems   = s.libraryItems;
+    if (Array.isArray(s.heartedItems))   heartedItems   = s.heartedItems;
+    if (s.watchNotes && typeof s.watchNotes === 'object') watchNotes = s.watchNotes;
+    if (s.formationReflections && typeof s.formationReflections === 'object') formationReflections = s.formationReflections;
+    if (Array.isArray(s.discernLog))     discernLog     = s.discernLog;
+    if (Array.isArray(s.mirrorLog))      mirrorLog      = s.mirrorLog;
+    if (Array.isArray(s.formationPool))  formationPool  = s.formationPool;
+    if (s.growthExpanded && typeof s.growthExpanded === 'object') growthExpanded = { ...growthExpanded, ...s.growthExpanded };
+  } catch(e) {}
+}
+
+function clearState() {
+  if (!confirm('Clear all progress? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  totalSorted = 0; modulesComplete = 0;
+  libraryItems = []; heartedItems = [];
+  watchNotes = {}; formationReflections = {};
+  discernLog = []; mirrorLog = [];
+  formationPool = [];
+  growthExpanded = { altar: false, mirror: false, stones: false, discernLog: false };
+  updateGrowthScreen();
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
-  // Frame buttons for Discern tab are rendered after onboarding completes (startApp → initDiscernSort)
+  loadState();
 });
 
 window.addEventListener('popstate', function(e) {
