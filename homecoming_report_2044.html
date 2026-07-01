@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Master Homecoming Report 2044 | Timbuktu Policy Exchange</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #D4AF37;
+  --gold-light: #F0D060;
+  --gold-dim: #8A7020;
+  --indigo: #1A2B5C;
+  --indigo-mid: #2A3F82;
+  --indigo-light: #F5F7FC;
+  --forest: #2D5016;
+  --forest-light: #F9FAF5;
+  --violet: #6B4BA3;
+  --violet-light: rgba(107,75,163,0.08);
+  --terracotta: #C85A3A;
+  --river: #2B6B9E;
+  --white: #FFFFFF;
+  --charcoal: #2C2C2C;
+  --gray-light: #F8F8F6;
+  --gray-mid: #E8E6E0;
+  --gray-border: #D4D0C8;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  color: var(--charcoal);
+  background: var(--white);
+  line-height: 1.7;
+}
+
+/* ── KENTE PATTERN GENERATOR (SVG background) ── */
+.kente-border {
+  height: 8px;
+  background: repeating-linear-gradient(90deg,
+    var(--gold) 0 12px, var(--indigo) 12px 24px,
+    var(--terracotta) 24px 36px, var(--forest) 36px 48px,
+    var(--violet) 48px 60px, var(--gold) 60px 72px);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 8px; left: 0; right: 0; z-index: 100;
+  background: rgba(26,43,92,0.97);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 40px; gap: 20px;
+}
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; font-weight: 700; color: var(--gold);
+  letter-spacing: 0.08em; white-space: nowrap;
+}
+.nav-links {
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;
+}
+.nav-links a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9.5px; font-weight: 600; color: rgba(255,255,255,0.75);
+  text-decoration: none; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: 2px; transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--gold); background: rgba(212,175,55,0.12); }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  background: var(--indigo);
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  padding-top: 80px;
+}
+.cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cdefs%3E%3Cpattern id='k' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Crect width='60' height='60' fill='none'/%3E%3Crect x='0' y='0' width='20' height='20' fill='rgba(212,175,55,0.04)'/%3E%3Crect x='20' y='20' width='20' height='20' fill='rgba(212,175,55,0.04)'/%3E%3Crect x='40' y='40' width='20' height='20' fill='rgba(212,175,55,0.04)'/%3E%3Crect x='0' y='40' width='20' height='20' fill='rgba(107,75,163,0.04)'/%3E%3Crect x='40' y='0' width='20' height='20' fill='rgba(107,75,163,0.04)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23k)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.cover-kente { flex-shrink: 0; }
+.cover-content {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  align-items: flex-start; padding: 80px 80px 60px;
+  position: relative; z-index: 1;
+}
+.cover-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.35em;
+  color: rgba(212,175,55,0.7); text-transform: uppercase; margin-bottom: 24px;
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 7vw, 96px); font-weight: 900; line-height: 1.0;
+  color: var(--white); margin-bottom: 12px;
+}
+.cover-title span { color: var(--gold); display: block; }
+.cover-subtitle {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(16px, 2vw, 22px); font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,0.6); max-width: 680px; line-height: 1.5;
+  margin-bottom: 48px;
+}
+.cover-rule { width: 80px; height: 3px; background: var(--gold); margin-bottom: 48px; }
+.cover-stats {
+  display: flex; gap: 48px; flex-wrap: wrap;
+}
+.cover-stat { text-align: left; }
+.cover-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px; font-weight: 900; color: var(--gold); line-height: 1;
+}
+.cover-stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-top: 4px;
+}
+.cover-footer {
+  border-top: 1px solid rgba(212,175,55,0.2);
+  padding: 24px 80px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; z-index: 1;
+}
+.cover-footer-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+/* ── LAYOUT ── */
+.report-body { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* ── SECTION HEADERS ── */
+.part-header {
+  padding: 100px 80px 60px;
+  position: relative;
+}
+.part-header.dark { background: var(--indigo); color: var(--white); }
+.part-header.light { background: var(--gray-light); }
+.part-header.forest-bg { background: var(--forest); color: var(--white); }
+.part-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.4em;
+  text-transform: uppercase; margin-bottom: 20px;
+  color: var(--gold);
+}
+.part-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px); font-weight: 700; line-height: 1.1;
+  max-width: 800px;
+}
+.part-header.dark .part-title { color: var(--white); }
+.part-header.light .part-title { color: var(--indigo); }
+.part-header.forest-bg .part-title { color: var(--white); }
+.part-desc {
+  font-family: 'Source Serif 4', serif;
+  font-size: 18px; font-style: italic; color: rgba(255,255,255,0.65);
+  max-width: 600px; margin-top: 16px; line-height: 1.6;
+}
+.part-header.light .part-desc { color: var(--charcoal); opacity: 0.7; }
+
+/* ── CONTENT SECTIONS ── */
+.section {
+  padding: 70px 80px;
+  border-bottom: 1px solid var(--gray-border);
+}
+.section:last-child { border-bottom: none; }
+.section.alt { background: var(--indigo-light); }
+.section.forest-tint { background: var(--forest-light); }
+.section.violet-tint { background: rgba(107,75,163,0.04); }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: var(--indigo);
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 32px;
+}
+p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 16px; color: var(--charcoal); line-height: 1.75;
+  margin-bottom: 20px; max-width: 720px;
+}
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 600; color: var(--indigo); }
+
+/* ── PULL QUOTES ── */
+.pull-quote {
+  border-left: 4px solid var(--gold);
+  padding: 24px 32px;
+  background: rgba(212,175,55,0.06);
+  margin: 40px 0;
+  max-width: 700px;
+}
+.pull-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-style: italic; color: var(--indigo);
+  line-height: 1.5; margin: 0;
+}
+.pull-quote.violet {
+  border-color: var(--violet);
+  background: var(--violet-light);
+}
+.pull-quote.violet p { color: var(--violet); }
+.pull-quote.terracotta {
+  border-color: var(--terracotta);
+  background: rgba(200,90,58,0.06);
+}
+.pull-quote.terracotta p { color: var(--terracotta); }
+
+/* ── STAT CARDS ── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px; margin: 40px 0;
+  border: 2px solid var(--gold);
+}
+.stat-card {
+  background: var(--white); padding: 32px 24px; text-align: center;
+  border-right: 1px solid var(--gray-border);
+  transition: background 0.2s;
+}
+.stat-card:last-child { border-right: none; }
+.stat-card:hover { background: var(--indigo-light); }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px; font-weight: 900; color: var(--gold);
+  line-height: 1; display: block;
+}
+.stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--indigo); margin-top: 8px;
+  display: block;
+}
+.stat-change {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700; color: var(--forest);
+  margin-top: 4px; display: block;
+}
+
+/* ── DATA TABLES ── */
+.data-table-wrap { overflow-x: auto; margin: 32px 0; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-family: 'Montserrat', sans-serif; font-size: 12px;
+}
+thead tr { background: var(--indigo); }
+thead th {
+  padding: 14px 16px; text-align: left;
+  font-weight: 700; font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold); white-space: nowrap;
+}
+tbody tr { border-bottom: 1px solid var(--gray-border); }
+tbody tr:nth-child(even) { background: var(--gray-light); }
+tbody tr:hover { background: var(--indigo-light); }
+tbody td {
+  padding: 12px 16px; color: var(--charcoal); font-size: 12px;
+  font-weight: 400;
+}
+tbody td:first-child { font-weight: 600; color: var(--indigo); }
+.td-gold { color: var(--gold) !important; font-weight: 700 !important; }
+.td-forest { color: var(--forest) !important; font-weight: 700 !important; }
+.td-violet { color: var(--violet) !important; font-weight: 600 !important; }
+
+/* ── BAR CHARTS ── */
+.chart-container { margin: 40px 0; }
+.chart-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--indigo); margin-bottom: 24px;
+}
+.bar-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.bar-label {
+  font-family: 'Montserrat', sans-serif; font-size: 11px;
+  font-weight: 500; color: var(--charcoal); width: 180px;
+  flex-shrink: 0; text-align: right;
+}
+.bar-track {
+  flex: 1; height: 32px; background: var(--gray-mid);
+  position: relative; overflow: visible;
+}
+.bar-fill {
+  height: 100%; position: relative;
+  display: flex; align-items: center;
+  transition: width 1s cubic-bezier(0.4,0,0.2,1);
+}
+.bar-fill.gold { background: var(--gold); }
+.bar-fill.forest { background: var(--forest); }
+.bar-fill.indigo { background: var(--indigo); }
+.bar-fill.river { background: var(--river); }
+.bar-fill.violet { background: var(--violet); }
+.bar-fill.terracotta { background: var(--terracotta); }
+.bar-value {
+  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+  color: var(--white); padding: 0 10px; white-space: nowrap; position: absolute; right: 0;
+}
+.bar-value.outside { color: var(--charcoal); right: -48px; }
+
+/* ── COMPARISON BARS (2026 vs 2044) ── */
+.compare-chart { margin: 40px 0; }
+.compare-row { margin-bottom: 20px; }
+.compare-label {
+  font-family: 'Montserrat', sans-serif; font-size: 11px;
+  font-weight: 600; color: var(--indigo); margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.compare-bars { display: flex; flex-direction: column; gap: 4px; }
+.compare-bar-row { display: flex; align-items: center; gap: 12px; }
+.compare-year {
+  font-family: 'Montserrat', sans-serif; font-size: 9px;
+  font-weight: 700; width: 36px; text-align: right; flex-shrink: 0;
+  letter-spacing: 0.08em;
+}
+.compare-year.y26 { color: var(--terracotta); }
+.compare-year.y44 { color: var(--forest); }
+
+/* ── CALLOUT BOXES ── */
+.callout {
+  background: var(--indigo); color: var(--white);
+  padding: 40px 48px; margin: 48px 0;
+  position: relative; overflow: hidden;
+}
+.callout::before {
+  content: '';
+  position: absolute; top: 0; left: 0; width: 6px; height: 100%;
+  background: var(--gold);
+}
+.callout-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.callout p { color: rgba(255,255,255,0.85); max-width: 100%; }
+.callout strong { color: var(--gold); }
+
+/* ── MILESTONE TIMELINE ── */
+.timeline { position: relative; padding-left: 48px; margin: 48px 0; }
+.timeline::before {
+  content: ''; position: absolute; left: 16px; top: 0; bottom: 0;
+  width: 2px; background: var(--gold);
+}
+.timeline-item { position: relative; margin-bottom: 32px; }
+.timeline-dot {
+  position: absolute; left: -40px; top: 4px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--gold);
+}
+.timeline-year {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 800; color: var(--gold);
+  letter-spacing: 0.2em; margin-bottom: 4px;
+}
+.timeline-text {
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px; color: var(--charcoal); line-height: 1.5;
+}
+
+/* ── INSTITUTION CARDS ── */
+.inst-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px; margin: 40px 0;
+}
+.inst-card {
+  background: var(--white); padding: 32px;
+  border-top: 4px solid var(--gold);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.inst-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.inst-card.indigo-card { border-color: var(--indigo); }
+.inst-card.forest-card { border-color: var(--forest); }
+.inst-card.violet-card { border-color: var(--violet); }
+.inst-card.river-card { border-color: var(--river); }
+.inst-card.terra-card { border-color: var(--terracotta); }
+.inst-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700; color: var(--indigo); margin-bottom: 6px;
+}
+.inst-year {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 700; color: var(--gold);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px;
+}
+.inst-metric {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 1px solid var(--gray-border); padding: 8px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+.inst-metric-key { font-size: 10px; font-weight: 500; color: var(--charcoal); letter-spacing: 0.05em; }
+.inst-metric-val { font-size: 12px; font-weight: 700; color: var(--indigo); }
+
+/* ── EAS GAUGE ── */
+.eas-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px; margin: 40px 0;
+}
+.eas-card { text-align: center; padding: 24px; }
+.eas-score-wrap {
+  position: relative; width: 120px; height: 120px; margin: 0 auto 16px;
+}
+.eas-score-bg {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: conic-gradient(var(--gold) calc(var(--pct) * 1%), var(--gray-mid) calc(var(--pct) * 1%));
+  display: flex; align-items: center; justify-content: center;
+}
+.eas-score-inner {
+  width: 88px; height: 88px; border-radius: 50%;
+  background: var(--white); display: flex; align-items: center; justify-content: center;
+}
+.eas-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 900; color: var(--indigo);
+}
+.eas-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--charcoal);
+}
+
+/* ── CRISIS SECTION ── */
+.crisis-card {
+  border-left: 4px solid var(--terracotta);
+  background: var(--white);
+  padding: 32px 40px; margin-bottom: 40px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.crisis-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--terracotta); margin-bottom: 8px;
+}
+.crisis-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 700; color: var(--indigo); margin-bottom: 16px;
+}
+.crisis-outcome {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; background: rgba(45,80,22,0.1);
+  border-radius: 2px; margin-top: 16px;
+}
+.crisis-outcome-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--forest);
+}
+
+/* ── THERMODYNAMIC DIAGRAM ── */
+.thermo-diagram {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 24px; align-items: center; margin: 48px 0; padding: 48px;
+  background: var(--indigo); color: var(--white);
+}
+.thermo-box {
+  padding: 24px; text-align: center;
+}
+.thermo-box.extraction { border: 2px solid var(--terracotta); }
+.thermo-box.healing { border: 2px solid var(--forest); }
+.thermo-box-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.3em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.thermo-box.extraction .thermo-box-title { color: var(--terracotta); }
+.thermo-box.healing .thermo-box-title { color: var(--gold); }
+.thermo-box p { color: rgba(255,255,255,0.75); font-size: 13px; max-width: 100%; }
+.thermo-arrow {
+  font-size: 36px; color: var(--gold); text-align: center; font-weight: 300;
+}
+
+/* ── WORLD MAP CALLOUT ── */
+.globe-stat-row {
+  display: flex; gap: 16px; flex-wrap: wrap; margin: 32px 0;
+}
+.globe-stat {
+  padding: 16px 24px; background: var(--indigo);
+  flex: 1; min-width: 140px;
+}
+.globe-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 900; color: var(--gold); display: block;
+}
+.globe-stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px; display: block;
+}
+
+/* ── FIVE LESSONS CARDS ── */
+.lessons-grid {
+  display: grid; grid-template-columns: 1fr; gap: 2px; margin: 40px 0;
+}
+.lesson-card {
+  display: flex; gap: 32px; padding: 32px 40px;
+  background: var(--white); border-bottom: 1px solid var(--gray-border);
+  align-items: flex-start;
+}
+.lesson-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px; font-weight: 900; color: var(--gold);
+  line-height: 1; flex-shrink: 0; width: 60px;
+}
+.lesson-body {}
+.lesson-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--indigo); margin-bottom: 10px;
+}
+.lesson-text {
+  font-family: 'Source Serif 4', serif;
+  font-size: 15px; color: var(--charcoal); line-height: 1.7;
+  max-width: 100%; margin: 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--indigo);
+  padding: 80px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: var(--gold); margin-bottom: 16px;
+}
+.footer-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.footer-rule {
+  width: 60px; height: 2px; background: var(--gold);
+  margin: 32px auto;
+}
+.footer-final {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-style: italic; color: rgba(255,255,255,0.65);
+  max-width: 600px; margin: 0 auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 12px 20px; }
+  .nav-links { display: none; }
+  .cover-content { padding: 48px 24px 40px; }
+  .cover-footer { padding: 20px 24px; }
+  .part-header { padding: 60px 24px 40px; }
+  .section { padding: 48px 24px; }
+  .thermo-diagram { grid-template-columns: 1fr; padding: 24px; }
+  .thermo-arrow { transform: rotate(90deg); }
+  .lesson-card { flex-direction: column; gap: 16px; }
+  .lesson-num { font-size: 36px; }
+  footer { padding: 48px 24px; }
+}
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cover-content > * {
+  animation: fadeUp 0.7s ease both;
+}
+.cover-eyebrow { animation-delay: 0.1s; }
+.cover-title { animation-delay: 0.25s; }
+.cover-subtitle { animation-delay: 0.4s; }
+.cover-rule { animation-delay: 0.5s; }
+.cover-stats { animation-delay: 0.6s; }
+
+/* bar animation on scroll - JS driven */
+.bar-fill { width: 0 !important; }
+.bar-fill.animated { transition: width 1.2s cubic-bezier(0.4,0,0.2,1) !important; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">The Homecoming Report · 2044</div>
+  <div class="nav-links">
+    <a href="#thermodynamics">Thermodynamics</a>
+    <a href="#governance">Governance</a>
+    <a href="#solomon">Solomon AI</a>
+    <a href="#faith">Faith</a>
+    <a href="#economy">Economy</a>
+    <a href="#education">Education</a>
+    <a href="#justice">Justice</a>
+    <a href="#green">Energy</a>
+    <a href="#economics">Returns</a>
+    <a href="#lessons">Lessons</a>
+    <a href="#crisis">Crisis Years</a>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover" id="top">
+  <div class="kente-border cover-kente"></div>
+  <div class="cover-content">
+    <div class="cover-eyebrow">Timbuktu Policy Exchange · New Timbuktu, West Virginia</div>
+    <h1 class="cover-title">The Master<br><span>Homecoming</span><br>Report</h1>
+    <p class="cover-subtitle">How 4.2 million people built a state, two Senate seats, and the most consequential Black institution since Reconstruction — and what it means for the world.</p>
+    <div class="cover-rule"></div>
+    <div class="cover-stats">
+      <div class="cover-stat"><div class="cover-stat-num">$94.2B</div><div class="cover-stat-label">Total Asset Value</div></div>
+      <div class="cover-stat"><div class="cover-stat-num">4.2M</div><div class="cover-stat-label">New Residents</div></div>
+      <div class="cover-stat"><div class="cover-stat-num">$231B</div><div class="cover-stat-label">State GDP</div></div>
+      <div class="cover-stat"><div class="cover-stat-num">67</div><div class="cover-stat-label">Countries Partnered</div></div>
+      <div class="cover-stat"><div class="cover-stat-num">11.4%</div><div class="cover-stat-label">Annualized Return</div></div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-footer-text">Published September 2044</div>
+    <div class="cover-footer-text">This report may be reproduced freely with attribution</div>
+  </div>
+</section>
+
+<!-- PREFACE -->
+<section class="part-header dark">
+  <div class="part-eyebrow">Preface</div>
+  <h2 class="part-title">The Question That Built a City</h2>
+  <p class="part-desc">This is not a story of success that can be ignored. It is a story of what becomes possible when a historically dispossessed community decides to build the thing instead of waiting for permission to join it.</p>
+</section>
+
+<div class="section">
+  <p>On April 29, 2026, the Supreme Court rendered the <em>Louisiana v. Callais</em> decision, closing the last viable pathway to proportional Black political representation within the existing constitutional structure. Justice Kagan's dissent: the ruling had rendered the Voting Rights Act <strong>"all but a dead letter."</strong></p>
+  <p>Eighteen months later, a coalition of Black economists, theologians, civil rights attorneys, and diaspora investors convened the Charlotte Summit. Rather than litigate further, they asked a different question:</p>
+  <div class="pull-quote">
+    <p>The Homecoming Project succeeded because it stopped asking whether excluded communities can gain access to existing institutions — and started asking whether they can build better institutions whose success becomes impossible to ignore.</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">+232%</span><span class="stat-label">WV Population Growth</span><span class="stat-change">1.77M → 5.89M</span></div>
+    <div class="stat-card"><span class="stat-num">46.2%</span><span class="stat-label">Black Population</span><span class="stat-change">Was 3.6% in 2026</span></div>
+    <div class="stat-card"><span class="stat-num">+175%</span><span class="stat-label">State GDP Growth</span><span class="stat-change">$84B → $231B</span></div>
+    <div class="stat-card"><span class="stat-num">-64%</span><span class="stat-label">Child Poverty</span><span class="stat-change">22% → 8%</span></div>
+    <div class="stat-card"><span class="stat-num">11.4%</span><span class="stat-label">HIT Annual Return</span><span class="stat-change">vs 8.2% S&P 500</span></div>
+  </div>
+</div>
+
+<!-- PART I: THERMODYNAMICS -->
+<section class="part-header dark" id="thermodynamics">
+  <div class="part-eyebrow">Part I</div>
+  <h2 class="part-title">The Thermodynamic Framework — Healing Systems vs. Extraction Systems</h2>
+  <p class="part-desc">Every economic system is a thermodynamic system. Its true cost is measured not by internal metrics but by its net effect on total system entropy.</p>
+</section>
+
+<div class="section">
+  <div class="section-subtitle">Understanding Entropy as a Principle of Governance</div>
+  <h2 class="section-title">GDP Counts the Cooling. It Does Not Count the Heat.</h2>
+  <p>Entropy is the measure of disorder — or more precisely, the measure of how unavailable energy becomes for doing useful work. Every living system sustains its internal order by exporting entropy outward. Technology inherits this characteristic:</p>
+  <div class="thermo-diagram">
+    <div class="thermo-box extraction">
+      <div class="thermo-box-title">The Extraction Model</div>
+      <p>Concentrate order (wealth, opportunity) inside borders by exporting violence, instability, and underdevelopment elsewhere. Colonialism, AI labor exploitation, environmental externalization.</p>
+    </div>
+    <div class="thermo-arrow">⇄</div>
+    <div class="thermo-box healing">
+      <div class="thermo-box-title">The Healing Model</div>
+      <p>Reduce total system entropy. Distribute ownership across all contributors. Measure net effect on the whole system, not just internal performance. Religion as thermodynamic technology.</p>
+    </div>
+  </div>
+  <p>The AI industry, by 2026, had become the most efficient entropy-exporting machine humanity had ever built: content moderators earning $1–2/hour in Kenya, communities whose water supplies were consumed by data centers, the accumulated creative output of the Global South ingested into systems owned entirely by Northern capital.</p>
+  <div class="callout">
+    <div class="callout-title">The Homecoming Foundation</div>
+    <p>The Homecoming Project rejected the extraction model at its foundation. Instead of extracting value and exporting entropy, it asked: <strong>What would it look like to build systems that reduce total system entropy rather than merely reducing internal entropy at the cost of external disorder?</strong></p>
+  </div>
+</div>
+
+<div class="section alt">
+  <div class="section-subtitle">The Entropy Accounting Standard</div>
+  <h2 class="section-title">Measuring What Actually Matters</h2>
+  <p>In 2038, the Timbuktu Policy Exchange developed the EAS — a replacement for GDP as the primary measure of whether a technology system is healing or extracting. Adopted by 18 national governments.</p>
+  <div class="eas-grid">
+    <div class="eas-card">
+      <div class="eas-score-wrap"><div class="eas-score-bg" style="--pct:84"><div class="eas-score-inner"><span class="eas-num">8.4</span></div></div></div>
+      <div class="eas-label">Death Reduction</div>
+    </div>
+    <div class="eas-card">
+      <div class="eas-score-wrap"><div class="eas-score-bg" style="--pct:79"><div class="eas-score-inner"><span class="eas-num">7.9</span></div></div></div>
+      <div class="eas-label">Opportunity Distribution</div>
+    </div>
+    <div class="eas-card">
+      <div class="eas-score-wrap"><div class="eas-score-bg" style="--pct:62"><div class="eas-score-inner"><span class="eas-num">6.2</span></div></div></div>
+      <div class="eas-label">Repentance & Repair</div>
+    </div>
+    <div class="eas-card">
+      <div class="eas-score-wrap"><div class="eas-score-bg" style="--pct:81"><div class="eas-score-inner"><span class="eas-num">8.1</span></div></div></div>
+      <div class="eas-label">Generative Capacity</div>
+    </div>
+  </div>
+  <div class="data-table-wrap">
+    <table>
+      <thead><tr><th>Index</th><th>Solomon Score</th><th>Industry Average</th><th>Gap</th></tr></thead>
+      <tbody>
+        <tr><td>Death Reduction</td><td class="td-forest">8.4 / 10</td><td>2.1 / 10</td><td class="td-gold">+6.3</td></tr>
+        <tr><td>Opportunity Distribution</td><td class="td-forest">7.9 / 10</td><td>1.8 / 10</td><td class="td-gold">+6.1</td></tr>
+        <tr><td>Repentance & Repair</td><td class="td-forest">6.2 / 10</td><td>0.9 / 10</td><td class="td-gold">+5.3</td></tr>
+        <tr><td>Generative Capacity</td><td class="td-forest">8.1 / 10</td><td>1.4 / 10</td><td class="td-gold">+6.7</td></tr>
+        <tr><td><strong>Composite Score</strong></td><td class="td-gold"><strong>7.65 / 10</strong></td><td>3.2 / 10</td><td class="td-gold"><strong>+4.45</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-style:italic; font-size:13px;">The 6.2 score for Repentance and Repair was published prominently rather than buried — because the point of the standard is to drive improvement, not generate favorable publicity.</p>
+</div>
+
+<!-- PART II: GOVERNANCE -->
+<section class="part-header light" id="governance">
+  <div class="part-eyebrow" style="color:var(--gold)">Part II</div>
+  <h2 class="part-title">The Executive Blueprint — From Personality to Plan</h2>
+</section>
+
+<div class="section">
+  <h2 class="section-title">The Green New Deal Was Too Large. The Big Beautiful Bill Was Fine. Both Were the Same Size.</h2>
+  <p>What was being debated was not policy substance but tribal affiliation with a symbol. The Homecoming Project replaced personality-driven governance with the Executive Blueprint: governance bounded to a publicly committed, technically reviewed, independently evaluated plan.</p>
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">STAGE 1 — PRIORITY SELECTION</div><div class="timeline-text">Before any candidate runs, voters select the top priorities from evidence-based problem statements. The priority list is binding. Administrations cannot campaign to address problems voters ranked fifth.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">STAGE 2 — BLUEPRINT COMPETITION</div><div class="timeline-text">Multiple expert teams develop comprehensive plans specifying: problem definition, interventions, measurable outcomes, timeline, success measures, abort conditions, and the specific team for each component. Published in full. Reviewed by independent experts.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">STAGE 3 — TEAM SELECTION</div><div class="timeline-text">Voters elect an approach and a team — not a personality. Charisma is useless when your plan is publicly reviewed by technical experts before the election.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">STAGE 4 — BOUNDED EXECUTION</div><div class="timeline-text">The winning team holds authority bounded to the Blueprint. Significant departures require voter authorization. The accountability dashboard shows citizens, in real time, the gap between Blueprint commitments and actual execution.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">STAGE 5 — REAL-TIME ACCOUNTABILITY</div><div class="timeline-text">Solomon Civic infrastructure makes governance visible and verifiable. The dashboard is not a government publication — it is governed by distributed ownership that no actor can modify to serve their interests.</div></div>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">91%</span><span class="stat-label">Campaign Promise Fulfillment</span><span class="stat-change">National average: 38%</span></div>
+    <div class="stat-card"><span class="stat-num">84%</span><span class="stat-label">Policy Milestone Completion</span><span class="stat-change">2037–2044</span></div>
+    <div class="stat-card"><span class="stat-num">71%</span><span class="stat-label">Voter Satisfaction</span><span class="stat-change">Post-term survey, 2041</span></div>
+    <div class="stat-card"><span class="stat-num">34</span><span class="stat-label">Cities Adopted Blueprint</span><span class="stat-change">Across 18 countries</span></div>
+  </div>
+</div>
+
+<!-- PART III: SOLOMON -->
+<section class="part-header dark" id="solomon">
+  <div class="part-eyebrow">Part III</div>
+  <h2 class="part-title">Solomon AI — Compute as a Public Utility</h2>
+  <p class="part-desc">What would it look like to build AI infrastructure that served the Global South the way that the Tennessee Valley Authority served rural Appalachia?</p>
+</section>
+
+<div class="section">
+  <div class="section-subtitle">The Infrastructure</div>
+  <h2 class="section-title">New Timbuktu Was Designed as Both a City and a Datacenter</h2>
+  <p>Every major building was constructed to house distributed computing nodes — high-efficiency structures with integrated cooling, standardized power interfaces, and fiber connections. The city itself was a supercomputer with neighborhoods.</p>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">2.4</span><span class="stat-label">Exaflops Compute Capacity</span></div>
+    <div class="stat-card"><span class="stat-num">4,200</span><span class="stat-label">Node-Equipped Buildings</span></div>
+    <div class="stat-card"><span class="stat-num">1,840</span><span class="stat-label">Licensed Distributors</span></div>
+    <div class="stat-card"><span class="stat-num">67</span><span class="stat-label">Countries Partnered</span></div>
+    <div class="stat-card"><span class="stat-num">$8.7B</span><span class="stat-label">Annual Revenue (2043)</span></div>
+    <div class="stat-card"><span class="stat-num">$0</span><span class="stat-label">Internet Cost to Residents</span></div>
+  </div>
+  <div class="callout">
+    <div class="callout-title">The AGI Hedge</div>
+    <p>Solomon didn't need to be larger than OpenAI or Anthropic to matter. It needed to be large enough that neither could ignore it. <strong>A community with a direct economic stake in its own AI infrastructure does not need to be convinced that the infrastructure serves its interests. The quarterly distribution statement does that work.</strong></p>
+  </div>
+</div>
+
+<div class="section alt">
+  <div class="section-subtitle">Solomon Med · The Flexner Answer</div>
+  <h2 class="section-title">Closing the Gap That 1910 Opened</h2>
+  <p>The Flexner Report of 1910 recommended closing five of the seven medical schools training Black physicians. The consequences compounded for 133 years into a shortage of 55,000 Black physicians by 2026. Solomon Med was designed as the direct institutional answer.</p>
+  <div class="compare-chart">
+    <div class="compare-row">
+      <div class="compare-label">U.S. Black Physician Gap</div>
+      <div class="compare-bars">
+        <div class="compare-bar-row"><span class="compare-year y26">2026</span><div class="bar-track"><div class="bar-fill terracotta" data-width="100" style="width:0"><span class="bar-value">55,000 missing physicians</span></div></div></div>
+        <div class="compare-bar-row"><span class="compare-year y44">2044</span><div class="bar-track"><div class="bar-fill forest" data-width="45" style="width:0"><span class="bar-value">25,000 remaining gap</span></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="inst-grid">
+    <div class="inst-card forest-card">
+      <div class="inst-name">Solomon Med</div>
+      <div class="inst-year">Founded 2034</div>
+      <div class="inst-metric"><span class="inst-metric-key">Students Enrolled</span><span class="inst-metric-val">4,200 from 47 countries</span></div>
+      <div class="inst-metric"><span class="inst-metric-key">Research Revenue</span><span class="inst-metric-val">$2.4B annually</span></div>
+      <div class="inst-metric"><span class="inst-metric-key">Robotic Surgery</span><span class="inst-metric-val">28 countries</span></div>
+      <div class="inst-metric"><span class="inst-metric-key">2043 Antimalarial Approval</span><span class="inst-metric-val">WHO Approved</span></div>
+    </div>
+    <div class="inst-card river-card">
+      <div class="inst-name">Solomon Civic</div>
+      <div class="inst-year">Founded 2033</div>
+      <div class="inst-metric"><span class="inst-metric-key">National Elections Deployed</span><span class="inst-metric-val">34 in 22 countries</span></div>
+      <div class="inst-metric"><span class="inst-metric-key">Accountability Dashboard Users</span><span class="inst-metric-val">48M monthly</span></div>
+      <div class="inst-metric"><span class="inst-metric-key">Disinformation Network Nodes</span><span class="inst-metric-val">2.4M in 34 countries</span></div>
+    </div>
+    <div class="inst-card forest-card">
+      <div class="inst-name">Solomon Agri</div>
+      <div class="inst-year">Founded 2035</div>
+      <div class="inst-metric"><span class="inst-metric-key">Smallholder Households</span><span class="inst-metric-val">12M across 3 continents</span></div>
+      <div class="inst-metric"><span class="inst-metric-key">Carbon Credits (2043)</span><span class="inst-metric-val">$340M to farmers</span></div>
+      <div class="inst-metric"><span class="inst-metric-key">Training Data Source</span><span class="inst-metric-val">Indigenous knowledge as primary</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PART IV: FAITH -->
+<section class="part-header light" id="faith">
+  <div class="part-eyebrow" style="color:var(--gold)">Part IV</div>
+  <h2 class="part-title">Faith Infrastructure — The Invisible Architecture of Community</h2>
+</section>
+
+<div class="section">
+  <h2 class="section-title">What Built the City Wasn't the Buildings</h2>
+  <p>By 2038, every major analysis of the Homecoming Project's outcomes — crime rates, education scores, employment, per capita income, self-reported happiness — had arrived at the same variable that no economic model had been designed to capture: <strong>the city's social architecture was held together by its families. Its families were held together by its faith community.</strong></p>
+  <div class="data-table-wrap">
+    <table>
+      <thead><tr><th>Family Stability Metric</th><th>2026</th><th>2044</th><th>Change</th></tr></thead>
+      <tbody>
+        <tr><td>Child Poverty Rate</td><td>22%</td><td class="td-forest">8%</td><td class="td-gold">−64%</td></tr>
+        <tr><td>Single-Parent Households</td><td>38%</td><td class="td-forest">24%</td><td class="td-gold">−37%</td></tr>
+        <tr><td>Sustained Shared Parenting</td><td>34%</td><td class="td-forest">61%</td><td class="td-gold">+79%</td></tr>
+        <tr><td>Contested Custody Per 1,000 Families</td><td>18</td><td class="td-forest">7</td><td class="td-gold">−61%</td></tr>
+        <tr><td>Abortion Rate (annual)</td><td>13,100</td><td class="td-forest">4,200</td><td class="td-gold">−68% (legal; no coercion)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">48,200</span><span class="stat-label">Covenant Marriages Registered</span></div>
+    <div class="stat-card"><span class="stat-num">66%</span><span class="stat-label">Cases Resolved Before Civil Court</span></div>
+    <div class="stat-card"><span class="stat-num">$2,400</span><span class="stat-label">Mediation Cost Per Case</span><span class="stat-change">vs $34,000 civil litigation</span></div>
+    <div class="stat-card"><span class="stat-num">340</span><span class="stat-label">Participating Congregations</span></div>
+  </div>
+</div>
+
+<!-- PART V: ECONOMY -->
+<section class="part-header forest-bg" id="economy">
+  <div class="part-eyebrow">Part V</div>
+  <h2 class="part-title">Economic Development — The Three Pillars</h2>
+  <p class="part-desc">Energy Independence · Technology & Creator Economy · Culture as Infrastructure</p>
+</section>
+
+<div class="section">
+  <div class="section-subtitle">Pillar II · Creator Economy</div>
+  <h2 class="section-title">Sankofa vs. YouTube: What Fair Pay Looks Like</h2>
+  <div class="compare-chart">
+    <div class="compare-row">
+      <div class="compare-label">Creator Earnings Per Hour of Content</div>
+      <div class="compare-bars">
+        <div class="compare-bar-row"><span class="compare-year y26" style="color:var(--gold)">Sankofa</span><div class="bar-track"><div class="bar-fill gold" data-width="100" style="width:0"><span class="bar-value">$340/hour</span></div></div></div>
+        <div class="compare-bar-row"><span class="compare-year y44" style="color:var(--river)">YouTube</span><div class="bar-track"><div class="bar-fill river" data-width="12" style="width:0"><span class="bar-value">$40/hour</span></div></div></div>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Top 1,000 Creator Annual Income</div>
+      <div class="compare-bars">
+        <div class="compare-bar-row"><span class="compare-year y26" style="color:var(--gold)">Sankofa</span><div class="bar-track"><div class="bar-fill gold" data-width="100" style="width:0"><span class="bar-value">$340K/year</span></div></div></div>
+        <div class="compare-bar-row"><span class="compare-year y44" style="color:var(--river)">YouTube</span><div class="bar-track"><div class="bar-fill river" data-width="12" style="width:0"><span class="bar-value">$40K/year</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PART VI: EDUCATION -->
+<section class="part-header light" id="education">
+  <div class="part-eyebrow" style="color:var(--gold)">Part VI</div>
+  <h2 class="part-title">Education and the Future — How to Become a Citizen of Homecoming</h2>
+</section>
+
+<div class="section">
+  <h2 class="section-title">From 48th to 7th: The Philosophy That Changed Everything</h2>
+  <p>Three decisions — not resources, but philosophy — drove West Virginia's education transformation:</p>
+  <div class="lessons-grid">
+    <div class="lesson-card"><div class="lesson-num">1</div><div class="lesson-body"><div class="lesson-title">Clarity About What Students Need to Read</div><p class="lesson-text">Achebe alongside Morrison alongside García Márquez alongside Wendell Berry alongside Dostoevsky. Explicit commitment to proportional representation of world population in the curriculum. The goal: graduates who understand the story they've been told is partial — and can construct a fuller one.</p></div></div>
+    <div class="lesson-card"><div class="lesson-num">2</div><div class="lesson-body"><div class="lesson-title">Private Sector as Mentoring Institution</div><p class="lesson-text">The Corporate Mentorship Act (2036) provided tax incentives calibrated so that companies providing 15% of their workforce to youth development programming received benefits exceeding the cost. By 2040: 340 companies, 14,200 mentors in West Virginia schools.</p></div></div>
+    <div class="lesson-card"><div class="lesson-num">3</div><div class="lesson-body"><div class="lesson-title">Education Outcomes Treated as a Public Health Emergency</div><p class="lesson-text">Every student failing to meet grade-level benchmarks received an individualized intervention plan developed by a team including teacher, counselor, community health worker, and family advocate. Expensive. Staffing-intensive. Produced results no standardized reform had approached.</p></div></div>
+  </div>
+</div>
+
+<!-- PART VII: JUSTICE -->
+<section class="part-header dark" id="justice">
+  <div class="part-eyebrow">Part VII</div>
+  <h2 class="part-title">Civil Rights & Justice — Exporting Just Systems</h2>
+  <p class="part-desc">Rights embedded in economic architecture are more durable than rights that depend on federal political will.</p>
+</section>
+
+<div class="section">
+  <h2 class="section-title">Policing, Incarceration, and the Reintegration Economy</h2>
+  <div class="data-table-wrap">
+    <table>
+      <thead><tr><th>Justice Metric</th><th>2026</th><th>2044</th><th>Change</th></tr></thead>
+      <tbody>
+        <tr><td>Violent Crime (per 100K)</td><td>460 (national AA baseline)</td><td class="td-forest">34</td><td class="td-gold">−93%</td></tr>
+        <tr><td>Incarceration Rate (per 100K)</td><td>1,280 (national AA)</td><td class="td-forest">140</td><td class="td-gold">−89%</td></tr>
+        <tr><td>Recidivism Rate (3-year)</td><td>61%</td><td class="td-forest">11%</td><td class="td-gold">−82%</td></tr>
+        <tr><td>Incarcerated Population</td><td>6,800</td><td class="td-forest">3,200</td><td class="td-gold">−53%</td></tr>
+        <tr><td>Educational Enrollment in Prison</td><td>12%</td><td class="td-forest">68%</td><td class="td-gold">+467%</td></tr>
+        <tr><td>Employment at 12 Months Post-Release</td><td>34%</td><td class="td-forest">72%</td><td class="td-gold">+112%</td></tr>
+        <tr><td>Police Liability Insurance Adoptions</td><td>0</td><td class="td-forest">14 countries, 8 states</td><td class="td-gold">Global export</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pull-quote terracotta">
+    <p>The for-profit incarceration model creates a structural incentive for recidivism: a system that profits from incarceration has no financial interest in producing citizens who do not return. The Mountain Justice Economy Act restructured around the opposite incentive: payment for outcomes rather than payment for census.</p>
+  </div>
+</div>
+
+<!-- GREEN DEAL -->
+<section class="part-header forest-bg" id="green">
+  <div class="part-eyebrow">Part VIII</div>
+  <h2 class="part-title">The Mountain Green Deal — How West Virginia Became the Nation's First Net-Zero State</h2>
+</section>
+
+<div class="section forest-tint">
+  <h2 class="section-title">The Irony That Became the Point</h2>
+  <p>The state that blocked the Green New Deal at the federal level for a generation became its most complete demonstration project at the state level. The coal communities used to justify killing the legislation became its primary beneficiaries.</p>
+  <div class="compare-chart">
+    <div class="compare-row">
+      <div class="compare-label">Coal as % of Electricity Generation</div>
+      <div class="compare-bars">
+        <div class="compare-bar-row"><span class="compare-year y26">2026</span><div class="bar-track"><div class="bar-fill terracotta" data-width="89" style="width:0"><span class="bar-value">89%</span></div></div></div>
+        <div class="compare-bar-row"><span class="compare-year y44">2044</span><div class="bar-track"><div class="bar-fill river" data-width="12" style="width:0"><span class="bar-value">12%</span></div></div></div>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Renewable Energy %</div>
+      <div class="compare-bars">
+        <div class="compare-bar-row"><span class="compare-year y26">2026</span><div class="bar-track"><div class="bar-fill terracotta" data-width="4" style="width:0"><span class="bar-value">4%</span></div></div></div>
+        <div class="compare-bar-row"><span class="compare-year y44">2044</span><div class="bar-track"><div class="bar-fill forest" data-width="78" style="width:0"><span class="bar-value">78%</span></div></div></div>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Clean Energy Jobs</div>
+      <div class="compare-bars">
+        <div class="compare-bar-row"><span class="compare-year y26">2026</span><div class="bar-track"><div class="bar-fill terracotta" data-width="4" style="width:0"><span class="bar-value">1,800</span></div></div></div>
+        <div class="compare-bar-row"><span class="compare-year y44">2044</span><div class="bar-track"><div class="bar-fill forest" data-width="100" style="width:0"><span class="bar-value">42,000</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ECONOMICS -->
+<section class="part-header dark" id="economics">
+  <div class="part-eyebrow">Part IX</div>
+  <h2 class="part-title">The Economics — What It Cost and What It Returned</h2>
+</section>
+
+<div class="section">
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">$33.8B</span><span class="stat-label">Total Capital Deployed</span></div>
+    <div class="stat-card"><span class="stat-num">$94.2B</span><span class="stat-label">Total Asset Value 2044</span><span class="stat-change">22.4x multiple</span></div>
+    <div class="stat-card"><span class="stat-num">11.4%</span><span class="stat-label">Annualized HIT Return</span><span class="stat-change">vs 8.2% S&P 500</span></div>
+    <div class="stat-card"><span class="stat-num">$15.5B</span><span class="stat-label">Mandatory Reinvestment</span><span class="stat-change">40% back to community</span></div>
+  </div>
+  <div class="data-table-wrap">
+    <table>
+      <thead><tr><th>Asset Category</th><th>2028 Investment</th><th>2044 Value</th><th>Multiple</th></tr></thead>
+      <tbody>
+        <tr><td>Land Holdings</td><td>$612M</td><td class="td-gold">$18.4B</td><td class="td-forest">30×</td></tr>
+        <tr><td>Energy Infrastructure</td><td>$1.2B</td><td class="td-gold">$28.4B</td><td class="td-forest">23.7×</td></tr>
+        <tr><td>Technology Companies (Solomon + ecosystem)</td><td>$2.4B</td><td class="td-gold">$84.2B</td><td class="td-forest">35×</td></tr>
+        <tr><td>University Infrastructure</td><td>$1.8B</td><td class="td-gold">$8.4B</td><td class="td-forest">4.7×</td></tr>
+        <tr><td>Cultural / Tourism Assets</td><td>$0.4B</td><td class="td-gold">$6.2B</td><td class="td-forest">15.5×</td></tr>
+        <tr><td>Governance / Institutional IP</td><td>$0 (intangible)</td><td class="td-gold">$12.4B (est.)</td><td class="td-gold">∞</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- LESSONS -->
+<section class="part-header light" id="lessons">
+  <div class="part-eyebrow" style="color:var(--gold)">Part X</div>
+  <h2 class="part-title">The Lessons That Travel — What Every Community Can Do Without Moving to West Virginia</h2>
+</section>
+
+<div class="section">
+  <div class="pull-quote violet">
+    <p>The migration was the catalyst. The institutions are the lesson. West Virginia is not the destination. It is the demonstration.</p>
+  </div>
+  <div class="lessons-grid">
+    <div class="lesson-card"><div class="lesson-num" style="color:var(--indigo)">1</div><div class="lesson-body"><div class="lesson-title">Build the institution before you seek access to the existing one</div><p class="lesson-text">The HBCU did not petition for inclusion in the existing university system. It built a university. The Black church did not petition. It built a church. Every excluded community has things it needs from institutions built to exclude it. In most cases, the institution can be built — starting smaller than it appears.</p></div></div>
+    <div class="lesson-card"><div class="lesson-num" style="color:var(--indigo)">2</div><div class="lesson-body"><div class="lesson-title">Own the infrastructure, not just the access</div><p class="lesson-text">Access is revocable. Ownership is not. Ask from the beginning: who owns this? If the answer is "a foundation" or "the government," the community has access — and access can be withdrawn. Blockchain-recorded cooperative ownership is the structure that is hardest to revoke.</p></div></div>
+    <div class="lesson-card"><div class="lesson-num" style="color:var(--indigo)">3</div><div class="lesson-body"><div class="lesson-title">Measure the whole system, not just your part of it</div><p class="lesson-text">The Entropy Accounting Standard asks: who bears the cost of this, and is that the same person who receives the benefit? Track externalities. Refuse to count only the cooling. This discipline is not natural in environments that reward short-term returns — but it is adoptable by any institution that chooses it.</p></div></div>
+    <div class="lesson-card"><div class="lesson-num" style="color:var(--indigo)">4</div><div class="lesson-body"><div class="lesson-title">Train citizens, not just workers</div><p class="lesson-text">The Citizen Formation curriculum's deepest insight: the most valuable output of an educational system is not a credentialed worker. It is a citizen who understands the system they inhabit well enough to change it. This can be implemented in any school by any teacher willing to organize curriculum around capability rather than content delivery.</p></div></div>
+    <div class="lesson-card"><div class="lesson-num" style="color:var(--indigo)">5</div><div class="lesson-body"><div class="lesson-title">Connect across geography before you consolidate in one place</div><p class="lesson-text">The dual-residency model extended political leverage to the 30M who did not migrate. A cooperative whose membership is geographically distributed, whose governance is digital, whose ownership is recorded on a blockchain, is not a theoretical construct. It is the architecture that the Homecoming Project's most successful institutions are built on.</p></div></div>
+  </div>
+</div>
+
+<!-- GLOBAL IMPACT -->
+<div class="section alt">
+  <div class="section-subtitle">Global Replication by 2044</div>
+  <h2 class="section-title">The Demonstration Spreads</h2>
+  <div class="globe-stat-row">
+    <div class="globe-stat"><span class="globe-stat-num">34</span><span class="globe-stat-label">Cities with Executive Blueprint</span></div>
+    <div class="globe-stat"><span class="globe-stat-num">67</span><span class="globe-stat-label">Solomon AI Partner Countries</span></div>
+    <div class="globe-stat"><span class="globe-stat-num">22</span><span class="globe-stat-label">Solomon Civic Election Deployments</span></div>
+    <div class="globe-stat"><span class="globe-stat-num">18</span><span class="globe-stat-label">Govts Adopted Entropy Accounting</span></div>
+    <div class="globe-stat"><span class="globe-stat-num">1,240</span><span class="globe-stat-label">TPPS Alumni in Government Globally</span></div>
+    <div class="globe-stat"><span class="globe-stat-num">14%</span><span class="globe-stat-label">Rwanda Recidivism Rate (after adoption)</span></div>
+  </div>
+</div>
+
+<!-- CRISIS YEARS -->
+<section class="part-header dark" id="crisis" style="background: #1a0a0a; background-image: repeating-linear-gradient(135deg, rgba(200,90,58,0.04) 0 4px, transparent 4px 24px);">
+  <div class="part-eyebrow" style="color:var(--terracotta)">Addendum · The Crisis Years</div>
+  <h2 class="part-title" style="color:var(--white)">How the Project Was Almost Destroyed Seven Times</h2>
+  <p class="part-desc">Every institution that claims to have built something durable has been tested. The ones that haven't been tested haven't been noticed yet.</p>
+</section>
+
+<div class="section">
+  <div class="callout" style="background: rgba(200,90,58,0.08); border-left-color: var(--terracotta);">
+    <div class="callout-title" style="color:var(--terracotta)">On What This Chapter Is</div>
+    <p style="color:var(--charcoal);">This chapter is written not as a triumphalist narrative — the Homecoming project survived, therefore it was always going to — but as an honest accounting of how close, on several occasions, the project came to failing. <strong style="color:var(--terracotta);">The margins were smaller than the retrospective summaries suggest.</strong></p>
+  </div>
+
+  <div class="data-table-wrap">
+    <table>
+      <thead><tr><th>Challenge Type</th><th>Federal Cases</th><th>State Cases</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Land Trust Constitutional Challenges</td><td>3</td><td>8</td><td class="td-forest">Dismissed / Favorable Settlement</td></tr>
+        <tr><td>Foreign Policy Preemption (DOJ)</td><td>4</td><td>0</td><td class="td-forest">3 Won, 1 Resolved by Protocol</td></tr>
+        <tr><td>Fair Competition / Antitrust</td><td>8</td><td>14</td><td class="td-forest">All Dismissed or Won</td></tr>
+        <tr><td>Solomon Hostile Acquisition</td><td>2</td><td>1</td><td class="td-forest">Repelled; Critical Infrastructure Designation Secured</td></tr>
+        <tr><td>TOTAL ALL CHALLENGES</td><td>48</td><td>124</td><td class="td-gold">Project Intact</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="crisis-card">
+    <div class="crisis-num">Crisis One · 2030–2033</div>
+    <div class="crisis-title">The Land Trust Challenge</div>
+    <p>A coalition of developers and out-of-state funds filed in federal court arguing the land trust's investor restrictions violated the Commerce Clause. The real threat was discovery — 847,000 documents demanded, targeting internal communications about racial justice strategy.</p>
+    <p><strong>Resolution:</strong> The HIT made a counterintuitive decision: full public disclosure before any external party demanded it. The most-quoted document in subsequent press coverage was not the board memorandum about demographic strategy — it was a theological working group letter citing Exodus 23:9. The coalition spent $24M. The diaspora crowdfunding campaign raised $8.4M in six weeks. The case was dismissed in 2032.</p>
+    <div class="crisis-outcome"><span class="crisis-outcome-text">✓ Dismissed — Institutional credibility strengthened by transparency</span></div>
+  </div>
+
+  <div class="crisis-card">
+    <div class="crisis-num">Crisis Two · 2033–2035</div>
+    <div class="crisis-title">The Procurement Fraud</div>
+    <p>A Solomon compliance system flagged anomalies in subcontracting patterns. A $180M fraud scheme — involving individuals with personal relationships to founding board members — had been operating for 14 months. The leadership faced a choice: manage it quietly or disclose publicly.</p>
+    <p><strong>Resolution:</strong> Full public disclosure before any external investigation demanded it. Named the participants. Described the mechanics in detail. Initiated criminal referral. Published specific process reforms. Eight criminal convictions, including two prominent early organizers. The credit agencies that upgraded the HIT cited institutional transparency as a positive governance signal.</p>
+    <div class="crisis-outcome"><span class="crisis-outcome-text">✓ 8 Convictions — HIT Credit Rating Upgraded Following Disclosure</span></div>
+  </div>
+
+  <div class="crisis-card">
+    <div class="crisis-num">Crisis Three · 2036–2038</div>
+    <div class="crisis-title">The Take Back Our State Campaign</div>
+    <p>West Virginia First — funded by $48M disclosed plus an estimated $80M undisclosed — launched a campaign to reverse the Mountain Gardens Act and Civil Rights Act before the Homecoming Alliance could entrench them constitutionally. Internal Alliance polling three weeks before the 2036 election: within the margin of error.</p>
+    <p><strong>Resolution:</strong> The Alliance's political director stopped running television advertisements and deployed the entire remaining budget ($12M) to covenant community meetings in 34 contested districts. The meetings were not campaign events — they were covenant community conversations, facilitated by ARC Churches pastors with actual authority. The Alliance won by 4 seats in the House, 3 in the Senate.</p>
+    <div class="crisis-outcome"><span class="crisis-outcome-text">✓ Alliance Wins — Covenant Infrastructure Becomes Primary Political Asset</span></div>
+  </div>
+
+  <div class="crisis-card">
+    <div class="crisis-num">Crisis Four · 2038–2040</div>
+    <div class="crisis-title">The Federal Foreign Policy Challenge</div>
+    <p>The DOJ filed suit arguing the WVHA's international activities — AU observer status, Diaspora Commerce Exchange, Pan-African forum participation — violated constitutional prohibitions on states conducting foreign policy.</p>
+    <p><strong>Resolution:</strong> The WVHA lost on one claim (AU voting participation — resolved by protocol modification) and won on three. The Fourth Circuit ruled that observer status without voting rights or treaty capacity did not constitute foreign policy conduct. The ruling was cited in 14 subsequent cases involving other subnational entities.</p>
+    <div class="crisis-outcome"><span class="crisis-outcome-text">✓ 3 of 4 Claims Won — Fourth Circuit Ruling Becomes National Precedent</span></div>
+  </div>
+
+  <div class="crisis-card">
+    <div class="crisis-num">Crisis Five · 2039–2041</div>
+    <div class="crisis-title">The Solomon Hostile Acquisition Attempt</div>
+    <p>A consortium of three major private AI companies — operating through Mountain Digital Holdings — accumulated a 12% stake in Solomon's distributed ownership structure, staying below disclosure thresholds. They sought: elimination of the Creator Equity Requirement, tiered access favoring large enterprise customers, and reorientation of Solomon Med's research toward commercially lucrative rather than Global South targets.</p>
+    <p><strong>Resolution:</strong> Three simultaneous tracks. Legal: community board invoked anti-acquisition provision, diluting stake from 12% to 7%. Political: emergency legislation designating Solomon as critical state infrastructure. Technical: accelerated public release of federated architecture making Solomon structurally impossible to acquire meaningfully. Mountain Digital Holdings withdrew and divested at a $50M loss.</p>
+    <div class="crisis-outcome"><span class="crisis-outcome-text">✓ Repelled — Critical Infrastructure Designation Extended to Energy & University Assets</span></div>
+  </div>
+
+  <div class="crisis-card">
+    <div class="crisis-num">Crisis Six · 2041–2043</div>
+    <div class="crisis-title">The Fair Competition Challenge</div>
+    <p>As Homecoming-origin companies began winning in national markets, former regional competitors filed FTC complaints (8) and Title VII racial discrimination claims (14) arguing the Economic Sovereignty Quarter's leasing restrictions constituted unfair competition.</p>
+    <p><strong>Resolution:</strong> FTC: staff investigation found no market distortion; all 8 complaints dismissed. Title VII: district court found for WVHA; Sixth Circuit affirmed; Supreme Court declined certiorari. Secondary outcome: the litigation produced the most comprehensive historical documentation of commercial discrimination in West Virginia real estate history — now required reading in the TPPS economic development curriculum.</p>
+    <div class="crisis-outcome"><span class="crisis-outcome-text">✓ All Claims Dismissed — Historical Documentation Produced as Enduring Public Record</span></div>
+  </div>
+
+  <div class="crisis-card">
+    <div class="crisis-num">Crisis Seven · 2040–2042</div>
+    <div class="crisis-title">The Internal Schism</div>
+    <p style="font-style:italic;">The most dangerous crisis did not come from outside.</p>
+    <p>The Economic Sovereignty Quarter's 10-year Black ownership requirement was scheduled to expire in 2041. A vocal faction argued for indefinite extension. The theological counterargument: a community that builds exclusion into its permanent institutional architecture has reproduced the rival altar it sought to escape. Exodus 23:9 was cited against the extension by members of the founding generation.</p>
+    <p><strong>Resolution:</strong> Eighteen months of covenant community deliberation, facilitated by ARC Churches leadership. The conclusion — a community contribution requirement replacing the race-based restriction — was adopted by the legislature in 2042. Neither side fully accepted it. Both sides were willing to live with it. By 2044, community ownership metrics were within 5 percentage points of their peak during the restriction period — achieved through community action, not legal mandate.</p>
+    <div class="crisis-outcome"><span class="crisis-outcome-text">✓ Resolved Through Covenant Process — Principle Proved More Durable Than Policy</span></div>
+  </div>
+
+  <div class="pull-quote">
+    <p>Each crisis produced something the project could not have generated any other way. The land trust challenge produced the evidentiary record that reframed the project's identity. The procurement fraud produced institutional process. The internal schism produced the experience of genuine institutional self-examination that proved the covenant community principle under the hardest test.</p>
+  </div>
+</div>
+
+<!-- CONCLUSION -->
+<div class="section" style="background: var(--indigo); color: var(--white); padding: 100px 80px;">
+  <div style="max-width:800px;">
+    <div class="section-subtitle" style="color:var(--gold)">Conclusion</div>
+    <h2 style="font-family:'Playfair Display',serif; font-size:40px; font-weight:900; color:var(--white); line-height:1.1; margin-bottom:32px;">The Question That Remains</h2>
+    <p style="color:rgba(255,255,255,0.8); font-size:18px; max-width:700px; margin-bottom:28px;">On January 3, 2043, West Virginia sent two senators to Congress who were accountable to a coalition that decided to build an alternative system instead of fighting for access to the existing one.</p>
+    <div class="pull-quote" style="border-color:var(--gold); background:rgba(212,175,55,0.08);">
+      <p style="color:var(--white);">The question is not whether change is possible. Homecoming has already answered that question. The question is whether the answer arrives in time.</p>
+    </div>
+    <div style="margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:600px;">
+      <div style="background:rgba(212,175,55,0.15); padding:24px;">
+        <div style="font-family:'Playfair Display',serif; font-size:32px; font-weight:900; color:var(--gold);">2027</div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:10px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:.15em; margin-top:6px;">Charlotte Summit asks: What if we built it ourselves?</div>
+      </div>
+      <div style="background:rgba(45,80,22,0.3); padding:24px;">
+        <div style="font-family:'Playfair Display',serif; font-size:32px; font-weight:900; color:#6ED444)">2043</div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:10px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:.15em; margin-top:6px;">Two senators sworn in. Everything changes.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="kente-border" style="margin-bottom:48px;"></div>
+  <div class="footer-logo">Timbuktu Policy Exchange</div>
+  <div class="footer-sub">New Timbuktu, West Virginia · Published September 2044</div>
+  <div class="footer-rule"></div>
+  <p class="footer-final">This report may be reproduced freely with attribution. The infrastructure is available. The theological framework is available. The institutional capacity is available. What is required is the clarity to name what the existing system actually is — and the institutional courage to build the alternative before the window closes.</p>
+  <div style="margin-top:48px;">
+    <div class="kente-border"></div>
+  </div>
+</footer>
+
+<script>
+// Bar animation on scroll
+const bars = document.querySelectorAll('.bar-fill[data-width]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bar = entry.target;
+      const w = bar.dataset.width;
+      bar.classList.add('animated');
+      setTimeout(() => { bar.style.width = w + '%'; }, 100);
+      observer.unobserve(bar);
+    }
+  });
+}, { threshold: 0.3 });
+bars.forEach(b => observer.observe(b));
+
+// EAS gauge animation
+const gauges = document.querySelectorAll('.eas-score-bg');
+const gaugeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const g = entry.target;
+      const pct = parseFloat(g.style.getPropertyValue('--pct') || g.getAttribute('style').match(/--pct:(\d+)/)?.[1] || 0);
+      g.style.transition = 'background 1.4s cubic-bezier(0.4,0,0.2,1)';
+      gaugeObserver.unobserve(g);
+    }
+  });
+}, { threshold: 0.5 });
+gauges.forEach(g => gaugeObserver.observe(g));
+
+// Smooth active nav
+const sections = document.querySelectorAll('section[id], div.section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current
+      ? 'var(--gold)' : '';
+  });
+});
+</script>
+</body>
+</html>
