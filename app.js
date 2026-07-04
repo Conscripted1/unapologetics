@@ -10,12 +10,19 @@ let formationReflections = {}; // key: 'moduleId:pageIdx', value: string
 let discernLog = [];         // accumulated placed statements from general discern sessions
 let mirrorLog  = [];         // { text, topic, firstFrame, secondFrame, finalFrame, note, moduleTitle, moduleId }
 let formationPool = [];      // { id, text, moduleId, moduleTitle, source, frame, algorithmWeight, userFloor, interactions, addedAt }
+let discernLibrary = [];     // { id, text, topic, correct, community, mirrorNote, moduleId, moduleTitle, addedAt } — unlocked on module completion
+let completedModules = {};   // { [moduleId]: true } — persisted, drives module card state
+let _breakdownOpen = false;
 let growthExpanded = { altar: false, mirror: false, stones: false, discernLog: false };
 
 let discernState = { statements:[], idx:0, placed:[], streak:0 };
 
 let moduleState = {
   moduleId:null, step:0,
+  preAssessIntroSeen:false,
+  // Pre-assessment (new fill-blank + match format)
+  preAssessIdx:0, preAssessAnswers:[], preAssessDone:false, preAssessQState:null,
+  // Legacy pre-sort fields kept for Mirror backward-compat (now empty)
   preSortIdx:0, preSortPlaced:[], preSortDone:false,
   extractViewed:false,
   sortIdx:0, sortPlaced:[], sortDone:false,
@@ -27,23 +34,195 @@ let moduleState = {
 // Used by renderFrameButtons for onclick delegation
 window._frameCallback = null;
 
+// ── ADMIN STATE ───────────────────────────────────────────────────────────────
+let adminMode = false;
+let adminApprovals = {}; // { [moduleId]: { sermonPoints:{idx:status}, discernmentQuestions:{idx:status}, preAssessment:{idx:status}, assessment:{idx:status} } }
+let adminSelectedModule = null;
+const ADMIN_PASS = 'inapologetics2026';
+let _logoTapCount = 0, _logoTapTimer = null;
+
+function handleLogoTap() {
+  _logoTapCount++;
+  clearTimeout(_logoTapTimer);
+  _logoTapTimer = setTimeout(() => { _logoTapCount = 0; }, 2000);
+  if (_logoTapCount >= 5) { _logoTapCount = 0; openAdmin(); }
+}
+
+function openAdmin() {
+  const pw = prompt('Admin access code:');
+  if (pw !== ADMIN_PASS) { alert('Incorrect code.'); return; }
+  adminMode = true;
+  document.getElementById('tab-admin').style.display = 'flex';
+  switchTab('admin');
+}
+
+function exitAdmin() {
+  adminMode = false;
+  document.getElementById('tab-admin').style.display = 'none';
+  switchTab('learn');
+}
+
+function getAdminApprovals(moduleId) {
+  if (!adminApprovals[moduleId]) adminApprovals[moduleId] = { sermonPoints:{}, discernmentQuestions:{}, preAssessment:{}, assessment:{} };
+  return adminApprovals[moduleId];
+}
+
+function adminSetStatus(moduleId, section, idx, status) {
+  getAdminApprovals(moduleId)[section][idx] = status;
+  saveAdminState();
+  renderAdminModule(moduleId);
+}
+
+function saveAdminState() {
+  try { localStorage.setItem('inapo_admin', JSON.stringify(adminApprovals)); } catch(e) {}
+}
+
+function loadAdminState() {
+  try {
+    const raw = localStorage.getItem('inapo_admin');
+    if (raw) adminApprovals = JSON.parse(raw);
+  } catch(e) {}
+}
+
+function renderAdminPanel() {
+  const moduleIds = Object.keys(MODULES);
+  if (!adminSelectedModule) adminSelectedModule = moduleIds[0];
+
+  const tabsEl = document.getElementById('admin-module-tabs');
+  tabsEl.innerHTML = moduleIds.map(id => {
+    const m = MODULES[id];
+    const active = id === adminSelectedModule;
+    return `<button onclick="renderAdminModule('${id}')" style="flex-shrink:0;padding:8px 14px;border-radius:100px;border:1.5px solid ${active ? '#6666cc' : '#2d2d4a'};background:${active ? '#2d2d4a' : 'transparent'};color:${active ? '#c0c0ff' : '#5555aa'};font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;">${m.title}</button>`;
+  }).join('');
+
+  renderAdminModule(adminSelectedModule);
+}
+
+function renderAdminModule(moduleId) {
+  adminSelectedModule = moduleId;
+  const m = MODULES[moduleId];
+  const approvals = getAdminApprovals(moduleId);
+  let html = '';
+
+  // ── Sermon Points section ──
+  if (m.sermonPoints && m.sermonPoints.length) {
+    html += adminSectionHTML('Sermon Points', 'format_list_numbered', m.sermonPoints.map((pt, i) => {
+      const status = approvals.sermonPoints[i] || 'pending';
+      return adminItemHTML(moduleId, 'sermonPoints', i, status, `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <span style="font-size:10px;font-weight:700;color:#8888cc;font-family:'Plus Jakarta Sans',sans-serif;">#${pt.id} · ${pt.timestamp}</span>
+        </div>
+        <p style="font-size:13px;font-weight:700;color:#e0e0ff;margin-bottom:2px;font-family:'Plus Jakarta Sans',sans-serif;">${pt.title}</p>
+        <p style="font-size:12px;color:#8888cc;font-family:'Plus Jakarta Sans',sans-serif;">${pt.summary}</p>
+        <a href="${pt.url}" target="_blank" style="font-size:11px;color:#6688cc;font-family:'Plus Jakarta Sans',sans-serif;">Watch at ${pt.timestamp} →</a>
+      `);
+    }).join(''));
+  }
+
+  // ── Pre-Assessment section ──
+  if (m.preAssessment && m.preAssessment.length) {
+    html += adminSectionHTML('Pre-Assessment', 'quiz', m.preAssessment.map((q, i) => {
+      const status = approvals.preAssessment[i] || 'pending';
+      const typeLabel = q.type === 'completion' ? 'Fill-in-the-blank' : 'Matching';
+      const preview = q.type === 'completion'
+        ? `<p style="font-size:13px;color:#e0e0ff;font-family:'Plus Jakarta Sans',sans-serif;line-height:1.5;">${q.sentence}</p><p style="font-size:11px;color:#5566aa;margin-top:4px;font-family:'Plus Jakarta Sans',sans-serif;">Options: ${q.options.join(' · ')} · Correct: ${q.options[q.correct]}</p>`
+        : `<p style="font-size:12px;font-weight:600;color:#c0c0ff;font-family:'Plus Jakarta Sans',sans-serif;">${q.instruction}</p>${q.pairs.map(p => `<p style="font-size:11px;color:#7788cc;font-family:'Plus Jakarta Sans',sans-serif;">"${p.left}" → "${p.right}"</p>`).join('')}`;
+      return adminItemHTML(moduleId, 'preAssessment', i, status, `
+        <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6666cc;background:rgba(102,102,204,0.12);padding:2px 7px;border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;">${typeLabel}</span>
+        <div style="margin-top:8px;">${preview}</div>
+        <p style="font-size:11px;color:#5566aa;margin-top:6px;font-style:italic;font-family:'Plus Jakarta Sans',sans-serif;">${q.explanation}</p>
+      `);
+    }).join(''));
+  }
+
+  // ── Post-Assessment section ──
+  if (m.assessment && m.assessment.length) {
+    html += adminSectionHTML('Post-Assessment', 'fact_check', m.assessment.map((q, i) => {
+      const status = approvals.assessment[i] || 'approved';
+      return adminItemHTML(moduleId, 'assessment', i, status, `
+        <p style="font-size:13px;font-weight:600;color:#e0e0ff;line-height:1.4;margin-bottom:6px;font-family:'Plus Jakarta Sans',sans-serif;">${q.q}</p>
+        ${q.options.map((opt, oi) => `<p style="font-size:11px;color:${oi === q.correct ? '#66cc88' : '#5566aa'};font-family:'Plus Jakarta Sans',sans-serif;">${oi === q.correct ? '✓' : '·'} ${opt}</p>`).join('')}
+        <p style="font-size:11px;color:#5566aa;margin-top:6px;font-style:italic;font-family:'Plus Jakarta Sans',sans-serif;">${q.explanation}</p>
+      `);
+    }).join(''));
+  }
+
+  // ── Discernment Questions section ──
+  if (m.discernmentQuestions && m.discernmentQuestions.length) {
+    const total = m.discernmentQuestions.length;
+    const approved = m.discernmentQuestions.filter((_,i) => (approvals.discernmentQuestions[i] || 'approved') === 'approved').length;
+    html += adminSectionHTML(`Discernment Library · ${approved}/${total} approved`, 'balance', m.discernmentQuestions.map((q, i) => {
+      const status = approvals.discernmentQuestions[i] || 'approved';
+      return adminItemHTML(moduleId, 'discernmentQuestions', i, status, `
+        <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#8888cc;font-family:'Plus Jakarta Sans',sans-serif;">${q.topic} · Frame ${q.correct}</span>
+        <p style="font-size:13px;color:#e0e0ff;line-height:1.5;margin-top:4px;font-family:'Plus Jakarta Sans',sans-serif;">${q.text}</p>
+        ${q.mirrorNote ? `<p style="font-size:11px;color:#5566aa;margin-top:4px;font-style:italic;font-family:'Plus Jakarta Sans',sans-serif;">"${q.mirrorNote}"</p>` : ''}
+      `);
+    }).join(''));
+  }
+
+  document.getElementById('admin-content').innerHTML = html || '<p style="color:#5555aa;padding:20px;font-family:Plus Jakarta Sans,sans-serif;">No content to review for this module.</p>';
+
+  // Re-render module tabs to show selection state
+  const moduleIds = Object.keys(MODULES);
+  document.getElementById('admin-module-tabs').innerHTML = moduleIds.map(id => {
+    const mod = MODULES[id];
+    const active = id === adminSelectedModule;
+    return `<button onclick="renderAdminModule('${id}')" style="flex-shrink:0;padding:8px 14px;border-radius:100px;border:1.5px solid ${active ? '#6666cc' : '#2d2d4a'};background:${active ? '#2d2d4a' : 'transparent'};color:${active ? '#c0c0ff' : '#5555aa'};font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;">${mod.title}</button>`;
+  }).join('');
+}
+
+function adminSectionHTML(title, icon, itemsHTML) {
+  return `<div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+      <span class="material-symbols-outlined" style="font-size:16px;color:#6666cc;">${icon}</span>
+      <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6666cc;font-family:'Plus Jakarta Sans',sans-serif;">${title}</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">${itemsHTML}</div>
+  </div>`;
+}
+
+function adminItemHTML(moduleId, section, idx, status, contentHTML) {
+  const colors = { approved: '#1F4D2F', pending: '#B8860B', rejected: '#A0523D' };
+  const bgColors = { approved: 'rgba(31,77,47,0.12)', pending: 'rgba(184,134,11,0.12)', rejected: 'rgba(160,82,61,0.12)' };
+  const labels = { approved: 'Approved', pending: 'Pending', rejected: 'Rejected' };
+  const c = colors[status] || colors.pending;
+  const bg = bgColors[status] || bgColors.pending;
+  return `<div style="background:#16162a;border-radius:12px;padding:14px;border:1px solid #2d2d4a;">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
+      <div style="flex:1;">${contentHTML}</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;">
+        <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:${c};background:${bg};padding:2px 8px;border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;">${labels[status]}</span>
+        <div style="display:flex;gap:4px;">
+          <button onclick="adminSetStatus('${moduleId}','${section}',${idx},'approved')" style="font-size:10px;padding:4px 8px;border-radius:6px;cursor:pointer;background:${status==='approved' ? '#1F4D2F' : 'transparent'};color:${status==='approved' ? '#fff' : '#1F4D2F'};border:1px solid #1F4D2F;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;">✓</button>
+          <button onclick="adminSetStatus('${moduleId}','${section}',${idx},'pending')" style="font-size:10px;padding:4px 8px;border-radius:6px;cursor:pointer;background:${status==='pending' ? '#B8860B' : 'transparent'};color:${status==='pending' ? '#fff' : '#B8860B'};border:1px solid #B8860B;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;">?</button>
+          <button onclick="adminSetStatus('${moduleId}','${section}',${idx},'rejected')" style="font-size:10px;padding:4px 8px;border-radius:6px;cursor:pointer;background:${status==='rejected' ? '#A0523D' : 'transparent'};color:${status==='rejected' ? '#fff' : '#A0523D'};border:1px solid #A0523D;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;">✗</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
 function switchTab(tab) {
   currentTab = tab;
-  ['screen-sort','screen-learn','screen-growth'].forEach(id => {
+  ['screen-sort','screen-learn','screen-growth','screen-admin'].forEach(id => {
     document.getElementById(id).classList.remove('active');
   });
-  ['tab-discern','tab-learn','tab-growth'].forEach(id => {
+  ['tab-discern','tab-learn','tab-growth','tab-admin'].forEach(id => {
     document.getElementById(id).classList.remove('active');
   });
   document.getElementById('bottom-nav').style.display = 'block';
 
-  const screenMap = { discern:'screen-sort', learn:'screen-learn', growth:'screen-growth' };
-  const tabMap    = { discern:'tab-discern', learn:'tab-learn',    growth:'tab-growth' };
+  const screenMap = { discern:'screen-sort', learn:'screen-learn', growth:'screen-growth', admin:'screen-admin' };
+  const tabMap    = { discern:'tab-discern', learn:'tab-learn',    growth:'tab-growth',    admin:'tab-admin' };
   document.getElementById(screenMap[tab]).classList.add('active');
   document.getElementById(tabMap[tab]).classList.add('active');
 
+
   if (tab === 'growth') updateGrowthScreen();
+  if (tab === 'learn')  updateModuleCards();
+  if (tab === 'admin')  renderAdminPanel();
 }
 
 function openModule(id) {
@@ -52,6 +231,8 @@ function openModule(id) {
   lastTab = currentTab;
   moduleState = {
     moduleId:id, step:0,
+    preAssessIntroSeen:false,
+    preAssessIdx:0, preAssessAnswers:[], preAssessDone:false, preAssessQState:null,
     preSortIdx:0, preSortPlaced:[], preSortDone:false,
     extractViewed:false,
     sortIdx:0, sortPlaced:[], sortDone:false,
@@ -84,10 +265,12 @@ function renderPipelineStep() {
 
   const dotsEl = document.getElementById('step-dots');
   dotsEl.innerHTML = PIPELINE_STEPS.map((s, i) => {
-    let cls = 'step-dot';
-    if (i < step) cls += ' complete';
-    else if (i === step) cls += ' active';
-    return `<div class="${cls}" title="${s.label}"></div>`;
+    let bg, color;
+    if (i < step)      { bg = '#1F4D2F'; color = '#fff'; }
+    else if (i === step) { bg = '#0B3D91'; color = '#fff'; }
+    else               { bg = '#EFEFED'; color = '#7A7570'; }
+    const iconHtml = `<span class="material-symbols-outlined" style="font-size:13px;${i <= step ? 'font-variation-settings:\'FILL\' 1,\'wght\' 500,\'GRAD\' 0,\'opsz\' 24;' : ''}">${s.icon}</span>`;
+    return `<div style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;background:${bg};color:${color};font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;font-family:'Plus Jakarta Sans',sans-serif;">${iconHtml}${s.label}</div>`;
   }).join('');
 
   const content = document.getElementById('pipeline-content');
@@ -106,46 +289,232 @@ function advancePipeline() {
   }
 }
 
-// ── STEP 1: PRE-SORT ─────────────────────────────────────────────────────────
-function renderPreSort(m, el) {
-  if (moduleState.preSortDone) { el.innerHTML = preSortSummaryHTML(m); return; }
+// ── STEP 1: PRE-ASSESSMENT (fill-blank + matching) ───────────────────────────
+function renderPreSort(m, el) { renderPreAssess(m, el); } // alias for pipeline dispatcher
 
-  const idx  = moduleState.preSortIdx;
-  const stmt = m.preSortStatements[idx];
-  const total = m.preSortStatements.length;
+function renderPreAssess(m, el) {
+  if (moduleState.preAssessDone) { el.innerHTML = preAssessSummaryHTML(m); return; }
 
-  el.innerHTML = `
-    <div class="fade-in">
-      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">Pre-Sort · ${idx + 1} of ${total}</p>
-      <div class="progress-bar" style="margin-bottom:16px;"><div class="progress-fill" style="width:${(idx/total)*100}%"></div></div>
-      <p style="font-size:13px;color:#52504B;line-height:1.5;margin-bottom:16px;">Before watching, sort these statements based on your current thinking. See how your placement changes after the module.</p>
-      <div class="statement-card" style="background:#fff;border-radius:20px;padding:20px;margin-bottom:14px;">
-        <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:10px;">${stmt.topic}</p>
-        <p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1.4;color:#2A2824;">${stmt.text}</p>
-      </div>
-      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;text-align:center;margin-bottom:10px;">Categorize This Statement</p>
-      <div style="display:flex;flex-direction:column;gap:8px;" id="pre-frame-list"></div>
-    </div>`;
+  if (!moduleState.preAssessIntroSeen) {
+    const qs = m.preAssessment || [];
+    el.innerHTML = `
+      <div style="padding:24px 20px;">
+        <div style="display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:#dae2ff44;border-radius:16px;margin:0 auto 16px;border:1px solid #b1c5ff;">
+          <span class="material-symbols-outlined icon-fill" style="font-size:28px;color:#0B3D91;">quiz</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:8px;color:#1c1c19;">Pre-Check</h2>
+        <p style="font-size:13px;color:#7A7570;text-align:center;line-height:1.6;margin-bottom:24px;">Before diving in, let's see what you already know. There are ${qs.length} quick question${qs.length !== 1 ? 's' : ''} — no pressure, just calibration.</p>
+        <div style="background:#f6f3ee;border-radius:14px;padding:14px 16px;margin-bottom:24px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;">
+            <span class="material-symbols-outlined icon-fill" style="font-size:16px;color:#0B3D91;margin-top:1px;">info</span>
+            <p style="font-size:12px;color:#434652;line-height:1.5;">Your answers won't be graded — they help personalise the module and show your growth at the end.</p>
+          </div>
+        </div>
+        <button onclick="preAssessStartQuestions()" style="width:100%;background:#0B3D91;color:#fff;border:none;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">
+          Begin Pre-Check →
+        </button>
+      </div>`;
+    return;
+  }
 
-  renderFrameButtons('pre-frame-list', function(frame) {
-    moduleState.preSortPlaced.push({ stmt, placed: frame });
-    moduleState.preSortIdx++;
-    if (moduleState.preSortIdx >= m.preSortStatements.length) moduleState.preSortDone = true;
-    renderPreSort(m, el);
-  });
+  const idx   = moduleState.preAssessIdx;
+  const qs    = m.preAssessment || [];
+  const total = qs.length;
+
+  if (idx >= total) {
+    moduleState.preAssessDone = true;
+    el.innerHTML = preAssessSummaryHTML(m);
+    return;
+  }
+
+  const q = qs[idx];
+  moduleState.preAssessQState = moduleState.preAssessQState || buildPreAssessQState(q);
+
+  if (q.type === 'completion') {
+    renderCompletionQ(m, el, q, idx, total);
+  } else if (q.type === 'match') {
+    renderMatchQ(m, el, q, idx, total);
+  }
 }
 
-function preSortSummaryHTML(m) {
-  const total   = moduleState.preSortPlaced.length;
-  const correct = moduleState.preSortPlaced.filter(p => p.placed === p.stmt.correct).length;
+function preAssessStartQuestions() {
+  moduleState.preAssessIntroSeen = true;
+  const m = MODULES[moduleState.moduleId];
+  renderPreAssess(m, document.getElementById('pipeline-content'));
+}
+
+function buildPreAssessQState(q) {
+  if (q.type === 'match') {
+    const order = q.pairs.map((_,i) => i).sort(() => Math.random() - 0.5);
+    return { selected: null, connections: [], rightOrder: order, checked: false };
+  }
+  return { selected: null, submitted: false };
+}
+
+function renderCompletionQ(m, el, q, idx, total) {
+  const state = moduleState.preAssessQState;
+  const submitted = state.submitted;
+
+  const sentence = q.sentence.replace('___', submitted
+    ? `<span style="border-bottom:2px solid ${state.selected === q.correct ? '#1F4D2F' : '#A0523D'};color:${state.selected === q.correct ? '#1F4D2F' : '#A0523D'};font-weight:700;">${q.options[state.selected]}</span>`
+    : `<span style="border-bottom:2px dashed #0B3D91;color:#0B3D91;font-weight:700;padding:0 4px;">${state.selected !== null ? q.options[state.selected] : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}</span>`
+  );
+
+  el.innerHTML = `<div class="fade-in">
+    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">Pre-Check · ${idx + 1} of ${total}</p>
+    <div class="progress-bar" style="margin-bottom:20px;"><div class="progress-fill" style="width:${(idx/total)*100}%"></div></div>
+    <p style="font-size:12px;color:#7A7570;margin-bottom:12px;">Fill in the blank — test your prior knowledge before watching.</p>
+    <div style="background:#fff;border-radius:16px;padding:20px;border:1.5px solid #c4c6d3;margin-bottom:20px;">
+      <p style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;line-height:1.55;color:#2A2824;">${sentence}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;" id="pa-opts">
+      ${q.options.map((opt, i) => {
+        let style = `background:#fff;border:1.5px solid #c4c6d3;border-radius:14px;padding:14px 12px;font-size:13px;font-weight:600;cursor:${submitted ? 'default' : 'pointer'};font-family:'Plus Jakarta Sans',sans-serif;text-align:left;transition:all 0.15s;`;
+        if (submitted) {
+          if (i === q.correct) style += 'background:#e8f5e9;border-color:#1F4D2F;color:#1F4D2F;';
+          else if (i === state.selected) style += 'background:#fdecea;border-color:#A0523D;color:#A0523D;';
+          else style += 'opacity:0.45;';
+        } else if (i === state.selected) {
+          style += 'background:#dae2ff;border-color:#0B3D91;color:#0B3D91;';
+        }
+        return `<button style="${style}" onclick="paSelectOption(${i})" ${submitted ? 'disabled' : ''}>${opt}</button>`;
+      }).join('')}
+    </div>
+    ${submitted ? `
+    <div style="background:#f4f3f1;border-radius:12px;padding:14px;margin-bottom:14px;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">Why this matters</p>
+      <p style="font-size:13px;color:#52504B;line-height:1.65;">${q.explanation}</p>
+    </div>
+    <button onclick="paNext()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+      ${idx + 1 < total ? 'Next Question →' : 'See Results →'}
+    </button>` : `
+    <button onclick="paSubmitCompletion()" ${state.selected === null ? 'disabled' : ''} style="background:${state.selected !== null ? '#0B3D91' : '#c4c6d3'};color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:${state.selected !== null ? 'pointer' : 'default'};width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+      Check Answer
+    </button>`}
+  </div>`;
+}
+
+function renderMatchQ(m, el, q, idx, total) {
+  const state = moduleState.preAssessQState;
+  const { connections, rightOrder, checked, selected } = state;
+  const allConnected = connections.length === q.pairs.length;
+
+  const rightItems = rightOrder.map(i => q.pairs[i].right);
+
+  const leftHTML = q.pairs.map((pair, li) => {
+    const conn = connections.find(c => c.left === li);
+    const isConnected = !!conn;
+    const isSelected = selected === li && !isConnected;
+    let borderColor = '#c4c6d3';
+    if (checked && isConnected) borderColor = conn.left === conn.right ? '#1F4D2F' : '#A0523D';
+    else if (isConnected) borderColor = '#0B3D91';
+    else if (isSelected) borderColor = '#0B3D91';
+    const bg = isSelected ? '#dae2ff' : isConnected ? (checked ? (conn.left === conn.right ? '#e8f5e9' : '#fdecea') : 'rgba(11,61,145,0.06)') : '#fff';
+    return `<button onclick="paMatchLeft(${li})" ${(isConnected || checked) ? 'disabled' : ''} style="width:100%;text-align:left;background:${bg};border:1.5px solid ${borderColor};border-radius:12px;padding:12px;font-size:12px;font-weight:600;color:#2A2824;cursor:${(isConnected || checked) ? 'default' : 'pointer'};font-family:'Plus Jakarta Sans',sans-serif;line-height:1.4;">
+      ${isConnected ? `<span style="font-size:10px;font-weight:700;color:${checked ? (conn.left === conn.right ? '#1F4D2F' : '#A0523D') : '#0B3D91'};display:block;margin-bottom:3px;">${checked ? (conn.left === conn.right ? '✓' : '✗') : '→'}</span>` : ''}
+      ${pair.left}
+    </button>`;
+  }).join('');
+
+  const rightHTML = rightItems.map((text, ri) => {
+    const realIdx = rightOrder[ri];
+    const conn = connections.find(c => c.right === realIdx);
+    const isConnected = !!conn;
+    const isSel = selected !== null && !isConnected;
+    const bg = isConnected ? (checked ? (conn.left === conn.right ? '#e8f5e9' : '#fdecea') : 'rgba(11,61,145,0.06)') : (isSel ? '#fffbf3' : '#f4f3f1');
+    const borderColor = isConnected ? (checked ? (conn.left === conn.right ? '#1F4D2F' : '#A0523D') : '#0B3D91') : (isSel ? '#D4A574' : '#EFEFED');
+    return `<button onclick="paMatchRight(${realIdx})" ${(isConnected || selected === null || checked) ? 'disabled' : ''} style="width:100%;text-align:left;background:${bg};border:1.5px solid ${borderColor};border-radius:12px;padding:12px;font-size:12px;color:#52504B;cursor:${(isConnected || selected === null || checked) ? 'default' : 'pointer'};font-family:'Plus Jakarta Sans',sans-serif;line-height:1.4;">${text}</button>`;
+  }).join('');
+
+  el.innerHTML = `<div class="fade-in">
+    <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">Pre-Check · ${idx + 1} of ${total}</p>
+    <div class="progress-bar" style="margin-bottom:20px;"><div class="progress-fill" style="width:${(idx/total)*100}%"></div></div>
+    <p style="font-size:13px;font-weight:600;color:#2A2824;margin-bottom:14px;">${q.instruction}</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">${leftHTML}</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">${rightHTML}</div>
+    </div>
+    ${checked ? `
+    <div style="background:#f4f3f1;border-radius:12px;padding:14px;margin-bottom:14px;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">The connection</p>
+      <p style="font-size:13px;color:#52504B;line-height:1.65;">${q.explanation}</p>
+    </div>
+    <button onclick="paNext()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+      ${idx + 1 < total ? 'Next Question →' : 'See Results →'}
+    </button>` : `
+    <button onclick="paCheckMatch()" ${!allConnected ? 'disabled' : ''} style="background:${allConnected ? '#0B3D91' : '#c4c6d3'};color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:${allConnected ? 'pointer' : 'default'};width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+      ${allConnected ? 'Check Answers' : `Connect all pairs (${connections.length}/${q.pairs.length})`}
+    </button>`}
+  </div>`;
+}
+
+function paSelectOption(i) {
+  const state = moduleState.preAssessQState;
+  if (state.submitted) return;
+  state.selected = i;
+  const m = MODULES[moduleState.moduleId];
+  renderPreAssess(m, document.getElementById('pipeline-content'));
+}
+
+function paSubmitCompletion() {
+  const state = moduleState.preAssessQState;
+  if (state.selected === null) return;
+  state.submitted = true;
+  const q = MODULES[moduleState.moduleId].preAssessment[moduleState.preAssessIdx];
+  moduleState.preAssessAnswers.push({ type:'completion', selected: state.selected, correct: q.correct });
+  renderPreAssess(MODULES[moduleState.moduleId], document.getElementById('pipeline-content'));
+}
+
+function paMatchLeft(li) {
+  const state = moduleState.preAssessQState;
+  if (state.checked) return;
+  state.selected = li;
+  renderPreAssess(MODULES[moduleState.moduleId], document.getElementById('pipeline-content'));
+}
+
+function paMatchRight(ri) {
+  const state = moduleState.preAssessQState;
+  if (state.selected === null || state.checked) return;
+  state.connections.push({ left: state.selected, right: ri });
+  state.selected = null;
+  renderPreAssess(MODULES[moduleState.moduleId], document.getElementById('pipeline-content'));
+}
+
+function paCheckMatch() {
+  const state = moduleState.preAssessQState;
+  state.checked = true;
+  const correct = state.connections.filter(c => c.left === c.right).length;
+  const q = MODULES[moduleState.moduleId].preAssessment[moduleState.preAssessIdx];
+  moduleState.preAssessAnswers.push({ type:'match', correct, total: q.pairs.length });
+  renderPreAssess(MODULES[moduleState.moduleId], document.getElementById('pipeline-content'));
+}
+
+function paNext() {
+  moduleState.preAssessIdx++;
+  moduleState.preAssessQState = null;
+  const m = MODULES[moduleState.moduleId];
+  if (moduleState.preAssessIdx >= (m.preAssessment || []).length) {
+    moduleState.preAssessDone = true;
+  }
+  renderPreAssess(m, document.getElementById('pipeline-content'));
+}
+
+function preAssessSummaryHTML(m) {
+  const answers = moduleState.preAssessAnswers;
+  let totalQ = 0, totalCorrect = 0;
+  answers.forEach(a => {
+    if (a.type === 'completion') { totalQ++; if (a.selected === a.correct) totalCorrect++; }
+    else if (a.type === 'match') { totalQ += a.total; totalCorrect += a.correct; }
+  });
+  const pct = totalQ > 0 ? Math.round((totalCorrect / totalQ) * 100) : 0;
   return `<div class="fade-in">
     <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #D4A574;text-align:center;margin-bottom:20px;" class="lifted">
       <div style="width:52px;height:52px;background:#dae2ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
-        <span class="material-symbols-outlined icon-fill" style="color:#0B3D91;font-size:26px;">balance</span>
+        <span class="material-symbols-outlined icon-fill" style="color:#0B3D91;font-size:26px;">quiz</span>
       </div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#0B3D91;margin-bottom:6px;">Pre-Sort Complete</h2>
-      <p style="font-size:14px;color:#52504B;margin-bottom:4px;">${correct} of ${total} placed correctly</p>
-      <p style="font-size:12px;color:#7A7570;line-height:1.5;">Now watch the sermon. See how your placements change.</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#0B3D91;margin-bottom:6px;">Pre-Check Complete</h2>
+      <p style="font-size:14px;color:#52504B;margin-bottom:4px;">${totalCorrect} of ${totalQ} correct — ${pct}%</p>
+      <p style="font-size:12px;color:#7A7570;line-height:1.5;">Now watch the sermon. Notice how your understanding deepens.</p>
     </div>
     <button onclick="advancePipeline()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
       Watch the Sermon →
@@ -599,13 +968,14 @@ function renderMirror(m, el) {
   const stmts = m.preSortStatements;
   const total = stmts.length;
   const stmt  = stmts[idx];
-  const firstPlaced  = moduleState.preSortPlaced[idx]?.placed;
+  const firstPlaced  = moduleState.preSortPlaced[idx]?.placed; // may be undefined if new pre-assess format
   const secondPlaced = moduleState.mirrorSecond[idx];
   const phase = moduleState.mirrorPhase;
 
   const firstColor = FRAME_COLORS[firstPlaced] || '#7A7570';
   const firstBg    = FRAME_BG[firstPlaced] || '#f4f3f1';
   const firstName  = FRAME_NAMES[firstPlaced] || '—';
+  const hasFirstPlacement = firstPlaced !== undefined;
 
   const progressPct = (idx / total) * 100;
 
@@ -614,6 +984,7 @@ function renderMirror(m, el) {
       <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">The Mirror · ${idx + 1} of ${total}</p>
       <div class="progress-bar" style="margin-bottom:16px;"><div class="progress-fill" style="width:${progressPct}%"></div></div>
 
+      ${hasFirstPlacement ? `
       <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:8px;">Before watching, you placed this as:</p>
       <div style="background:#f8f7f5;border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid #EFEFED;">
         <span style="display:inline-block;background:${firstBg};color:${firstColor};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:100px;border:1px solid ${firstColor}33;margin-bottom:8px;">${firstName}</span>
@@ -629,7 +1000,9 @@ function renderMirror(m, el) {
         <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,#D4A574,transparent);"></div>
       </div>
 
-      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:8px;">Having watched the sermon, place this statement again:</p>
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:8px;">Having watched the sermon, place this statement again:</p>` : `
+      <p style="font-size:12px;color:#52504B;line-height:1.5;margin-bottom:12px;">Having watched the sermon, sort each statement into a frame. Then reflect on what you're learning.</p>`}
+
       <div style="background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;border:1.5px solid #D4A574;">
         <p style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#2A2824;line-height:1.45;">${stmt.text}</p>
       </div>
@@ -659,7 +1032,8 @@ function renderMirror(m, el) {
       <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:4px;">The Mirror · ${idx + 1} of ${total}</p>
       <div class="progress-bar" style="margin-bottom:16px;"><div class="progress-fill" style="width:${progressPct}%"></div></div>
 
-      <!-- 1st Assessment card -->
+      <!-- 1st Assessment card (only when pre-sort data exists) -->
+      ${hasFirstPlacement ? `
       <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">1st Assessment</p>
       <div style="background:#f8f7f5;border-radius:14px;padding:14px;border:1px solid #EFEFED;">
         <span style="display:inline-block;background:${firstBg};color:${firstColor};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:100px;border:1px solid ${firstColor}33;margin-bottom:8px;">${firstName}</span>
@@ -673,10 +1047,10 @@ function renderMirror(m, el) {
           ? `<span class="material-symbols-outlined" style="font-size:18px;color:#D4A574;">swap_vert</span>`
           : `<span class="material-symbols-outlined" style="font-size:18px;color:#1F4D2F;">check_circle</span>`}
         <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,#D4A574,transparent);"></div>
-      </div>
+      </div>` : ''}
 
-      <!-- 2nd Assessment card -->
-      <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">2nd Assessment</p>
+      <!-- After-watching placement -->
+      <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">${hasFirstPlacement ? '2nd Assessment' : 'Your Placement'}</p>
       <div style="background:#fff;border-radius:14px;padding:14px;border:1.5px solid #D4A574;margin-bottom:14px;">
         <span style="display:inline-block;background:${secondBg};color:${secondColor};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:100px;border:1px solid ${secondColor}33;margin-bottom:8px;">${secondName}</span>
         <p style="font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:#2A2824;line-height:1.55;">${stmt.text}</p>
@@ -972,7 +1346,9 @@ function renderAssessResults(m, el) {
   const correct = answers.filter((a, i) => a === m.assessment[i].correct).length;
   const pct     = Math.round((correct / total) * 100);
   modulesComplete++;
+  completedModules[m.id] = true;
   populateFormationPool(m);
+  addModuleDiscernQuestions(m);
   saveState();
 
   const color  = pct >= 80 ? '#1F4D2F' : pct >= 60 ? '#0B3D91' : '#A0523D';
@@ -1045,12 +1421,13 @@ function renderFrameButtons(containerId, callback) {
 
 // ── DISCERN SORT ENGINE ───────────────────────────────────────────────────────
 function initDiscernSort() {
-  const stmts = [...GENERAL_STATEMENTS].sort(() => Math.random() - 0.5);
+  const poolStmts = discernLibrary.map(q => ({ text:q.text, topic:q.topic, correct:q.correct, community:q.community, mirrorNote:q.mirrorNote }));
+  const stmts = [...GENERAL_STATEMENTS, ...poolStmts].sort(() => Math.random() - 0.5);
   discernState = { statements:stmts, idx:0, placed:[], streak:0 };
 
   document.getElementById('sort-complete').style.display      = 'none';
   document.getElementById('sort-card-area').style.display     = 'block';
-  document.getElementById('community-breakdown').style.display = 'none';
+  closeBreakdown();
   document.getElementById('sort-frame-buttons').style.display = 'block';
 
   renderDiscernCard();
@@ -1067,7 +1444,7 @@ function setupSortCardDrag() {
   let startX = 0, isDragging = false;
 
   function onStart(e) {
-    if (document.getElementById('community-breakdown').style.display === 'block') return;
+    if (_breakdownOpen) return;
     isDragging = true;
     startX = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
     card.style.transition = 'none';
@@ -1096,24 +1473,7 @@ function setupSortCardDrag() {
 }
 
 function renderDiscernFrameButtons() {
-  const el = document.getElementById('frame-list');
-  if (!el) return;
-  const shortNames = ['', 'Essentials', 'Lies', 'Non-Ess.', 'Wisdom', 'Unclean'];
-  el.innerHTML = [1,2,3,4,5].map(i => {
-    let iconInner;
-    if (FRAME_ICONS[i] === '≈') {
-      iconInner = `<div style="font-size:18px;color:${FRAME_COLORS[i]};font-weight:700;line-height:1;">≈</div>`;
-    } else {
-      const fill = FRAME_FILL[i] ? `font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;` : '';
-      iconInner = `<span class="material-symbols-outlined" style="font-size:20px;color:${FRAME_COLORS[i]};${fill}">${FRAME_ICONS[i]}</span>`;
-    }
-    return `
-      <button onclick="discernPlace(${i})"
-        style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 4px;background:${FRAME_BG[i]};border:1px solid ${FRAME_COLORS[i]}33;border-radius:12px;cursor:pointer;transition:all 0.15s;font-family:'Plus Jakarta Sans',sans-serif;">
-        ${iconInner}
-        <span style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:${FRAME_COLORS[i]};line-height:1.2;text-align:center;">${shortNames[i]}</span>
-      </button>`;
-  }).join('');
+  renderFrameButtons('frame-list', discernPlace);
 }
 
 function renderDiscernCard() {
@@ -1133,7 +1493,7 @@ function renderDiscernCard() {
   void card.offsetWidth;
   card.classList.add('sort-float');
 
-  document.getElementById('community-breakdown').style.display = 'none';
+  closeBreakdown();
 }
 
 function discernPlace(frame) {
@@ -1142,10 +1502,19 @@ function discernPlace(frame) {
 
   const ok = frame === stmt.correct;
   discernState.streak = ok ? discernState.streak + 1 : 0;
+  discernState.maxStreak = Math.max(discernState.maxStreak || 0, discernState.streak);
   totalSorted++;
   document.getElementById('sort-streak').textContent = discernState.streak;
 
   showCommunityBreakdown(stmt, frame);
+}
+
+function closeBreakdown() {
+  const el = document.getElementById('community-breakdown');
+  const bd = document.getElementById('community-backdrop');
+  el.classList.remove('sheet-open');
+  bd.style.display = 'none';
+  _breakdownOpen = false;
 }
 
 function showCommunityBreakdown(stmt, placed) {
@@ -1176,7 +1545,9 @@ function showCommunityBreakdown(stmt, placed) {
   `;
 
   document.getElementById('sort-frame-buttons').style.display = 'none';
-  el.style.display = 'block';
+  document.getElementById('community-backdrop').style.display = 'block';
+  el.classList.add('sheet-open');
+  _breakdownOpen = true;
 }
 
 function nextCard() {
@@ -1187,8 +1558,8 @@ function nextCard() {
     // Save completed session to persistent log
     discernLog.push(...discernState.placed);
     saveState();
+    closeBreakdown();
     document.getElementById('sort-card-area').style.display  = 'none';
-    document.getElementById('community-breakdown').style.display = 'none';
     document.getElementById('sort-complete').style.display   = 'block';
     document.getElementById('sort-counter').textContent      = `${total} / ${total}`;
     document.getElementById('sort-progress').style.width     = '100%';
@@ -1196,7 +1567,7 @@ function nextCard() {
     return;
   }
 
-  document.getElementById('community-breakdown').style.display = 'none';
+  closeBreakdown();
   document.getElementById('sort-frame-buttons').style.display  = 'block';
   renderDiscernCard();
 }
@@ -1205,25 +1576,75 @@ function renderSortResults() {
   const list = document.getElementById('sort-results-list');
   const placed = discernState.placed;
   const correct = placed.filter(p => p.placed === p.stmt.correct).length;
+  const pct = placed.length > 0 ? Math.round((correct / placed.length) * 100) : 0;
+  const maxStreak = discernState.maxStreak || 0;
+  const scoreColor = pct >= 80 ? '#1F4D2F' : pct >= 60 ? '#0B3D91' : '#A0523D';
+  const scoreMsg = pct >= 80 ? 'Sharp discernment.' : pct >= 60 ? 'Good instincts.' : 'Keep training.';
 
-  list.innerHTML = `<div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;margin-bottom:10px;" class="mono-shadow">
-    <p style="font-size:11px;font-weight:700;color:#7A7570;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Session Results</p>
-    ${placed.map(p => {
-      const ok = p.placed === p.stmt.correct;
-      return `<div style="padding:8px 0;border-bottom:1px solid #EFEFED;display:flex;gap:8px;align-items:flex-start;">
-        <span class="material-symbols-outlined icon-fill" style="font-size:14px;color:${ok ? '#1F4D2F' : '#A0523D'};flex-shrink:0;margin-top:2px;">${ok ? 'check_circle' : 'cancel'}</span>
-        <div style="flex:1;min-width:0;">
-          <p style="font-size:12px;color:#2A2824;line-height:1.4;margin-bottom:2px;">${p.stmt.text.length > 80 ? p.stmt.text.slice(0,80)+'…' : p.stmt.text}</p>
-          <p style="font-size:10px;color:${ok ? '#1F4D2F' : '#A0523D'};font-weight:600;">${ok ? FRAME_NAMES[p.placed] : `You: ${FRAME_NAMES[p.placed]} · Correct: ${FRAME_NAMES[p.stmt.correct]}`}</p>
+  list.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <div style="background:#fff;border-radius:16px;padding:16px;text-align:center;border:1px solid #c4c6d3;" class="mono-shadow">
+        <p style="font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:${scoreColor};line-height:1;">${pct}%</p>
+        <p style="font-size:11px;color:#7A7570;font-weight:600;margin-top:4px;">Accuracy</p>
+        <p style="font-size:11px;color:${scoreColor};font-weight:600;margin-top:2px;">${scoreMsg}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="flex:1;background:#fff;border-radius:12px;padding:12px;text-align:center;border:1px solid #c4c6d3;display:flex;flex-direction:column;align-items:center;justify-content:center;" class="mono-shadow">
+          <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#0B3D91;line-height:1;">${placed.length}</p>
+          <p style="font-size:10px;color:#7A7570;font-weight:600;margin-top:3px;">Sorted</p>
         </div>
-      </div>`;
-    }).join('')}
-  </div>`;
+        <div style="flex:1;background:#fff;border-radius:12px;padding:12px;text-align:center;border:1px solid ${maxStreak >= 5 ? '#D4A574' : '#c4c6d3'};display:flex;flex-direction:column;align-items:center;justify-content:center;" class="mono-shadow">
+          <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:${maxStreak >= 5 ? '#B8860B' : '#0B3D91'};line-height:1;">${maxStreak}</p>
+          <p style="font-size:10px;color:#7A7570;font-weight:600;margin-top:3px;">Best Streak</p>
+        </div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #c4c6d3;margin-bottom:10px;" class="mono-shadow">
+      <p style="font-size:11px;font-weight:700;color:#7A7570;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Statement Breakdown</p>
+      ${placed.map(p => {
+        const ok = p.placed === p.stmt.correct;
+        return `<div style="padding:8px 0;border-bottom:1px solid #EFEFED;display:flex;gap:8px;align-items:flex-start;">
+          <span class="material-symbols-outlined icon-fill" style="font-size:14px;color:${ok ? '#1F4D2F' : '#A0523D'};flex-shrink:0;margin-top:2px;">${ok ? 'check_circle' : 'cancel'}</span>
+          <div style="flex:1;min-width:0;">
+            <p style="font-size:12px;color:#2A2824;line-height:1.4;margin-bottom:2px;">${p.stmt.text.length > 80 ? p.stmt.text.slice(0,80)+'…' : p.stmt.text}</p>
+            <p style="font-size:10px;color:${ok ? '#1F4D2F' : '#A0523D'};font-weight:600;">${ok ? FRAME_NAMES[p.placed] : `You: ${FRAME_NAMES[p.placed]} · Correct: ${FRAME_NAMES[p.stmt.correct]}`}</p>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
 }
 
 function resetDiscern() {
   document.getElementById('sort-results-list').innerHTML = '';
   initDiscernSort();
+}
+
+// ── LEARN TAB CARD STATES ─────────────────────────────────────────────────────
+function updateModuleCards() {
+  const idsAndColors = [
+    ['built-different',   '#002869'],
+    ['egypt',             '#002869'],
+    ['how-to-seek-god',   '#1F4D2F'],
+    ['demonic-ranks',     '#1F4D2F'],
+  ];
+  idsAndColors.forEach(([id, color]) => {
+    const btnEl    = document.getElementById(`mc-cta-${id}`);
+    const statusEl = document.getElementById(`mc-status-${id}`);
+    if (!btnEl) return;
+    if (completedModules[id]) {
+      btnEl.textContent    = 'Review ↺';
+      btnEl.style.background = '#1F4D2F';
+      if (statusEl) statusEl.innerHTML = `
+        <div style="display:inline-flex;align-items:center;gap:5px;background:#e8f5e9;border:1px solid rgba(31,77,47,0.25);border-radius:100px;padding:3px 10px;margin-bottom:10px;">
+          <span class="material-symbols-outlined icon-fill" style="font-size:13px;color:#1F4D2F;">check_circle</span>
+          <span style="font-size:11px;font-weight:700;color:#1F4D2F;font-family:'Plus Jakarta Sans',sans-serif;">Complete</span>
+        </div>`;
+    } else {
+      btnEl.textContent    = 'Begin →';
+      btnEl.style.background = color;
+      if (statusEl) statusEl.innerHTML = '';
+    }
+  });
 }
 
 // ── GROWTH SCREEN ─────────────────────────────────────────────────────────────
@@ -1375,6 +1796,16 @@ function populateFormationPool(m) {
   });
 }
 
+function addModuleDiscernQuestions(m) {
+  const now = Date.now();
+  const mId = m.id;
+  (m.discernmentQuestions || []).forEach((q, i) => {
+    const id = `dq-${mId}-${i}`;
+    if (discernLibrary.find(x => x.id === id)) return;
+    discernLibrary.push({ id, text:q.text, topic:q.topic, correct:q.correct, community:q.community, mirrorNote:q.mirrorNote, moduleId:mId, moduleTitle:m.title, addedAt:now });
+  });
+}
+
 function setPoolItemFloor(id, floor) {
   const item = formationPool.find(x => x.id === id);
   if (!item) return;
@@ -1509,11 +1940,25 @@ function updateGrowthScreen() {
 }
 
 // ── ONBOARDING ────────────────────────────────────────────────────────────────
+function showOb2() {
+  document.getElementById('ob-1').style.display = 'none';
+  const ob2 = document.getElementById('ob-2');
+  ob2.style.display = 'block';
+  ob2.classList.remove('fade-in');
+  void ob2.offsetWidth;
+  ob2.classList.add('fade-in');
+}
+
 function showOb3() {
   document.getElementById('ob-2').style.display = 'none';
   document.getElementById('ob3-onboarding-footer').style.display = 'block';
   document.getElementById('ob3-help-footer').style.display = 'none';
-  document.getElementById('ob-3').style.display = 'block';
+  const ob3 = document.getElementById('ob-3');
+  ob3.style.display = 'block';
+  ob3.classList.remove('fade-in');
+  void ob3.offsetWidth;
+  ob3.classList.add('fade-in');
+  ob3.scrollTop = 0;
 }
 
 function showFramesHelp() {
@@ -1549,6 +1994,8 @@ function saveState() {
       discernLog,
       mirrorLog,
       formationPool,
+      discernLibrary,
+      completedModules,
       growthExpanded,
     }));
   } catch(e) {}
@@ -1569,6 +2016,8 @@ function loadState() {
     if (Array.isArray(s.discernLog))     discernLog     = s.discernLog;
     if (Array.isArray(s.mirrorLog))      mirrorLog      = s.mirrorLog;
     if (Array.isArray(s.formationPool))  formationPool  = s.formationPool;
+    if (Array.isArray(s.discernLibrary)) discernLibrary = s.discernLibrary;
+    if (s.completedModules && typeof s.completedModules === 'object') completedModules = s.completedModules;
     if (s.growthExpanded && typeof s.growthExpanded === 'object') growthExpanded = { ...growthExpanded, ...s.growthExpanded };
   } catch(e) {}
 }
@@ -1580,7 +2029,7 @@ function clearState() {
   libraryItems = []; heartedItems = [];
   watchNotes = {}; formationReflections = {};
   discernLog = []; mirrorLog = [];
-  formationPool = [];
+  formationPool = []; discernLibrary = []; completedModules = {};
   growthExpanded = { altar: false, mirror: false, stones: false, discernLog: false };
   updateGrowthScreen();
 }
@@ -1588,6 +2037,7 @@ function clearState() {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
   loadState();
+  loadAdminState();
 });
 
 window.addEventListener('popstate', function(e) {

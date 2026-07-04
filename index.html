@@ -76,10 +76,15 @@
     <p style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:18px;">Unapologetic Ideas. Intelligent Impact.</p>
     <p style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;">"Casting down arguments and every high thing that exalts itself against the knowledge of God."</p>
     <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:40px;">2 Corinthians 10:5</p>
-    <button onclick="document.getElementById('ob-1').style.display='none';document.getElementById('ob-2').style.display='block'"
+    <button onclick="showOb2()"
       style="background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:100px;padding:14px 32px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">
       How it works →
     </button>
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:20px;">
+      <div style="width:24px;height:4px;border-radius:2px;background:rgba(255,255,255,0.8);"></div>
+      <div style="width:8px;height:4px;border-radius:2px;background:rgba(255,255,255,0.25);"></div>
+      <div style="width:8px;height:4px;border-radius:2px;background:rgba(255,255,255,0.25);"></div>
+    </div>
   </div>
 
   <div id="ob-2" style="display:none;max-width:340px;width:100%;">
@@ -117,6 +122,11 @@
       style="background:#fff;color:#0B3D91;border-radius:100px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
       Next: The Five Frames →
     </button>
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:16px;">
+      <div style="width:8px;height:4px;border-radius:2px;background:rgba(255,255,255,0.25);"></div>
+      <div style="width:24px;height:4px;border-radius:2px;background:rgba(255,255,255,0.8);"></div>
+      <div style="width:8px;height:4px;border-radius:2px;background:rgba(255,255,255,0.25);"></div>
+    </div>
   </div>
 </div>
 
@@ -245,21 +255,10 @@
       </div>
     </div>
 
-    <div id="community-breakdown" style="display:none;background:#fff;border-radius:16px;padding:14px;margin-bottom:14px;" class="mono-shadow">
-      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:10px;">Community Breakdown</p>
-      <div id="community-bars"></div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #EFEFED;display:flex;justify-content:space-between;align-items:center;">
-        <div id="placed-badge" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"></div>
-        <button onclick="nextCard()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:8px 20px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif;">
-          Next →
-        </button>
-      </div>
-    </div>
-
-    <!-- 5-column horizontal frame buttons -->
+    <!-- frame buttons -->
     <div id="sort-frame-buttons">
       <p style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;text-align:center;margin-bottom:8px;">Categorize This Statement</p>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;" id="frame-list"></div>
+      <div id="frame-list" style="display:flex;flex-direction:column;gap:8px;"></div>
       <div style="display:flex;justify-content:center;margin-top:12px;">
         <button onclick="showFramesHelp()" style="display:flex;align-items:center;gap:4px;color:#7A7570;font-size:11px;font-family:'Plus Jakarta Sans',sans-serif;background:none;border:none;cursor:pointer;padding:4px 8px;">
           <span class="material-symbols-outlined" style="font-size:15px;">help</span>
@@ -291,8 +290,8 @@
   <!-- Top bar: logo + search -->
   <div style="padding:16px 16px 14px;background:#fcf9f4;border-bottom:1px solid #e5e2dd;">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-      <img src="Branding/Favicon.png" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;" />
-      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#002869;flex:1;">Unapologetics.ai</span>
+      <img src="Branding/Favicon.png" id="learn-logo" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;cursor:pointer;" onclick="handleLogoTap()" />
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#002869;flex:1;">inApologetics.ai</span>
     </div>
     <div style="background:#f0ede8;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;">
       <span class="material-symbols-outlined" style="font-size:18px;color:#747783;">search</span>
@@ -324,6 +323,7 @@
       </div>
     </div>
 
+    <div class="module-cards-grid">
     <!-- Module card: I'm Built Different (Jun 14) -->
     <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;border:1px solid #c4c6d3;cursor:pointer;" class="mono-shadow" onclick="openModule('built-different')">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -331,7 +331,8 @@
         <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Jun 14, 2026</span>
       </div>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">I'm Built Different</h3>
-      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Matthew 7:24–27 · Union Church</p>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px;">Matthew 7:24–27 · Union Church</p>
+      <div id="mc-status-built-different"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;gap:14px;">
           <div style="display:flex;align-items:center;gap:4px;">
@@ -340,10 +341,10 @@
           </div>
           <div style="display:flex;align-items:center;gap:4px;">
             <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
-            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">6 steps</span>
           </div>
         </div>
-        <button onclick="event.stopPropagation();openModule('built-different')" style="background:#002869;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+        <button id="mc-cta-built-different" onclick="event.stopPropagation();openModule('built-different')" style="background:#002869;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
       </div>
     </div>
 
@@ -354,7 +355,8 @@
         <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">Jun 7, 2026</span>
       </div>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">You Can't Bring Egypt With You</h3>
-      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Numbers 13:26–33 · Union Church</p>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px;">Numbers 13:26–33 · Union Church</p>
+      <div id="mc-status-egypt"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;gap:14px;">
           <div style="display:flex;align-items:center;gap:4px;">
@@ -363,12 +365,13 @@
           </div>
           <div style="display:flex;align-items:center;gap:4px;">
             <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
-            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">6 steps</span>
           </div>
         </div>
-        <button onclick="event.stopPropagation();openModule('egypt')" style="background:#002869;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+        <button id="mc-cta-egypt" onclick="event.stopPropagation();openModule('egypt')" style="background:#002869;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
       </div>
     </div>
+    </div><!-- .module-cards-grid -->
 
     <button style="width:100%;background:transparent;border:1.5px solid #c4c6d3;border-radius:100px;padding:11px;font-size:12px;font-weight:700;color:#434652;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-top:4px;margin-bottom:28px;">
       View All Resources
@@ -377,8 +380,6 @@
 
   <!-- The Remnant Christian Network community -->
   <div style="padding:0 16px 0;">
-    <p style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#747783;margin-bottom:16px;">From your Community</p>
-
     <!-- RCN community header -->
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
       <div style="width:42px;height:42px;background:#1F4D2F;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
@@ -390,6 +391,7 @@
       </div>
     </div>
 
+    <div class="module-cards-grid">
     <!-- Module card: How to Seek God -->
     <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;border:1px solid #c4c6d3;cursor:pointer;" class="mono-shadow" onclick="openModule('how-to-seek-god')">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -397,7 +399,8 @@
         <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">RCN Archives</span>
       </div>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">How to Seek God</h3>
-      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Jeremiah 29:13 · Arome Osayi</p>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px;">Jeremiah 29:13 · Arome Osayi</p>
+      <div id="mc-status-how-to-seek-god"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;gap:14px;">
           <div style="display:flex;align-items:center;gap:4px;">
@@ -406,10 +409,10 @@
           </div>
           <div style="display:flex;align-items:center;gap:4px;">
             <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
-            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">6 steps</span>
           </div>
         </div>
-        <button onclick="event.stopPropagation();openModule('how-to-seek-god')" style="background:#1F4D2F;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+        <button id="mc-cta-how-to-seek-god" onclick="event.stopPropagation();openModule('how-to-seek-god')" style="background:#1F4D2F;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
       </div>
     </div>
 
@@ -420,7 +423,8 @@
         <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">RCN Archives</span>
       </div>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1c1c19;line-height:1.3;margin-bottom:4px;">Demonic Ranks and How to Deal With Them</h3>
-      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">Ephesians 6:12 · Arome Osayi</p>
+      <p style="font-size:12px;color:#434652;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px;">Ephesians 6:12 · Arome Osayi</p>
+      <div id="mc-status-demonic-ranks"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;gap:14px;">
           <div style="display:flex;align-items:center;gap:4px;">
@@ -429,12 +433,13 @@
           </div>
           <div style="display:flex;align-items:center;gap:4px;">
             <span class="material-symbols-outlined" style="font-size:13px;color:#747783;">stairs</span>
-            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">5 steps</span>
+            <span style="font-size:11px;color:#747783;font-family:'Plus Jakarta Sans',sans-serif;">6 steps</span>
           </div>
         </div>
-        <button onclick="event.stopPropagation();openModule('demonic-ranks')" style="background:#1F4D2F;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
+        <button id="mc-cta-demonic-ranks" onclick="event.stopPropagation();openModule('demonic-ranks')" style="background:#1F4D2F;color:#fff;border:none;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Begin →</button>
       </div>
     </div>
+    </div><!-- .module-cards-grid -->
 
     <button style="width:100%;background:transparent;border:1.5px solid #c4c6d3;border-radius:100px;padding:11px;font-size:12px;font-weight:700;color:#434652;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-top:4px;margin-bottom:28px;">
       View All Resources
@@ -494,7 +499,7 @@
       </div>
       <span style="font-size:12px;color:#7A7570;font-weight:600;flex-shrink:0;" id="module-step-label">1 / 5</span>
     </div>
-    <div style="display:flex;align-items:center;gap:4px;" id="step-dots"></div>
+    <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;" id="step-dots"></div>
   </div>
   <div style="flex:1;overflow-y:auto;padding:20px 16px 48px;" id="pipeline-content"></div>
 </div>
@@ -588,6 +593,42 @@
   </div>
 </div>
 
+<!-- ═══ ADMIN PANEL ══════════════════════════════════════════════════════════ -->
+<div id="screen-admin" class="screen" style="padding:0 0 100px;">
+  <div style="position:sticky;top:0;z-index:50;background:#1a1a2e;padding:14px 16px 12px;border-bottom:1px solid #2d2d4a;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="material-symbols-outlined" style="font-size:18px;color:#8888cc;">admin_panel_settings</span>
+        <span style="font-size:14px;font-weight:700;color:#e0e0ff;font-family:'Plus Jakarta Sans',sans-serif;">Admin Panel</span>
+      </div>
+      <button onclick="exitAdmin()" style="font-size:11px;color:#8888cc;background:transparent;border:1px solid #2d2d4a;border-radius:100px;padding:4px 10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">Exit Admin</button>
+    </div>
+    <p style="font-size:11px;color:#5555aa;font-family:'Plus Jakarta Sans',sans-serif;">Review and approve AI-generated content before it goes live.</p>
+  </div>
+
+  <!-- Module selector -->
+  <div style="padding:14px 16px 0;">
+    <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;" id="admin-module-tabs"></div>
+  </div>
+
+  <!-- Content area -->
+  <div id="admin-content" style="padding:16px;"></div>
+</div>
+
+<!-- ═══ COMMUNITY BREAKDOWN (bottom sheet) ══════════════════════════════════ -->
+<div id="community-backdrop" onclick="nextCard()"></div>
+<div id="community-breakdown" class="mono-shadow">
+  <div style="width:40px;height:4px;background:#c4c6d3;border-radius:2px;margin:0 auto 14px;"></div>
+  <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7A7570;margin-bottom:10px;">Community Breakdown</p>
+  <div id="community-bars"></div>
+  <div style="margin-top:10px;padding-top:10px;border-top:1px solid #EFEFED;display:flex;justify-content:space-between;align-items:center;">
+    <div id="placed-badge" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"></div>
+    <button onclick="nextCard()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:8px 20px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif;">
+      Next →
+    </button>
+  </div>
+</div>
+
 <!-- ═══ BOTTOM NAV ════════════════════════════════════════════════════════════ -->
 <nav id="bottom-nav">
   <div style="display:flex;">
@@ -602,6 +643,10 @@
     <button class="nav-tab" id="tab-growth" onclick="switchTab('growth')">
       <span class="material-symbols-outlined nav-icon">monitoring</span>
       <span class="nav-label">Growth</span>
+    </button>
+    <button class="nav-tab" id="tab-admin" onclick="switchTab('admin')" style="display:none;">
+      <span class="material-symbols-outlined nav-icon">admin_panel_settings</span>
+      <span class="nav-label">Admin</span>
     </button>
   </div>
 </nav>
