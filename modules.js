@@ -103,6 +103,66 @@ const MODULES = {
       }
     ],
 
+    preAssessment: [
+      {
+        type: 'completion',
+        sentence: "The wise builder was different from the foolish builder because he heard God's Word and ___ it.",
+        options: ["shared", "memorized", "put it into practice", "debated"],
+        correct: 2,
+        explanation: "Matthew 7:24 — both builders heard the same Word. The only difference was response. The wise builder 'put it into practice.' Knowing and doing are two entirely different things."
+      },
+      {
+        type: 'completion',
+        sentence: "Storms don't create weak foundations — they ___ them.",
+        options: ["destroy", "expose", "build", "judge"],
+        correct: 1,
+        explanation: "Both the wise and foolish builder faced the same storm. The storm's function is diagnostic, not punitive — it surfaces what was already true about the foundation before the rain ever came."
+      },
+      {
+        type: 'match',
+        instruction: "Connect each concept to its meaning:",
+        pairs: [
+          { left: "Excavation before elevation", right: "The invisible work that makes the visible possible" },
+          { left: "Agreement vs. alignment", right: "Affirming truth without conforming your life to it" },
+          { left: "Height without depth", right: "Visible success built without invisible formation" },
+          { left: "Storm-proof, not storm-exempt", right: "Obedience ensures you stand through storms, not skip them" }
+        ],
+        explanation: "These four concepts form the architecture of the sermon. One World Trade Center's 150-foot underground foundation before a single visible floor is the central image — everything visible requires invisible work first."
+      },
+      {
+        type: 'completion',
+        sentence: "___ with God's Word happens in a moment. ___ with God's Word happens over a lifetime.",
+        options: ["Fighting / Wrestling", "Agreeing / Aligning", "Hearing / Praying", "Believing / Struggling"],
+        correct: 1,
+        explanation: "The sermon draws from Dallas Willard: agreement is in a moment; alignment is over a lifetime. You can shout over a sermon you never plan to submit to. That gap between the two is where self-deception lives."
+      },
+      {
+        type: 'completion',
+        sentence: "The most important work you will ever do is the work that ___.",
+        options: ["produces visible results", "earns recognition from others", "no one will ever see", "happens in community"],
+        correct: 2,
+        explanation: "The paradox of spiritual formation: your private prayer, secret repentance, and hidden surrender are not preparation for the real work — they are the real work. The visible is just what others get to see."
+      }
+    ],
+
+    discernmentQuestions: [
+      { text:"The invisible foundation you build in private determines whether the visible life you build will stand.", topic:"Foundation", correct:1, community:[74,4,4,12,6], mirrorNote:"The support beams were drilled 150 feet into bedrock before a single floor was visible. The invisible work of prayer, obedience, and surrender is the foundation that makes everything else possible." },
+      { text:"A believer can genuinely affirm what God says about forgiveness while having never actually forgiven anyone who hurt them.", topic:"Obedience", correct:1, community:[72,5,5,13,5], mirrorNote:"Agreement happens in a moment. Alignment happens over a lifetime. You can shout over a sermon about forgiveness you never plan to submit to. Agreement without alignment is the self-deception James 1:22 describes." },
+      { text:"If a follower of Jesus is going through a painful storm, the most helpful first question is: 'What sin caused this?'", topic:"Suffering", correct:5, community:[5,32,6,12,45], mirrorNote:"Both builders faced the same storm — it was not a verdict on behavior. The storm is a diagnostic on the foundation, not a punishment for sin. The first question the storm invites is 'What is this revealing in me?' not 'Why is this happening to me?'" },
+      { text:"Spiritual disciplines like private prayer and Scripture study are valuable but not the most important part of the Christian life.", topic:"Spiritual Formation", correct:2, community:[4,68,6,15,7], mirrorNote:"These disciplines ARE the most important work — they are the invisible foundation. Making them secondary is precisely what produces height without depth." },
+      { text:"Two believers can face the same difficult season and have entirely different outcomes based solely on what they built their lives on.", topic:"Foundation", correct:1, community:[78,3,4,10,5], mirrorNote:"Both builders faced the same storm — rain, rising streams, wind. The storm didn't change; the foundation did. The same circumstance can destroy one person and reveal the strength of another." },
+      { text:"Visible spiritual success — a growing platform, influence, or reputation — is evidence that a person's spiritual foundation is deep.", topic:"Foundation", correct:5, community:[6,42,5,16,31], mirrorNote:"Height without depth is a disaster waiting to happen. Some visible success is built on sand, some on rock — you cannot tell from the outside before the storm hits. This is a malformed question." },
+      { text:"It is possible to be very busy for God — serving, attending, giving — while having almost no real private relationship with Him.", topic:"Obedience", correct:1, community:[70,5,5,15,5], mirrorNote:"The distinction between agreement and alignment cuts through religious activity. You can do all the visible things — attend church, serve in ministry — while the invisible foundation is hollow. Busyness for God is not the same as the foundation work of God." },
+      { text:"A believer who obeys God's Word will avoid major life storms.", topic:"Trials", correct:2, community:[4,72,5,13,6], mirrorNote:"Both builders faced the same storm. Obedience does not exempt the wise builder from the storm — it ensures the house stands through the storm. Storm-exempt and storm-proof are not the same thing." },
+      { text:"The primary measure of a believer's spiritual health is how often they attend church and serve in ministry.", topic:"Spiritual Formation", correct:2, community:[5,65,6,18,6], mirrorNote:"The primary measure is invisible, not visible: the depth of the private foundation. What you do in public tells people what you've built. What you do in private tells you what you've built it on." },
+      { text:"James 1:22 suggests that merely hearing God's Word, without doing it, is a form of self-deception.", topic:"Obedience", correct:1, community:[79,3,4,9,5], mirrorNote:"James uses the mirror metaphor — the person who hears God's Word and doesn't do it 'looks at his natural face in a mirror, then immediately forgets what he looks like.' The Mirror step in this module is named after this exact passage." },
+      { text:"The storm tests what the foundation actually is — it cannot change what the foundation was before it arrived.", topic:"Trials", correct:1, community:[74,4,4,13,5], mirrorNote:"Storms don't create foundations — they expose them. Both builders' foundations were set before the storm arrived. The storm revealed the truth; it didn't create it." },
+      { text:"A person can have great theological knowledge about God's Word while being very far from obeying it.", topic:"Obedience", correct:1, community:[71,4,5,14,6], mirrorNote:"Both builders heard the same Word. The foolish builder presumably understood it. Understanding is not the same as obedience, and the sermon's target is not ignorance — it is the gap between agreement and alignment." },
+      { text:"Suffering that reveals a crack in your spiritual foundation is always bad news.", topic:"Trials", correct:2, community:[5,52,7,28,8], mirrorNote:"A storm before the house is built too high can save your life. Revealing a crack while it can still be repaired is one of the most merciful things a storm can do. The sermon invites believers to receive the storm's diagnostic as a gift." },
+      { text:"The reason so many believers are surprised and devastated by life's storms is that they built on the wrong foundation.", topic:"Foundation", correct:4, community:[38,5,6,42,9], mirrorNote:"The observation is partly true, but storms surprise people for many reasons. The sermon's point is that the right foundation ensures you stand regardless of surprise. Whether most devastation comes from wrong foundation specifically is a wisdom judgment." },
+      { text:"Obedience without visible success is still obedience — the rock-builder's value is in the foundation, not the applause.", topic:"Foundation", correct:1, community:[74,4,4,13,5], mirrorNote:"The wise builder built on the rock before the storm came — with no storm to yet prove it. The value of obedience is not its visible vindication but its foundational integrity. The storm just confirms what was already true." }
+    ],
+
     assessment: [
       {
         q:"According to the sermon, what made the wise builder different from the foolish builder?",
@@ -229,6 +289,93 @@ const MODULES = {
       }
     ],
 
+    sermonPoints: [
+      { id:1, title:"Israel Stands at the Edge of Promise", summary:"Israel reaches promise, but fear interprets the land.", timestamp:"0:00", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=0s" },
+      { id:2, title:"You Can't Bring Egypt With You", summary:"You cannot enter promise while carrying Egypt within.", timestamp:"2:36", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=156s" },
+      { id:3, title:"Every New Season Demands a New You", summary:"Every new season demands a new version of you.", timestamp:"4:49", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=289s" },
+      { id:4, title:"New Seasons Expose Old Mindsets", summary:"New seasons expose mindsets formed by old bondage.", timestamp:"7:55", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=475s" },
+      { id:5, title:"Old Mindsets Contradict God's Truth", summary:"Old mindsets agree with the past over God's truth.", timestamp:"12:25", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=745s" },
+      { id:6, title:"The Wilderness Was Meant to Change Them", summary:"The wilderness forms what the promise requires.", timestamp:"14:57", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=897s" },
+      { id:7, title:"God Reforms Identity, Dependency, and Trust", summary:"God reshapes identity, dependency, and trust in transition.", timestamp:"20:40", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=1240s" },
+      { id:8, title:"Leaving Egypt Is Worth It", summary:"Leaving Egypt is painful, but the promise is worth it.", timestamp:"24:50", url:"https://www.youtube.com/watch?v=_wSqePjcVf0&t=1490s" }
+    ],
+
+    preAssessment: [
+      {
+        type: 'completion',
+        sentence: "The wilderness was never a ___ from God's plan — it was the plan.",
+        options: ["shortcut", "detour", "punishment", "delay"],
+        correct: 1,
+        explanation: "Deuteronomy 8:2 — God led Israel through the wilderness 'to humble you, testing you to know what was in your heart.' The wilderness wasn't a divine oversight — it was the designed curriculum."
+      },
+      {
+        type: 'completion',
+        sentence: "Israel said 'we seemed like ___ in our own eyes' before the Canaanites ever said it about them.",
+        options: ["strangers", "failures", "grasshoppers", "wanderers"],
+        correct: 2,
+        explanation: "Numbers 13:33. The spies called themselves grasshoppers before the giants did. This is the grasshopper problem: preemptive self-disqualification using a slave identity that God had already cancelled."
+      },
+      {
+        type: 'match',
+        instruction: "Connect each concept to what it reveals:",
+        pairs: [
+          { left: "Leaving Egypt", right: "Changes your location, not your mindset" },
+          { left: "Carrying Egypt", right: "Staying anchored to a slave identity after you've been freed" },
+          { left: "The wilderness", right: "God's curriculum for forming who the promise requires" },
+          { left: "The grasshopper problem", right: "Preemptive self-disqualification with a past identity" }
+        ],
+        explanation: "Egypt here is not a geography — it is a psychology. God's deliverance changes your location; only His formation changes your self-perception. The wilderness is where that transformation happens."
+      },
+      {
+        type: 'completion',
+        sentence: "Not one word of all the good ___ that the LORD had made to Israel had failed.",
+        options: ["laws", "warnings", "promises", "instructions"],
+        correct: 2,
+        explanation: "Joshua 21:45 — every promise came to pass. God's delay is not God's denial — the first generation didn't make it in, but the promise was never canceled."
+      },
+      {
+        type: 'completion',
+        sentence: "God's ___ is not God's denial — He is forming the person worthy of the promise.",
+        options: ["silence", "delay", "correction", "judgment"],
+        correct: 1,
+        explanation: "Hebrews 10:35–36 says perseverance is needed to receive what God has promised. The interval between promise and fulfillment is not abandonment — it is the formation corridor where the promise becomes personally possible."
+      },
+      {
+        type: 'match',
+        instruction: "Match each half of the key teaching:",
+        pairs: [
+          { left: "God's deliverance...", right: "...changes your location" },
+          { left: "God's formation...", right: "...changes your self-perception" },
+          { left: "New seasons expose...", right: "...old mindsets formed by bondage" },
+          { left: "Wilderness seasons are...", right: "...God's classroom, not His punishment" }
+        ],
+        explanation: "These four pairings form the spine of the sermon. The central question it leaves the listener with is not 'When will this end?' but 'What is God forming in me through this?'"
+      }
+    ],
+
+    discernmentQuestions: [
+      { text:"God does not waste wilderness seasons — the pain, waiting, and testing are purposeful formation, not pointless suffering.", topic:"Formation", correct:1, community:[71,4,4,14,7], mirrorNote:"Wilderness seasons are God's classroom, not His punishment. God led Israel through the wilderness to humble and test them — to reveal what was in their hearts. The wilderness was never a detour. It was the plan." },
+      { text:"A person can be physically free from a painful season while still mentally enslaved to it.", topic:"Identity & Mindset", correct:1, community:[78,4,4,9,5], mirrorNote:"You cannot carry Egypt's mindsets into the Promised Land. God's deliverance changes your location. Only His formation changes your self-perception. You can leave Egypt while still carrying Egypt inside you." },
+      { text:"Physical freedom from a painful season automatically produces internal freedom from its effects.", topic:"Formation", correct:2, community:[5,74,4,11,6], mirrorNote:"Israel left Egypt but carried Egypt inside them. God's deliverance changes your location; only His formation changes your self-perception." },
+      { text:"The mindsets formed in seasons of bondage don't automatically disappear when the bondage ends.", topic:"Identity & Mindset", correct:1, community:[77,3,4,11,5], mirrorNote:"400 years of slavery formed a way of thinking. The chains were broken at the Exodus, but the identity hadn't been renewed. That's why God needed the wilderness." },
+      { text:"What kept Israel from the Promised Land was not the giants — it was Israel's fear of the giants.", topic:"Numbers 13", correct:1, community:[76,4,3,10,7], mirrorNote:"Israel named themselves 'grasshoppers' before the giants did. The giants didn't disqualify Israel — Israel disqualified themselves by believing a slave identity that no longer applied." },
+      { text:"Not one word of all of God's good promises has ever failed.", topic:"God's Faithfulness", correct:1, community:[82,3,3,7,5], mirrorNote:"God's promises are not canceled by delay — not a word has failed. Joshua 21:45 declares this over Israel's entire history." },
+      { text:"New seasons from God always feel peaceful and free of fear — if something feels scary, it probably isn't from Him.", topic:"Discernment", correct:5, community:[6,23,5,14,52], mirrorNote:"Crossing the Jordan was terrifying. The Promised Land required confronting giants. God's seasons often feel exactly like what they require — courage, not comfort. This is a malformed question." },
+      { text:"What others have named you — failure, grasshopper, slave — is more accurate than what God says about you.", topic:"Identity", correct:2, community:[3,73,4,6,14], mirrorNote:"Israel named themselves 'grasshoppers' before the giants did. The question every believer must answer is whose word they will believe about themselves. God had already spoken — the spies chose to override it with a slave identity." },
+      { text:"If God has not fulfilled His promise to you yet, He has probably moved on to someone more faithful.", topic:"God's Faithfulness", correct:2, community:[2,78,3,5,12], mirrorNote:"God's promises are not canceled by delay — not a word has failed. Hebrews 10:35-36 says perseverance is needed to receive what God has promised. The delay is formation, not abandonment." },
+      { text:"A person can enter a new season God has prepared for them while still operating from the mindsets of the old one.", topic:"Transition", correct:1, community:[74,4,4,13,5], mirrorNote:"Israel crossed the Red Sea but never fully crossed out of Egypt's worldview. Every new season demands a new version of you — not just a new address." },
+      { text:"A new season from God is designed to be comfortable — if it's uncomfortable, it's likely not from Him.", topic:"Discernment", correct:2, community:[5,65,6,16,8], mirrorNote:"Every new season exposes old mindsets formed in the previous one. Discomfort in a new season is often the friction between who you've been and who the season requires you to become." },
+      { text:"The purpose of the wilderness was to reveal what was already in Israel's hearts — not to create something new.", topic:"Formation", correct:1, community:[73,4,4,13,6], mirrorNote:"Deuteronomy 8:2 — 'to know what was in your heart.' The wilderness was God's diagnostic. It surfaced the slave mentality that 400 years had built so that God could rebuild it." },
+      { text:"God's primary goal in transition seasons is to change your circumstances as quickly as possible.", topic:"God's Nature", correct:2, community:[4,72,5,12,7], mirrorNote:"God's primary goal in transition is not to change your circumstances — it is to change you. God reforms identity, dependency, and trust. Circumstances follow formation, they don't precede it." },
+      { text:"The three things God specifically reforms in transition seasons are: identity, dependency, and trust.", topic:"Formation", correct:1, community:[68,4,5,16,7], mirrorNote:"God doesn't just move you from slavery to freedom — He rebuilds who you think you are, what you rely on, and who you trust. These three transformations are what make the Promised Land possessable." },
+      { text:"God's promise to you will come to pass even if it skips one generation.", topic:"God's Faithfulness", correct:4, community:[25,8,8,48,11], mirrorNote:"The promise to Abraham came through Isaac, then Jacob, then finally through Joshua. The promise was never canceled — it found its generation. Whether it applies to 'your' generation is a matter of wisdom and discernment." },
+      { text:"The spies' report about the giants was factually accurate but spiritually malformed.", topic:"Discernment", correct:4, community:[38,5,6,41,10], mirrorNote:"The giants were real. The obstacles were real. What was malformed was the conclusion: that the obstacles disqualified them. Accurate perception does not always produce accurate interpretation." },
+      { text:"God's delay in fulfilling a promise is always evidence that the believer made a mistake or missed a window.", topic:"God's Faithfulness", correct:2, community:[3,74,4,11,8], mirrorNote:"Joshua 21:45 — not one word of all God's promises had failed. The delay is formation, not evidence of error. The generation that inherited the promise was not the generation that first received it." },
+      { text:"Wilderness seasons are God's classroom, not His punishment.", topic:"Formation", correct:1, community:[74,4,4,12,6], mirrorNote:"Moses tells Israel that God led them through the wilderness to humble and test them — to reveal what was in their hearts. The wilderness was never a detour from God's plan. It was the plan." },
+      { text:"A believer who struggles to trust God in a new season despite past experience of His faithfulness is demonstrating shallow faith.", topic:"Faith", correct:5, community:[6,28,6,14,46], mirrorNote:"Israel had experienced the Exodus — the most dramatic divine intervention in their history — and still struggled at the border of the promise. Past experience does not automatically produce present trust. Faith is a daily practice, not a permanent achievement. This is a malformed standard." },
+      { text:"God's promise is worth the pain of the formation corridor required to receive it.", topic:"Formation", correct:1, community:[77,3,4,11,5], mirrorNote:"Leaving Egypt is painful but the promise is worth it. The formation corridor is hard — but what it leads to is exactly what God said. The sermon's final word is that the cost of formation is worth the prize of the promise." }
+    ],
+
     assessment: [
       {
         q:"A wilderness season that feels painful and disorienting is most likely...",
@@ -284,6 +431,200 @@ const MODULES = {
         ],
         correct:3,
         explanation:"The entire sermon argues that the wilderness — painful, uncertain, disorienting — is precisely where God does His deepest formation work. Discomfort is not disqualifying; it is developmental. And God's faithfulness is not measured by speed of fulfillment but by the certainty of His word."
+      }
+    ]
+  },
+
+  'victory-valley': {
+    id: 'victory-valley',
+    title: "Victory from the Valley",
+    series: 'Union Church',
+    community: 'Union Church',
+    date: 'Jun 28, 2026',
+    type: 'Formation',
+    duration: '45 min',
+    scripture: 'Ezekiel 37:1',
+    videoId: '2TunS0W3dt8',
+
+    preSortStatements: [
+      { text:"God carries people into valley seasons as a form of punishment or discipline for sin.", topic:"Valleys & Suffering", correct:2, community:[5,74,5,10,6], mirrorNote:"Ezekiel had no scriptural evidence of wrongdoing — the hand of the Lord simply carried him and set him in the valley. The valley wasn't punishment; it was revelation. You can be doing all the right things and still find yourself in the valley." },
+      { text:"Because the hand of the Lord is upon you in the valley, you are not only assigned to it — you are anointed for it.", topic:"Anointing", correct:1, community:[74,4,4,12,6], mirrorNote:"Ezekiel 37:1 — 'the hand of the Lord was upon me.' Not only assigned to the valley, but anointed for it. There is a problem in your valley that you have been specifically equipped by God to face and solve." },
+      { text:"The healthiest response to a valley season is to stay still and wait for God to move you out of it.", topic:"Valleys & Action", correct:2, community:[5,68,6,14,7], mirrorNote:"God doesn't put you in the valley for you to sit — He puts you there because He's trying to get something for you to see. 'Every place the sole of your feet shall tread shall become yours.' The valley is territory to be walked and claimed, not a bench." },
+      { text:"When God wants to transform something in your life, He usually moves you to a better environment before He changes you.", topic:"Transformation", correct:2, community:[5,70,5,12,8], mirrorNote:"Zara renovated without leaving the mall. Transformation doesn't come with transportation. God often doesn't change your environment — He changes you in it. You may be asking God to move you when He is trying to make you the answer where you already are." },
+      { text:"The problem that consistently frustrates you most — the one others walk past without caring — is often a sign you are anointed to solve it.", topic:"Calling", correct:1, community:[70,4,5,16,5], mirrorNote:"When you care about something that other people don't care about, it is a clear indication that you're the one placed there to solve it. Your frustration with what others ignore is often the fingerprint of your anointing." },
+      { text:"A person can get divine results inside a dead environment when they are anointed.", topic:"Anointing", correct:1, community:[75,4,4,12,5], mirrorNote:"Hiroshima's landscape was a gray wasteland — yet plants emerged within one year. When the devil sets off a bomb in your life, he didn't account for what God can still grow from the ashes. Anointing is most visible when it produces results where others cannot." },
+      { text:"Speaking God's Word over seemingly dead situations — prophesying to the bones — can reverse what took years of decay.", topic:"Prophetic Declaration", correct:1, community:[73,4,4,14,5], mirrorNote:"God told Ezekiel to prophesy to the bones, and what had decayed over decades began to reverse in an instant. What looks permanently dead in your situation is subject to the Word of God spoken over it with faith and authority." },
+      { text:"Once the Word has been declared and the structure returns, life will naturally follow without any further need for the Spirit.", topic:"Holy Spirit", correct:2, community:[5,72,5,12,6], mirrorNote:"Bones came together when Ezekiel prophesied — but nothing was yet alive. God said the equation wasn't complete: prophesy also to the wind (ruach/Spirit). You need both Word AND Spirit. Structure without breath is still a skeleton." },
+    ],
+
+    arguments: [
+      { text:'"The valley wasn\'t punishment. The valley was revelation."', timestamp:'13:29' },
+      { text:'"Not only am I assigned to this valley — I\'m anointed for this valley."', timestamp:'15:05' },
+      { text:'"You can\'t let what\'s dead around you kill what\'s alive inside of you."', timestamp:'19:43' },
+      { text:'"Transformation doesn\'t come with transportation."', timestamp:'23:56' },
+      { text:'"I know I\'m anointed when I get divine results in dead environments."', timestamp:'26:25' },
+      { text:'"Stop praying, God get me out — start praying, God make me the answer."', timestamp:'29:14' },
+      { text:'"This is not the season to get quiet. This is the season to prophesy to the bones."', timestamp:'33:06' },
+      { text:'"You\'ve got to get the wind of the Holy Ghost — the same power that raised Jesus from the dead."', timestamp:'37:02' },
+    ],
+
+    sortStatements: [
+      { text:'"The valley wasn\'t punishment — it was revelation. God assigns it because there\'s something He needs you to see."', topic:"Valleys", correct:1, community:[76,4,4,11,5] },
+      { text:'"Not only are you assigned to this valley — the hand of the Lord upon you means you are anointed for it."', topic:"Anointing", correct:1, community:[74,4,4,12,6] },
+      { text:'"You can\'t let what\'s dead around you kill what\'s alive inside of you."', topic:"Resilience", correct:1, community:[79,3,3,10,5] },
+      { text:'"Transformation doesn\'t come with transportation — sometimes God does it right in the middle of your current environment."', topic:"Transformation", correct:1, community:[77,3,4,11,5] },
+      { text:'"I know I\'m anointed when I get divine results in dead environments."', topic:"Anointing", correct:4, community:[42,5,6,40,7] },
+      { text:'"Stop praying God get me out — start praying God make me the answer."', topic:"Prayer", correct:4, community:[44,5,6,39,6] },
+      { text:'"This is not the season to get quiet. This is the season to prophesy to the bones."', topic:"Declaration", correct:1, community:[73,4,4,14,5] },
+      { text:'"You\'ve got to get the wind of the Holy Ghost — the Word alone is not enough to bring dead things back to life."', topic:"Holy Spirit", correct:1, community:[71,4,4,15,6] },
+    ],
+
+    formation: [
+      {
+        title: "Assigned AND Anointed",
+        icon: "bolt",
+        scripture: "Ezekiel 37:1",
+        verseText: "The hand of the Lord was upon me, and he brought me out in the Spirit of the Lord and set me down in the middle of the valley; it was full of bones.",
+        body: "The most unsettling thing about Ezekiel 37:1 is what it reveals about how valleys work. Ezekiel did not volunteer for this assignment. There is no scriptural evidence he had done anything wrong. The hand of the Lord — not his failure — carried him and set him down in the midst of a valley full of dry bones. This is the first thing God needs you to hear: some valleys have your name on them not because of what you did but because of what He wants to do. The valley was not punishment. The valley was revelation. But there is a second truth buried in the same verse that is easy to miss when you're focused on the bones all around you. 'The hand of the Lord was upon me.' That phrase in Scripture consistently signals anointing — a specific equipping of a person for a purpose God intends to accomplish through them. Which means the valley that was assigned to Ezekiel was also the valley he was anointed for. You cannot accept God's mountain tops and avoid His valleys — but the valleys you have been assigned are also the valleys you have been anointed for. There is something in the problem you are standing in right now that you have been specifically equipped by God to address."
+      },
+      {
+        title: "Walk Around the Valley",
+        icon: "directions_walk",
+        scripture: "Joshua 1:3",
+        verseText: "Every place that the sole of your foot will tread upon I have given to you, just as I promised to Moses.",
+        body: "One of the primary symptoms of a valley season is hopelessness. When everything around you is dead, the human tendency is to stop — stop planning, stop pursuing, stop investing. God's first instruction to Ezekiel is to survey the valley — to walk around it rather than sit in it. This instruction connects to a recurring principle in Scripture: every place the sole of your feet shall tread shall become yours. The valley is not a waiting room with a bench — it is territory that belongs to whoever walks it. The believer who sits in their valley, paralyzed by what surrounds them, forfeits the very ground God has assigned them to claim. Walking around the valley does not mean pretending it isn't hard. It means refusing to let what is dead around you kill what is still alive inside you. There is something in you that has not died — a vision, a calling, a conviction — and the valley's most powerful weapon is the lie that what looks dead outside also reflects what is dead inside. Walk. Survey. Claim the territory. Every step you take in that valley is a claim God is honoring."
+      },
+      {
+        title: "Work With What's in the Valley",
+        icon: "build",
+        scripture: "Isaiah 43:19",
+        verseText: "Behold, I am doing a new thing; now it springs forth, do you not perceive it? I will make a way in the wilderness and rivers in the desert.",
+        body: "God gives Ezekiel an assignment but never changes his environment. He is still surrounded by dry bones when God speaks. And this is where the sermon's most practically challenging word lands: transformation doesn't come with transportation. Too often we ask God to move us out of the environment before He does the work — to put us in a new city, a new job, a new relationship — because we don't like the conditions of where we are. But God's answer is frequently different. He prepares a table in the presence of your enemies, not after they leave. He makes a way in the wilderness and rivers in the desert — not after you've left the wilderness. The problem that frustrates you most — the thing others walk past without caring — is likely a signal that you were placed there to solve it. You are anointed when you get divine results in dead environments. Not when everything is perfect, not when everyone affirms you, not when the resources are in place. When you produce in a place that has no business producing anything, that is the fingerprint of anointing. Stop asking God to take you out of the environment. Start asking Him to make you the answer within it."
+      },
+      {
+        title: "Wait for the Wind",
+        icon: "air",
+        scripture: "Ezekiel 37:9",
+        verseText: "Then he said to me, Prophesy to the breath; prophesy, son of man, and say to the breath, Thus says the Lord God: Come from the four winds, O breath, and breathe on these slain, that they may live.",
+        body: "After Ezekiel prophesied to the bones, something remarkable happened: they came back together. Tendons and flesh returned. But nothing was yet alive. God said the equation was not complete — prophesy also to the wind. The Hebrew word here is ruach, which carries both meanings simultaneously: breath and spirit. To prophesy to the wind was to call for the very Spirit of God to move. This pattern is not new. Genesis 1 begins with the same dynamic: God's word goes forth over a formless void, and the Spirit of God hovers over the face of the water. Both are required for creation. You cannot produce life from a skeleton alone, no matter how perfectly the bones are reassembled. The Word without the Spirit gives structure; the Spirit without the Word gives movement without form. Both are necessary. This is the call to the believer in the valley: you cannot just read your Bible and hope things improve. You must create the atmosphere — through worship, through declaration, through prayer in the Spirit — that makes your valley conducive for the miracle God has already planned. The same power that raised Jesus from the dead is available to quicken and bring life to the dead places in your story. The bones are beginning to rattle. The wind is coming."
+      }
+    ],
+
+    preAssessment: [
+      {
+        type: 'completion',
+        sentence: "In Ezekiel 37:1, God didn't send Ezekiel to the valley as punishment — the valley was assigned as ___.",
+        options: ["a test of endurance", "revelation", "correction", "humiliation"],
+        correct: 1,
+        explanation: "The sermon's core thesis: Ezekiel had no scriptural evidence of wrongdoing. The hand of the Lord — not his failure — placed him in the valley. God assigns valleys because there is something He needs you to see, not because He is angry."
+      },
+      {
+        type: 'completion',
+        sentence: "You know you're in a valley season when hope is replaced by ___ — just doing what you have to do to get by.",
+        options: ["prayer", "endurance", "maintenance", "routine"],
+        correct: 2,
+        explanation: "The sermon names three signs of a valley season: what used to excite you no longer moves you; isolation feels more comfortable than community; and hope is replaced by maintenance — going through the motions with no expectation of real change."
+      },
+      {
+        type: 'match',
+        instruction: "Match each valley principle to its meaning:",
+        pairs: [
+          { left: "Assigned to the valley", right: "God placed you there — not accident or punishment" },
+          { left: "Anointed for the valley", right: "The hand of the Lord equips you for what's in it" },
+          { left: "Walk around the valley", right: "Every place you tread becomes yours — don't sit" },
+          { left: "Prophesy to the wind", right: "Create the atmosphere for the Holy Spirit to bring life" }
+        ],
+        explanation: "These four moves form the architecture of getting victory from the valley. The assignment and anointing come together; then the action — walking, working, and inviting the Spirit."
+      },
+      {
+        type: 'completion',
+        sentence: "When God asked Ezekiel 'Can these bones live?', the sermon says He wasn't looking for information — He was looking for Ezekiel's ___.",
+        options: ["obedience first", "perspective", "strength", "confession"],
+        correct: 1,
+        explanation: "When God asks you a question, it's not because He doesn't know the answer. He's trying to see what your perspective is — do you know what your God is capable of, even when the environment looks completely dead? The question was an invitation to partnership, not a test of information."
+      },
+      {
+        type: 'completion',
+        sentence: "The Hebrew word ruach, translated 'wind' in Ezekiel 37:9, also means ___.",
+        options: ["fire", "voice", "breath and spirit", "presence"],
+        correct: 2,
+        explanation: "Ruach carries both meanings simultaneously: breath and spirit. This is why prophesying to the wind was calling for the Spirit of God to breathe life into what the Word had structurally reassembled. Just as Genesis 1 required the hovering Spirit alongside the spoken Word, Ezekiel 37 required both."
+      }
+    ],
+
+    discernmentQuestions: [
+      { text:"God carries people into valley seasons as a consequence of their sin or spiritual failure.", topic:"Valleys & Suffering", correct:2, community:[5,74,5,10,6], mirrorNote:"Ezekiel had no scriptural evidence of wrongdoing. The hand of the Lord carried him and set him in the valley. You can be doing all the right things — tithing, serving, attending — and still find yourself in the valley. It wasn't punishment; it was revelation." },
+      { text:"Some valleys in a believer's life are specifically assigned by God — placed there for revelation, not as discipline.", topic:"God's Leading", correct:1, community:[74,4,4,12,6], mirrorNote:"Ezekiel 37:1 — the hand of the Lord set him in the valley. God assigns valleys because there is something He needs you to see. The valley is not accidental; it is intentional." },
+      { text:"Because the hand of the Lord is upon you in the valley, you are not only assigned to it — you are anointed for it.", topic:"Anointing", correct:1, community:[73,4,4,13,6], mirrorNote:"The first part of Ezekiel 37:1 says 'the hand of the Lord was upon me.' Not only assigned — anointed. There is a problem in your current valley that you have specifically been equipped by God to face and solve." },
+      { text:"The healthiest response to a valley season is to wait patiently in stillness for God to move you out.", topic:"Valleys & Action", correct:2, community:[5,68,6,14,7], mirrorNote:"God doesn't put you in the valley for you to sit — He puts you there because He's trying to get you to see something. 'Every place the sole of your feet shall tread shall become yours.' The valley is territory to be walked, not a waiting room." },
+      { text:"Transformation often happens inside the existing environment — God does not always relocate you before He changes you.", topic:"Transformation", correct:1, community:[76,3,4,12,5], mirrorNote:"Zara renovated without leaving the mall. David's table was prepared in the presence of his enemies. God doesn't take you out of the environment — He does it right in the middle. Transformation doesn't come with transportation." },
+      { text:"A person's consistent frustration with a problem that others ignore is often a signal that they are anointed to solve it.", topic:"Calling", correct:4, community:[44,5,6,38,7], mirrorNote:"The sermon presents this as a strong indicator of anointing. But whether any specific frustration is a calling marker or simply a personality preference requires discernment. The principle points toward anointing; the specific application is a wisdom judgment." },
+      { text:"A person can be anointed by God even when surrounded by a completely dead and unresponsive environment.", topic:"Anointing", correct:1, community:[76,3,4,12,5], mirrorNote:"Hiroshima's landscape was a gray wasteland — yet plants grew within a year. God can still grow things in beautiful ashes. Anointing is most visible precisely when it produces results where others cannot." },
+      { text:"Speaking God's Word over dead situations is unnecessary — He will act sovereignly whenever He chooses, regardless of declaration.", topic:"Prophetic Declaration", correct:2, community:[5,74,5,10,6], mirrorNote:"God told Ezekiel to prophesy to the bones — the act of declaration was not optional. The bones responded when the Word was spoken. Sovereign action and human declaration are not opposites in Scripture; they are partners." },
+      { text:"Once the Word has been declared and structure is restored, life will follow naturally without further need for the Spirit.", topic:"Holy Spirit", correct:2, community:[5,72,5,12,6], mirrorNote:"Bones came back together after the first prophecy, but nothing was yet alive. God said the equation wasn't complete — prophesy also to the wind (ruach). Word and Spirit are both necessary. Structure without breath is still a skeleton." },
+      { text:"Hopelessness in a valley season naturally stops a person from planning, pursuing, and investing in their future.", topic:"Valleys & Suffering", correct:1, community:[75,4,4,12,5], mirrorNote:"The BMC Public Health study cited in the sermon confirms what Scripture implies: sitting produces hopelessness, and hopelessness stops planning, fighting, and investing. The valley's most powerful weapon is the paralysis it produces — which is why the first command is to walk." },
+      { text:"The principle of polarity means that if you are in a valley right now, eventually the season will shift toward the mountain.", topic:"Valleys & Suffering", correct:4, community:[42,5,6,40,7], mirrorNote:"The sermon presents Newton's third law and the principle of polarity as a general truth — when life is spiraling down, sooner or later it gets up. As a general pattern this is sound; specific timing and manner are in God's sovereign hands. This is wisdom territory." },
+      { text:"What looks permanently dead in a believer's life is beyond God's power to restore.", topic:"God's Power", correct:2, community:[3,80,4,8,5], mirrorNote:"Dry bones — long past decay — came back to life at God's word. Hiroshima grew plants within a year of an atomic bomb. God specializes in what looks finished. What took decades of decay can be reversed in an instant by His Word and Spirit." },
+      { text:"The bones in Ezekiel 37 represented not only individuals but the families and bloodlines of a nation — and God's wind came to restore entire lineages.", topic:"Ezekiel 37", correct:1, community:[71,4,4,15,6], mirrorNote:"The valley was believed to contain the bones of an army — people's families died there. Last names were buried in that valley. God's wind was sent to restore everything connected — generational restoration, not just individual resurrection." },
+      { text:"Creating an atmosphere conducive for a miracle — through worship, declaration, and openness to the Holy Spirit — is part of the believer's active responsibility.", topic:"Holy Spirit", correct:4, community:[44,5,7,38,6], mirrorNote:"Ezekiel had to prophesy to the wind for the atmosphere to become conducive. But whether atmosphere preparation is primarily the believer's responsibility or God's sovereign initiation is a genuine tension in pneumatology. The sermon leans toward human participation; full sovereignty belongs to God. This is wisdom territory." },
+      { text:"The same power that raised Jesus from the dead is available to quicken and bring life to dead situations in a believer's life.", topic:"Holy Spirit", correct:1, community:[78,3,4,10,5], mirrorNote:"Romans 8:11 — 'the same Spirit who raised Christ from the dead will also give life to your mortal bodies.' The wind that came to Ezekiel's valley is the same Spirit. What God did at the resurrection is the same power available to the dead places in your story." }
+    ],
+
+    assessment: [
+      {
+        q: "According to the sermon, why did God carry Ezekiel to a valley full of dry bones?",
+        options: [
+          "To discipline him for a sin he had committed",
+          "To reveal something — valleys are assigned for revelation, not punishment",
+          "To test whether Ezekiel would stay faithful even in difficulty",
+          "To demonstrate God's judgment over Israel's disobedience"
+        ],
+        correct: 1,
+        explanation: "The sermon's central argument is that the valley wasn't punishment — it was revelation. Ezekiel had no scriptural evidence of wrongdoing. The hand of the Lord carried him there. God assigns valleys because there is something He needs you to see. The assignment is purposeful, not punitive."
+      },
+      {
+        q: "What does the sermon mean when it says you are not just 'assigned' to the valley but 'anointed' for it?",
+        options: [
+          "God gives valley-dwellers supernatural gifts unavailable to people on the mountain",
+          "Surviving difficulty is itself evidence of superior faith",
+          "The hand of the Lord being upon you means you are specifically equipped for the challenge in your valley",
+          "Anointing removes the pain of the valley season"
+        ],
+        correct: 2,
+        explanation: "Ezekiel 37:1 opens with 'the hand of the Lord was upon me' — the phrase Scripture consistently uses to signal anointing. The sermon draws the distinction: being assigned to the valley means you're there; being anointed for it means you're equipped for what is there. The problem in your valley is one you have been specifically prepared to solve."
+      },
+      {
+        q: "What does the Zara renovation illustration explain about how God works?",
+        options: [
+          "God sometimes closes things down before He rebuilds them from scratch",
+          "God often transforms people and situations within their existing environment, not by removing them from it",
+          "Physical renovation is a spiritual metaphor for salvation",
+          "God prefers gradual change over sudden transformation"
+        ],
+        correct: 1,
+        explanation: "Zara didn't close the store or move to a new location — they renovated within the space they were already in. Spiritually: transformation doesn't come with transportation. You may be asking God to move you when He is trying to make you the answer where you already are. God prepared David's table in the presence of his enemies, not after they left."
+      },
+      {
+        q: "Why does God tell Ezekiel to prophesy to both the bones AND the wind (ruach)?",
+        options: [
+          "Because the first prophecy failed and needed to be repeated in a different form",
+          "Because the bones required the Word to reassemble structurally, and then the Spirit to bring life",
+          "Because Ezekiel's faith needed to be tested twice before God would act",
+          "Because the wind represented the prayers of the Israelites who had died in the valley"
+        ],
+        correct: 1,
+        explanation: "After Ezekiel prophesied to the bones, they came together — but nothing was yet alive. God said the equation was not complete. Ruach means both breath and spirit. Just as Genesis 1 needed both the spoken Word and the hovering Spirit, Ezekiel 37 required both. Structure without breath is still a skeleton."
+      },
+      {
+        q: "Which statement best captures the three-part framework this sermon gives for getting victory from the valley?",
+        options: [
+          "Pray, fast, and wait for God to act on your behalf",
+          "Repent, believe, and confess so the valley will end",
+          "Walk around it, work with what's in it, and wait for the wind of the Spirit",
+          "Accept it, endure it, and eventually you will reach the mountain"
+        ],
+        correct: 2,
+        explanation: "The three points form a practical theology of the valley: (1) Walk around the valley — survey your territory and refuse to sit, because every place you tread becomes yours. (2) Work with what's in the valley — you are anointed to be the answer in the environment you're in, not after you leave it. (3) Wait for the wind — prophesy to the bones AND create the atmosphere for the Holy Spirit to breathe life into what the Word has reassembled."
       }
     ]
   },
@@ -359,6 +700,66 @@ const MODULES = {
         verseText: "And Jesus grew in wisdom and stature, and in favor with God and man.",
         body: "Between promise and manifestation there is almost always a season that looks like nothing is happening. Apostle Arome calls this the season of hiddenness — and he is insistent: it is not wasted time. It is sacred investment. Every significant figure in Scripture went through it. Moses had forty years in the wilderness before the burning bush. David was anointed king and then spent years running from the man who sat on his throne. Jesus Himself — described in Luke 2:52 as growing in wisdom and stature — had thirty years of obscurity before three years of public ministry. The pattern is not accidental. God uses the hidden season not to delay you but to develop you. He is not building your platform in that season — He is building your character. And character, once formed, can carry what platform alone will destroy. If you are in a season where you feel unseen, overlooked, and unprepared, Apostle Arome's word is direct: stop asking 'when will this be over?' and start asking 'what is God forming in me through this?' The hiddenness is not the enemy of your destiny. It is the preparation of your destiny."
       }
+    ],
+
+    preAssessment: [
+      {
+        type: 'completion',
+        sentence: "Seeking God has no regimented pattern — it is first and fundamentally a matter of your ___ for God.",
+        options: ["theology", "quest", "discipline", "performance"],
+        correct: 1,
+        explanation: "Jeremiah 29:13 — 'when you seek me with all your heart.' God is not evaluating the sophistication of your method. He is responding to the wholeness of your desire. The question is not 'Am I doing this right?' but 'Is my hunger real?'"
+      },
+      {
+        type: 'completion',
+        sentence: "You cannot sustain a real relationship with what you have no ___ of.",
+        options: ["experience", "feelings", "knowledge", "desire"],
+        correct: 2,
+        explanation: "Hosea 4:6 — 'My people are destroyed for lack of knowledge.' Sincerity toward God is not enough to sustain a relationship. Love requires knowledge — knowing how He moves, how He operates, and how the spiritual realm functions."
+      },
+      {
+        type: 'match',
+        instruction: "Match each concept to how the sermon defines it:",
+        pairs: [
+          { left: "Seeking God", right: "A quest driven by hunger, not a formula driven by method" },
+          { left: "Prayer", right: "Heaven-earth partnership — actualizing what God has already purposed" },
+          { left: "Sovereign faith", right: "Holding convictions when circumstances contradict what you believe" },
+          { left: "The hidden season", right: "Sacred investment in character before public impact" }
+        ],
+        explanation: "Each of these redefinitions dismantles a surface-level assumption. Seeking is not technique; prayer is not petition; faith is not comfort; hiddenness is not waste."
+      },
+      {
+        type: 'completion',
+        sentence: "Prayer is not informing God of what He doesn't know — it is the believer ___ with heaven to actualize what God has already purposed on earth.",
+        options: ["arguing", "pleading", "cooperating", "negotiating"],
+        correct: 2,
+        explanation: "Matthew 6:10 — 'Your kingdom come, your will be done, on earth as it is in heaven.' The believer is not initiating something God was waiting to be convinced of. Prayer is the mechanism of alignment, not of persuasion."
+      },
+      {
+        type: 'completion',
+        sentence: "God deliberately processes significant believers in seasons of ___ before displaying them in impact.",
+        options: ["ministry", "visible success", "obscurity", "fellowship"],
+        correct: 2,
+        explanation: "Moses had 40 years in the wilderness before the burning bush. David was anointed king and spent years running from Saul. Jesus Himself had 30 years of obscurity before 3 years of ministry. The hidden season is not wasted time — it is sacred investment."
+      }
+    ],
+
+    discernmentQuestions: [
+      { text:"Seeking God is primarily about mastering the right spiritual disciplines in the correct order.", topic:"Spiritual Formation", correct:2, community:[14,52,6,18,10], mirrorNote:"Seeking God has no regimented pattern — it is a matter of your quest for God. The issue is not technique. It is hunger. Reducing seeking to a formula is the precise thing this sermon argues against." },
+      { text:"A believer's genuine love for God can coexist with deep ignorance of how God operates in the spiritual realm.", topic:"Spiritual Knowledge", correct:2, community:[12,55,8,18,7], mirrorNote:"You cannot sustain a real relationship with what you have no knowledge of. Hosea 4:6 warns that God's people are destroyed for lack of knowledge — not for lack of sincerity. Sincerity without knowledge cannot navigate a world where invisible forces have visible consequences." },
+      { text:"A believer who feels God's presence consistently is seeking Him more effectively than one who doesn't feel anything.", topic:"Seeking God", correct:5, community:[10,24,7,15,44], mirrorNote:"Seeking God has no regimented pattern — God is not contained in a predictable emotional signature. Demanding a felt presence as proof of encounter misunderstands what seeking is. This is a malformed standard for measuring effectiveness." },
+      { text:"Prayer is most powerful when a believer clearly and specifically articulates their personal needs to God.", topic:"Prayer", correct:4, community:[30,5,6,52,7], mirrorNote:"Prayer is not informing God of what He doesn't know. Prayer is the believer cooperating with heaven to actualize what God has already purposed on earth. Articulation is not wrong — but that is not what makes prayer effective. This is a matter of wisdom." },
+      { text:"Sovereign faith holds its convictions even when life circumstances appear to contradict what God has said.", topic:"Faith", correct:1, community:[76,3,4,12,5], mirrorNote:"This is the sermon's definition. Sovereign faith is becoming scarce in a generation that recalibrates belief based on visible outcomes. This is the faith that holds its ground when what you see contradicts what you believe." },
+      { text:"The quality of a believer's spiritual life can be accurately measured by the consistency of their devotional schedule.", topic:"Spiritual Formation", correct:5, community:[8,28,8,18,38], mirrorNote:"The issue is not technique or consistency of schedule — it is the wholeness of desire behind it. A consistent schedule maintained without genuine hunger is exactly what this sermon dismantles. This is a malformed standard." },
+      { text:"God processes believers in seasons of hiddenness and obscurity before elevating them to significant public impact.", topic:"Preparation", correct:1, community:[72,4,5,14,5], mirrorNote:"Moses, David, Jesus Himself — all had extended seasons of obscurity before public impact. God uses the hidden season to build character, not platform. Character formed in hiddenness is what determines whether the platform will produce fruit." },
+      { text:"A believer who is not yet seeing visible results from their ministry or calling is probably not in God's will.", topic:"Preparation", correct:2, community:[5,70,6,14,5], mirrorNote:"The season of hiddenness is not evidence of wrong direction — it is often evidence of right preparation. The hidden season is sacred investment, not divine rejection." },
+      { text:"Prayer that doesn't feel effective is probably not working.", topic:"Prayer", correct:5, community:[7,32,8,15,38], mirrorNote:"Prayer is not informing God — it is the believer cooperating with heaven's already-moving purposes. Whether prayer 'feels effective' is not the standard. The question is whether the believer is aligned with what God has already purposed. This is a malformed standard." },
+      { text:"A believer who hungers for God Himself — above results, comfort, or relief — will find Him.", topic:"Seeking God", correct:1, community:[78,3,4,10,5], mirrorNote:"Jeremiah 29:13 — 'when you seek me with all your heart.' Hunger for God Himself, not His benefits, is the posture the sermon identifies as the true way of seeking." },
+      { text:"God's pattern for preparing people for impact always involves a season where almost nothing visible seems to be happening.", topic:"Preparation", correct:1, community:[71,4,5,14,6], mirrorNote:"Moses 40 years in Midian. David anointed then hunted. Jesus 30 years in Nazareth. The pattern is consistent. The season that looks like nothing is happening is often where everything necessary is being built." },
+      { text:"Spiritual knowledge — understanding how God and the spiritual realm operate — is a secondary concern compared to love and devotion.", topic:"Spiritual Knowledge", correct:2, community:[10,60,6,16,8], mirrorNote:"Hosea 4:6 treats lack of knowledge as the source of destruction, not lack of love. You can love God deeply and still be destroyed by ignorance of how He operates. Knowledge and devotion are not substitutes for one another." },
+      { text:"Perseverance through a season of hiddenness, with no visible result, is itself an act of faith.", topic:"Faith", correct:1, community:[73,4,4,14,5], mirrorNote:"Hebrews 11 is full of people who acted on what they believed without seeing the result. The hidden season requires exactly this kind of faith — not faith that produces visible results, but faith that holds its ground while nothing visible confirms it." },
+      { text:"God's delay in answering prayer most likely indicates that He is waiting for the believer to pray with more faith.", topic:"Prayer", correct:5, community:[8,30,6,14,42], mirrorNote:"God's delay is not a feedback signal about the quality of your prayer. The season of hiddenness is about formation, not about the believer earning a response through better technique. This turns prayer into a performance metric. The question is malformed." },
+      { text:"True seeking of God produces a transformation in who you are, not just access to what you want.", topic:"Seeking God", correct:1, community:[76,3,4,12,5], mirrorNote:"Seeking God is a quest that fundamentally transforms who you are. The sermon argues that the person who has genuinely sought God is a different person than the one who went through the motions — not just a more satisfied one." }
     ],
 
     assessment: [
@@ -491,6 +892,66 @@ const MODULES = {
       }
     ],
 
+    preAssessment: [
+      {
+        type: 'completion',
+        sentence: "Ephesians 6:12 says our warfare is not against flesh and blood, but against rulers, authorities, and spiritual forces of evil in ___ realms.",
+        options: ["earthly", "heavenly", "natural", "hidden"],
+        correct: 1,
+        explanation: "Paul uses four distinct terms — rulers, authorities, powers of this dark world, spiritual forces of evil in heavenly realms — each describing a different tier in a deliberate hierarchy. Spiritual opposition is organized, not chaotic."
+      },
+      {
+        type: 'completion',
+        sentence: "Two ___ rob believers of their authority: not knowing how the enemy operates, and not knowing how to conduct spiritual warfare.",
+        options: ["sins", "fears", "ignorances", "mistakes"],
+        correct: 2,
+        explanation: "2 Corinthians 2:11 says Paul was not ignorant of Satan's schemes — implying that ignorance is a choice. Together, these two knowledge gaps produce believers designed to win who live as though they are losing."
+      },
+      {
+        type: 'match',
+        instruction: "Match each concept to what the sermon reveals about it:",
+        pairs: [
+          { left: "The sons of Sceva", right: "Spiritual authority invoked without a consecrated life behind it" },
+          { left: "Ephesians 6:12", right: "Four distinct ranks of organized demonic opposition" },
+          { left: "Consecration", right: "The credential that makes spiritual authority credible" },
+          { left: "Territorial spirits", right: "Demonic forces assigned to resist the gospel in specific regions" }
+        ],
+        explanation: "These four concepts define the theology of the sermon. The central insight: authority in the spiritual realm is backed by a life aligned with Christ, not merely claimed by title."
+      },
+      {
+        type: 'completion',
+        sentence: "The believer who is not ___ has no business going into battle — it is the credential that makes the invocation credible.",
+        options: ["gifted", "educated", "consecrated", "trained"],
+        correct: 2,
+        explanation: "Acts 19 — the sons of Sceva invoked authority they didn't carry. The demonic response: 'Jesus I know, Paul I know — but who are you?' The lesson is not about volume or title. It is about the life behind the prayer."
+      },
+      {
+        type: 'completion',
+        sentence: "Nations are not casually evangelized — every ___ on earth is supernaturally contested.",
+        options: ["church", "city", "territory", "believer"],
+        correct: 2,
+        explanation: "Psalm 2:8 — 'Ask me, and I will make the nations your inheritance.' The nations must be actively taken in partnership with God. 1 Corinthians 15:32 shows Paul fighting 'wild beasts' in Ephesus — organized spiritual resistance encountered advancing the gospel."
+      }
+    ],
+
+    discernmentQuestions: [
+      { text:"The demonic realm is organized into ranks and hierarchies deliberately assigned to resist God's kingdom.", topic:"Spiritual Warfare", correct:1, community:[72,3,4,16,5], mirrorNote:"Satan's kingdom is not disorganized chaos. Principalities, powers, rulers of darkness, spiritual wickedness in high places — these are ranks. This is a military structure deployed against the advancement of God's kingdom." },
+      { text:"A believer's primary battles in daily life are ultimately social and psychological, with the spiritual realm playing a secondary role.", topic:"Spiritual Warfare", correct:2, community:[4,72,6,12,6], mirrorNote:"Our warfare is not against flesh and blood — and until you settle that conviction, you will always be fighting the wrong enemy. Ephesians 6:12 names four tiers of spiritual opposition. Reducing the battle to the social is the lie Paul corrects." },
+      { text:"Only apostles and prophets with special anointing are equipped to engage in serious spiritual warfare.", topic:"Spiritual Authority", correct:2, community:[5,70,6,15,4], mirrorNote:"Consecration, not title, is what qualifies a believer to engage in warfare. The sons of Sceva had a title — they lost badly. Every consecrated believer carries the authority of the One in whose name they stand." },
+      { text:"Ignorance of how the enemy operates is one of the primary reasons believers live below their God-given authority.", topic:"Spiritual Warfare", correct:1, community:[75,3,4,13,5], mirrorNote:"Two ignorances rob believers of their authority: ignorance of the enemy's devices, and ignorance of how to conduct spiritual warfare. Together, they produce a believer designed to win who lives as though losing." },
+      { text:"Praying loudly and persistently is the primary factor that determines whether spiritual warfare is effective.", topic:"Prayer", correct:5, community:[5,30,8,12,45], mirrorNote:"Volume is not the credential. Holiness is. The sons of Sceva were bold — they lost badly. Acts 19 shows that the enemy responds not to noise but to the authority of a life aligned with Christ. This is a malformed standard." },
+      { text:"Personal consecration is a prerequisite for effective spiritual warfare — an unholy life cannot carry genuine spiritual authority.", topic:"Consecration", correct:1, community:[74,3,4,14,5], mirrorNote:"The believer who is not consecrated has no business going into battle. Consecration is not a spiritual luxury — it is your credential in the war. 2 Timothy 2:21 connects cleansing to being 'useful to the Master.'" },
+      { text:"Nations and territories are spiritually contested, with specific demonic forces assigned to resist the gospel's advance in those regions.", topic:"Territorial Warfare", correct:1, community:[68,4,5,17,6], mirrorNote:"Nations are not casually evangelized. Every territory on earth is supernaturally contested. You do not waltz into a city and reap the harvest without confronting what has been assigned there to resist you." },
+      { text:"If a believer consistently faces spiritual difficulty and warfare, the most likely explanation is unconfessed sin in their life.", topic:"Suffering", correct:5, community:[7,28,5,10,50], mirrorNote:"Spiritual difficulty may reflect the enemy's targeted resistance — especially when a believer is advancing God's kingdom. The question 'what sin caused this?' is often the wrong place to start. This is a malformed question." },
+      { text:"The gospel advances into new regions primarily through the quality of the message and the size of the team — not through spiritual warfare.", topic:"Territorial Warfare", correct:2, community:[4,64,6,18,8], mirrorNote:"Paul's confrontation with demonic resistance in Ephesus shows that gospel advancement requires more than good communication — it requires prevailing in the spiritual conflict assigned against it." },
+      { text:"Understanding the ranks and hierarchy of demonic opposition is more about morbid fascination than practical Christian living.", topic:"Spiritual Warfare", correct:2, community:[5,68,7,14,6], mirrorNote:"Understanding the ranks is the intelligence briefing that makes prayer strategic rather than vague. You cannot strategize against something you refuse to acknowledge." },
+      { text:"A believer's spiritual authority is primarily determined by the depth of their theological education.", topic:"Spiritual Authority", correct:2, community:[4,68,6,16,6], mirrorNote:"Consecration, not education, is the credential. The sons of Sceva presumably knew enough theology to invoke Jesus' name. What they lacked was a consecrated life that carried genuine authority." },
+      { text:"Satan's kingdom operates as an organized military structure, not chaotic random resistance.", topic:"Spiritual Warfare", correct:1, community:[70,4,4,16,6], mirrorNote:"Ephesians 6:12 uses four distinct terms — rulers, authorities, powers, forces — describing a hierarchy. Satan's kingdom is deliberate and organized, not chaotic." },
+      { text:"Prayer without consecration is like wielding a weapon you haven't earned the authority to carry.", topic:"Consecration", correct:1, community:[71,4,4,15,6], mirrorNote:"The sons of Sceva used the right name without the right life. The enemy's response — 'who are you?' — revealed that authority in the spiritual realm is backed by a consecrated life. A prayer launched from an unconsecrated life is hollow." },
+      { text:"Believers who understand demonic opposition are equipped to pray with more strategic precision than those who don't.", topic:"Spiritual Knowledge", correct:1, community:[73,3,4,14,6], mirrorNote:"2 Corinthians 2:11 — Paul was not ignorant of Satan's schemes. The intelligence briefing about organized demonic opposition transforms vague general prayer into strategic, targeted intercession." },
+      { text:"The church's primary tools for advancing God's kingdom are education, social justice, and good communication strategy.", topic:"Spiritual Warfare", correct:5, community:[10,32,8,14,36], mirrorNote:"These are not wrong tools, but they are insufficient without spiritual engagement. The diagnosis is that the church has adopted a purely natural strategy for a supernaturally contested mission. Whether these are 'primary' vs. 'insufficient without warfare' is the sermon's challenge. This is a malformed framing." }
+    ],
+
     assessment: [
       {
         q: "According to Ephesians 6:12, the primary opposition believers face is:",
@@ -553,7 +1014,7 @@ const MODULES = {
 
 // ── PIPELINE STEPS ────────────────────────────────────────────────────────────
 const PIPELINE_STEPS = [
-  { id:'pre-sort',    label:'Discern', icon:'balance',         title:'Pre-Sort'    },
+  { id:'pre-sort',    label:'Pre-Check', icon:'quiz',           title:'Pre-Check'   },
   { id:'watch-sort',  label:'Watch',   icon:'play_circle',     title:'Watch & Sort' },
   { id:'mirror',      label:'Mirror',  icon:'compare_arrows',  title:'The Mirror'  },
   { id:'formation',   label:'Study',   icon:'menu_book',       title:'Formation'   },

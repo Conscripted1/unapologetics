@@ -1624,6 +1624,7 @@ function updateModuleCards() {
   const idsAndColors = [
     ['built-different',   '#002869'],
     ['egypt',             '#002869'],
+    ['victory-valley',    '#002869'],
     ['how-to-seek-god',   '#1F4D2F'],
     ['demonic-ranks',     '#1F4D2F'],
   ];
