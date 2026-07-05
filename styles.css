@@ -152,3 +152,33 @@ body {
   }
   .module-cards-grid > div { margin-bottom: 0; }
 }
+
+#screen-review {
+  position: fixed;
+  inset: 0;
+  background: #fcf9f4;
+  z-index: 70;
+  transform: translateY(100%);
+  transition: transform 0.32s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow-y: auto;
+  will-change: transform;
+}
+#screen-review.active {
+  transform: translateY(0);
+}
+#screen-review .review-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px 100px;
+}
+@media (min-width: 768px) {
+  #screen-review {
+    left: 50%;
+    right: auto;
+    width: 640px;
+    transform: translateX(-50%) translateY(100%);
+  }
+  #screen-review.active {
+    transform: translateX(-50%) translateY(0);
+  }
+}

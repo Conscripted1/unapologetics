@@ -308,6 +308,20 @@
     </div>
   </div>
 
+  <!-- Daily Review -->
+  <div style="padding:16px 16px 0;">
+    <div onclick="openReview()" style="background:#0B3D91;border-radius:16px;padding:18px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8ba3e0;margin-bottom:6px;">Daily Review</p>
+        <p style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:4px;">5 Questions from Recent Sermons</p>
+        <p style="font-size:12px;color:#8ba3e0;">Reinforce what you've been learning</p>
+      </div>
+      <div style="width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span class="material-symbols-outlined" style="color:#fff;font-size:22px;">arrow_forward</span>
+      </div>
+    </div>
+  </div>
+
   <!-- From your Community -->
   <div style="padding:20px 16px 0;">
     <p style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#747783;margin-bottom:16px;">From your Community</p>
@@ -708,6 +722,21 @@
     </button>
   </div>
 </nav>
+
+<!-- Daily Review Screen -->
+<div id="screen-review">
+  <div class="review-inner">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;">
+      <button onclick="closeReview()" style="display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:#0B3D91;">
+        <span class="material-symbols-outlined" style="font-size:20px;">arrow_back</span>
+        Learn
+      </button>
+      <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#747783;">Daily Review</p>
+      <div style="width:60px;"></div>
+    </div>
+    <div id="review-content"></div>
+  </div>
+</div>
 
 <script src="modules.js" defer></script>
 <script src="app.js" defer></script>

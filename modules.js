@@ -106,42 +106,48 @@ const MODULES = {
     preAssessment: [
       {
         type: 'completion',
-        sentence: "The wise builder was different from the foolish builder because he heard God's Word and ___ it.",
-        options: ["shared", "memorized", "put it into practice", "debated"],
-        correct: 2,
-        explanation: "Matthew 7:24 — both builders heard the same Word. The only difference was response. The wise builder 'put it into practice.' Knowing and doing are two entirely different things."
+        sentence: "The primary difference between strong and weak Christians is usually ___.",
+        options: ["how consistently they apply what they've heard", "how much Scripture they've memorized", "how long they've been saved", "how often they serve in church"],
+        correct: 0,
+        scripture: "Matthew 7:24",
+        scriptureText: "Everyone then who hears these words of mine and does them will be like a wise man who built his house on the rock.",
+        explanation: "Both builders heard the same Word. The difference wasn't knowledge, longevity, or ministry involvement — it was doing. Matthew 7:24 makes consistent application the single variable that separates the two builders."
       },
       {
         type: 'completion',
-        sentence: "Storms don't create weak foundations — they ___ them.",
-        options: ["destroy", "expose", "build", "judge"],
+        sentence: "When a major storm strikes a believer's life, the most honest diagnostic question is ___.",
+        options: ["What sin caused this to happen?", "What have I been building my life on?", "How can I make this storm stop?", "Who has been praying against me?"],
         correct: 1,
-        explanation: "Both the wise and foolish builder faced the same storm. The storm's function is diagnostic, not punitive — it surfaces what was already true about the foundation before the rain ever came."
-      },
-      {
-        type: 'match',
-        instruction: "Connect each concept to its meaning:",
-        pairs: [
-          { left: "Excavation before elevation", right: "The invisible work that makes the visible possible" },
-          { left: "Agreement vs. alignment", right: "Affirming truth without conforming your life to it" },
-          { left: "Height without depth", right: "Visible success built without invisible formation" },
-          { left: "Storm-proof, not storm-exempt", right: "Obedience ensures you stand through storms, not skip them" }
-        ],
-        explanation: "These four concepts form the architecture of the sermon. One World Trade Center's 150-foot underground foundation before a single visible floor is the central image — everything visible requires invisible work first."
+        scripture: "Matthew 7:26–27",
+        scriptureText: "Everyone who hears these words of mine and does not do them will be like a foolish man who built his house on the sand. And the rain fell, and the floods came, and the winds blew and beat against that house, and it fell — and great was the fall of it.",
+        explanation: "Storms don't create weak foundations — they expose them. The first question the storm invites is not 'What sin caused this?' but 'What was I building on?' Both builders faced identical storms; the difference was the foundation beneath them."
       },
       {
         type: 'completion',
-        sentence: "___ with God's Word happens in a moment. ___ with God's Word happens over a lifetime.",
-        options: ["Fighting / Wrestling", "Agreeing / Aligning", "Hearing / Praying", "Believing / Struggling"],
-        correct: 1,
-        explanation: "The sermon draws from Dallas Willard: agreement is in a moment; alignment is over a lifetime. You can shout over a sermon you never plan to submit to. That gap between the two is where self-deception lives."
-      },
-      {
-        type: 'completion',
-        sentence: "The most important work you will ever do is the work that ___.",
-        options: ["produces visible results", "earns recognition from others", "no one will ever see", "happens in community"],
+        sentence: "James 1:22 says hearing God's Word without doing it is a form of ___.",
+        options: ["spiritual immaturity", "incomplete faith", "self-deception", "intellectual pride"],
         correct: 2,
-        explanation: "The paradox of spiritual formation: your private prayer, secret repentance, and hidden surrender are not preparation for the real work — they are the real work. The visible is just what others get to see."
+        scripture: "James 1:22",
+        scriptureText: "Do not merely listen to the word, and so deceive yourselves. Do what it says.",
+        explanation: "James uses the word 'deceive' — not 'struggle' or 'fall short.' Self-deception means you genuinely believe you're good when you're not. You can sincerely love the sermon, shout your agreement, and still have never aligned your life to it. Agreement and alignment are not the same thing."
+      },
+      {
+        type: 'completion',
+        sentence: "The deepest spiritual work you will ever do is ___.",
+        options: ["public ministry and serving others", "leading others to Christ", "consistent church attendance and tithing", "the private work that no one will ever see"],
+        correct: 3,
+        scripture: "Matthew 7:25",
+        scriptureText: "The rain fell, the floods came, and the winds blew and beat on that house, but it did not fall, because it had been founded on the rock.",
+        explanation: "One World Trade Center has 150 feet of foundation drilled into bedrock before a single visible floor was built. Your private prayer, secret repentance, and hidden surrender are not preparation for the real work — they are the real work. What becomes publicly visible is only what the invisible foundation made possible."
+      },
+      {
+        type: 'completion',
+        sentence: "A believer who faithfully follows God should expect that major life storms ___.",
+        options: ["will come less often than for unbelievers", "will come just like they do for everyone", "will always end in clear visible victory", "will be less severe because of God's protection"],
+        correct: 1,
+        scripture: "Matthew 7:24–25",
+        scriptureText: "The rain fell, and the floods came, and the winds blew and beat on that house — and it did not fall, because it had been founded on the rock.",
+        explanation: "Both the wise and foolish builder faced exactly the same storm — rain, rising streams, strong wind. Obedience doesn't make you storm-exempt; it makes you storm-proof. The difference isn't whether the storm comes — it's whether the house stands."
       }
     ],
 
@@ -303,53 +309,48 @@ const MODULES = {
     preAssessment: [
       {
         type: 'completion',
-        sentence: "The wilderness was never a ___ from God's plan — it was the plan.",
-        options: ["shortcut", "detour", "punishment", "delay"],
-        correct: 1,
-        explanation: "Deuteronomy 8:2 — God led Israel through the wilderness 'to humble you, testing you to know what was in your heart.' The wilderness wasn't a divine oversight — it was the designed curriculum."
-      },
-      {
-        type: 'completion',
-        sentence: "Israel said 'we seemed like ___ in our own eyes' before the Canaanites ever said it about them.",
-        options: ["strangers", "failures", "grasshoppers", "wanderers"],
+        sentence: "After God delivers someone from a painful season, the most immediate challenge they face is usually ___.",
+        options: ["finding the right community to heal in", "deciding what to do with their new freedom", "leaving behind the mindset formed in what they left", "locating the next thing God has for them"],
         correct: 2,
-        explanation: "Numbers 13:33. The spies called themselves grasshoppers before the giants did. This is the grasshopper problem: preemptive self-disqualification using a slave identity that God had already cancelled."
-      },
-      {
-        type: 'match',
-        instruction: "Connect each concept to what it reveals:",
-        pairs: [
-          { left: "Leaving Egypt", right: "Changes your location, not your mindset" },
-          { left: "Carrying Egypt", right: "Staying anchored to a slave identity after you've been freed" },
-          { left: "The wilderness", right: "God's curriculum for forming who the promise requires" },
-          { left: "The grasshopper problem", right: "Preemptive self-disqualification with a past identity" }
-        ],
-        explanation: "Egypt here is not a geography — it is a psychology. God's deliverance changes your location; only His formation changes your self-perception. The wilderness is where that transformation happens."
+        scripture: "Deuteronomy 8:2",
+        scriptureText: "Remember how the LORD your God led you through the wilderness for these forty years, humbling you and testing you to prove your character, and to find out whether or not you would obey his commands.",
+        explanation: "God delivered Israel from Egypt in a day — but the mindset Egypt built in them took decades to unravel. God's deliverance changes your location; only His formation changes your self-perception. Israel left Egypt, but kept carrying Egypt inside them."
       },
       {
         type: 'completion',
-        sentence: "Not one word of all the good ___ that the LORD had made to Israel had failed.",
-        options: ["laws", "warnings", "promises", "instructions"],
-        correct: 2,
-        explanation: "Joshua 21:45 — every promise came to pass. God's delay is not God's denial — the first generation didn't make it in, but the promise was never canceled."
-      },
-      {
-        type: 'completion',
-        sentence: "God's ___ is not God's denial — He is forming the person worthy of the promise.",
-        options: ["silence", "delay", "correction", "judgment"],
+        sentence: "In Numbers 13, the ten spies said 'we seemed like grasshoppers in our own eyes.' What's most significant about that phrase?",
+        options: ["They were accurately assessing their military weakness", "They used a past slave identity to disqualify themselves before the giants ever said a word", "They were being humble before God by admitting their smallness", "They correctly identified the giants as the primary obstacle"],
         correct: 1,
-        explanation: "Hebrews 10:35–36 says perseverance is needed to receive what God has promised. The interval between promise and fulfillment is not abandonment — it is the formation corridor where the promise becomes personally possible."
+        scripture: "Numbers 13:33",
+        scriptureText: "We seemed like grasshoppers in our own eyes, and we looked the same to them.",
+        explanation: "Notice the order — 'in our own eyes' comes first. Israel preemptively self-disqualified before the giants ever spoke. The grasshopper identity came from Israel, not from Canaan. They took a slave identity that God had already cancelled and used it to make the final call on their future."
       },
       {
-        type: 'match',
-        instruction: "Match each half of the key teaching:",
-        pairs: [
-          { left: "God's deliverance...", right: "...changes your location" },
-          { left: "God's formation...", right: "...changes your self-perception" },
-          { left: "New seasons expose...", right: "...old mindsets formed by bondage" },
-          { left: "Wilderness seasons are...", right: "...God's classroom, not His punishment" }
-        ],
-        explanation: "These four pairings form the spine of the sermon. The central question it leaves the listener with is not 'When will this end?' but 'What is God forming in me through this?'"
+        type: 'completion',
+        sentence: "A painful season that God assigns — wilderness time — is primarily ___.",
+        options: ["God's curriculum for forming who the promise requires", "a consequence of a specific sin or mistake", "a waiting room until better circumstances arrive", "an opportunity to build community with others in hard seasons"],
+        correct: 0,
+        scripture: "Deuteronomy 8:2",
+        scriptureText: "Remember how the LORD your God led you through the wilderness for these forty years, humbling you and testing you to prove your character.",
+        explanation: "God's first description of the wilderness is that He 'led' Israel there — not that they wandered into it. The wilderness was never a mistake or a punishment — it was God's designed formation space for building the people the promise required."
+      },
+      {
+        type: 'completion',
+        sentence: "If God has promised you something and years have passed without fulfillment, the most accurate interpretation is ___.",
+        options: ["the promise was conditional and you may have missed the condition", "someone has been praying against the fulfillment", "your faith hasn't reached the required level", "God is using the interval to form who the promise requires you to be"],
+        correct: 3,
+        scripture: "Hebrews 10:36",
+        scriptureText: "You need to persevere so that when you have done the will of God, you will receive what he has promised.",
+        explanation: "God's delay is never God's denial. Not one word of God's promises failed (Joshua 21:45). The interval is not abandonment — it is formation. God is not withholding the promise; He is preparing the person."
+      },
+      {
+        type: 'completion',
+        sentence: "God's track record with His promises, according to Joshua 21:45, is ___.",
+        options: ["mostly reliable — most promises were fulfilled, but some conditions weren't met", "perfect — not one word of all His good promises failed", "conditional on each generation's obedience", "fulfilled over long periods but not always in the form expected"],
+        correct: 1,
+        scripture: "Joshua 21:45",
+        scriptureText: "Not one word of all the good promises that the LORD had made to the house of Israel had failed; all came to pass.",
+        explanation: "After Israel entered the land, God's verdict on His own track record was categorical: not one word failed. The delay was real — the wilderness was decades. The first generation didn't make it. But every single promise came to pass. God's reliability is not statistically probable — it is declared total."
       }
     ],
 
@@ -513,42 +514,48 @@ const MODULES = {
     preAssessment: [
       {
         type: 'completion',
-        sentence: "In Ezekiel 37:1, God didn't send Ezekiel to the valley as punishment — the valley was assigned as ___.",
-        options: ["a test of endurance", "revelation", "correction", "humiliation"],
+        sentence: "When the hand of the Lord places a believer in a valley season, the most likely reason is ___.",
+        options: ["God is testing whether they'll stay faithful under pressure", "there is something in the valley God needs them to see", "God is preparing them for a spiritual promotion", "they sinned and God is allowing discipline"],
         correct: 1,
-        explanation: "The sermon's core thesis: Ezekiel had no scriptural evidence of wrongdoing. The hand of the Lord — not his failure — placed him in the valley. God assigns valleys because there is something He needs you to see, not because He is angry."
+        scripture: "Ezekiel 37:1",
+        scriptureText: "The hand of the LORD was upon me, and he brought me out in the Spirit of the LORD and set me down in the middle of the valley; it was full of bones.",
+        explanation: "Ezekiel had no record of wrongdoing. The hand of the Lord simply placed him in the valley. God does not assign valleys as punishment — He assigns them as revelation. When you find yourself there, the first question is not 'What did I do wrong?' but 'What is God showing me?'"
       },
       {
         type: 'completion',
-        sentence: "You know you're in a valley season when hope is replaced by ___ — just doing what you have to do to get by.",
-        options: ["prayer", "endurance", "maintenance", "routine"],
+        sentence: "When God's answer to a dead situation seems impossible, the most spiritually productive response is to ___.",
+        options: ["wait in patient prayer for God to move on His timeline", "fast until the breakthrough comes", "gather a community of believers to agree in intercession", "declare God's Word over the situation and invite the Spirit to move"],
+        correct: 3,
+        scripture: "Ezekiel 37:4, 9",
+        scriptureText: "Then he said to me, 'Prophesy over these bones, and say to them, O dry bones, hear the word of the LORD... Prophesy to the breath; prophesy, son of man, and say to the breath, Thus says the Lord God: Come from the four winds, O breath, and breathe on these slain, that they may live.'",
+        explanation: "God's instructions to Ezekiel were specific and active: prophesy to the bones, then prophesy to the wind. Waiting and praying are not wrong — but they are not the only moves. God commanded both the Word declaration AND the Spirit invitation. One without the other was incomplete."
+      },
+      {
+        type: 'completion',
+        sentence: "A person can produce miraculous results in a dead environment because ___.",
+        options: ["God's anointing works precisely where nothing else can", "they've prayed long enough to deserve the breakthrough", "the circumstances eventually shift if you wait long enough", "God rewards those who don't give up with visible results"],
+        correct: 0,
+        scripture: "Ezekiel 37:1",
+        scriptureText: "The hand of the LORD was upon me...",
+        explanation: "'The hand of the LORD was upon me' is the phrase in Scripture that consistently marks anointing — specific equipping for a purpose. You were not placed in the valley because God abandoned you there. You were placed there because you were equipped to produce what no one else in that valley can."
+      },
+      {
+        type: 'completion',
+        sentence: "When God asked Ezekiel 'Can these bones live?', the purpose of the question was to ___.",
+        options: ["test whether Ezekiel was willing to look foolish", "reveal Ezekiel's lack of faith so it could be addressed", "invite Ezekiel to declare what he believed about God's power", "give Ezekiel time to assess the situation before acting"],
         correct: 2,
-        explanation: "The sermon names three signs of a valley season: what used to excite you no longer moves you; isolation feels more comfortable than community; and hope is replaced by maintenance — going through the motions with no expectation of real change."
-      },
-      {
-        type: 'match',
-        instruction: "Match each valley principle to its meaning:",
-        pairs: [
-          { left: "Assigned to the valley", right: "God placed you there — not accident or punishment" },
-          { left: "Anointed for the valley", right: "The hand of the Lord equips you for what's in it" },
-          { left: "Walk around the valley", right: "Every place you tread becomes yours — don't sit" },
-          { left: "Prophesy to the wind", right: "Create the atmosphere for the Holy Spirit to bring life" }
-        ],
-        explanation: "These four moves form the architecture of getting victory from the valley. The assignment and anointing come together; then the action — walking, working, and inviting the Spirit."
+        scripture: "Ezekiel 37:3",
+        scriptureText: "And he said to me, 'Son of man, can these bones live?' And I answered, 'O Lord GOD, you know.'",
+        explanation: "God doesn't ask questions because He lacks information. He asks to surface your perspective — do you know what your God is capable of? Ezekiel's answer was exactly right: 'Lord God, you know.' He held the question open and stayed in partnership, not projecting hopelessness onto God's capacity."
       },
       {
         type: 'completion',
-        sentence: "When God asked Ezekiel 'Can these bones live?', the sermon says He wasn't looking for information — He was looking for Ezekiel's ___.",
-        options: ["obedience first", "perspective", "strength", "confession"],
+        sentence: "The Hebrew word ruach in Ezekiel 37 means ___.",
+        options: ["glory — the visible weight of God's presence", "breath and spirit — both meanings simultaneously", "wind — the natural movement of air that God used", "fire — the purifying power of the Holy Spirit"],
         correct: 1,
-        explanation: "When God asks you a question, it's not because He doesn't know the answer. He's trying to see what your perspective is — do you know what your God is capable of, even when the environment looks completely dead? The question was an invitation to partnership, not a test of information."
-      },
-      {
-        type: 'completion',
-        sentence: "The Hebrew word ruach, translated 'wind' in Ezekiel 37:9, also means ___.",
-        options: ["fire", "voice", "breath and spirit", "presence"],
-        correct: 2,
-        explanation: "Ruach carries both meanings simultaneously: breath and spirit. This is why prophesying to the wind was calling for the Spirit of God to breathe life into what the Word had structurally reassembled. Just as Genesis 1 required the hovering Spirit alongside the spoken Word, Ezekiel 37 required both."
+        scripture: "Ezekiel 37:9",
+        scriptureText: "Prophesy to the breath; prophesy, son of man, and say to the breath, Thus says the Lord God: Come from the four winds, O breath, and breathe on these slain, that they may live.",
+        explanation: "Ruach holds breath and spirit in the same word. God didn't just want physical movement — He wanted His Spirit. Just as Genesis 1 required both the spoken Word AND the hovering Spirit, Ezekiel 37 required both the declaration (prophesy to the bones) and the Spirit invitation (prophesy to the wind)."
       }
     ],
 
@@ -707,42 +714,48 @@ const MODULES = {
     preAssessment: [
       {
         type: 'completion',
-        sentence: "The centurion explained that he believed Jesus could heal from a distance because Jesus was ___ — the same reason the centurion's own orders were obeyed.",
-        options: ["beloved by the Father", "well-known in the region", "under authority himself", "proven through miracles"],
-        correct: 2,
-        explanation: "The centurion's revelation was about how authority works in a chain of command: because he was under authority, he had authority. He recognized that Jesus, submitted to the Father, carried authority that transcended physical proximity — 'just say the word.'"
+        sentence: "Most believers struggle to walk in consistent spiritual authority because ___.",
+        options: ["they haven't developed enough genuine submission to what God has told them", "they haven't found the right prayer formula", "they don't attend the right kind of church", "they haven't been given a public platform to exercise it"],
+        correct: 0,
+        scripture: "Matthew 8:9",
+        scriptureText: "I know this because I am under the authority of my superior officers, and I have authority over my soldiers. I only need to say, 'Go,' and they go, or 'Come,' and they come.",
+        explanation: "The centurion's entire insight was about the chain of command: being under authority is what gave him authority. Spiritual authority isn't unlocked through formulas, church affiliation, or platform — it flows directly out of submission. When you're truly submitted to what God has already told you to do, authority over your circumstances becomes available."
       },
       {
         type: 'completion',
-        sentence: "Pastor Wayne's key principle: 'You cannot ___ what you do not carry, and you cannot carry what you're not connected to.'",
-        options: ["receive", "inherit", "command", "speak"],
-        correct: 2,
-        explanation: "This is the architecture of authority in the kingdom: connection → carrying → commanding. When you're disconnected from the vine (John 15), you cannot carry the authority. When you cannot carry it, you cannot exercise it over the situations in your life."
-      },
-      {
-        type: 'match',
-        instruction: "Match each dimension of authority to its meaning:",
-        pairs: [
-          { left: "Founded on submission", right: "Being under authority is what gives you authority" },
-          { left: "Activated by spoken word", right: "Authority remains dormant until it's voiced" },
-          { left: "Maintained through discipline", right: "Conditioned through prayer, fasting, and the Word" },
-          { left: "Inherited through identity", right: "You're a king's kid, not a servant earning a spot" }
-        ],
-        explanation: "These four dimensions form a complete theology of spiritual authority: its source (submission), its activation (voice), its maintenance (discipline), and its basis (identity). Weakness in any one affects the others."
+        sentence: "When facing a serious spiritual situation, most believers' first instinct is to pray to God about it. Scripture also models a different move: ___.",
+        options: ["fasting until the answer comes", "gathering others to intercede in agreement", "finding a leader with stronger anointing to pray over it", "speaking directly to the situation with the authority of Christ"],
+        correct: 3,
+        scripture: "Mark 4:39",
+        scriptureText: "He got up and rebuked the wind and said to the waves, 'Quiet! Be still!' Then the wind died down and it was completely calm.",
+        explanation: "When the storm hit, Jesus didn't petition the Father — He spoke to the wind and waves. Prayer and declaration are both valid; they are not identical. The centurion didn't ask Jesus to pray — he asked Jesus to speak the word. Spiritual authority is voiced, not only petitioned."
       },
       {
         type: 'completion',
-        sentence: "The sermon says Jesus modeled a shift from praying 'about' a problem to speaking ___ a problem.",
-        options: ["for", "with", "to", "around"],
+        sentence: "The reason 'being seated with Christ in heavenly places' (Eph 2:6) matters in daily life is ___.",
+        options: ["it gives confidence that heaven is our eternal destination", "it reminds us that Christ intercedes for us from His throne", "your voice carries the weight of the position you're seated in", "it helps us endure suffering with an eternal perspective"],
         correct: 2,
-        explanation: "When the storm raged, Jesus didn't petition the Father to calm it — He spoke directly to the wind and waves: 'Peace, be still.' The sermon applies this: stop praying about the sickness or situation in petition mode, and start speaking to it as someone who carries authority in Christ."
+        scripture: "Ephesians 2:6",
+        scriptureText: "For he raised us from the dead along with Christ and seated us with him in the heavenly realms because we are united with Christ Jesus.",
+        explanation: "A badge doesn't get its power from the officer holding it — it gets its authority from the institution behind it. Your voice in spiritual matters carries the weight of where you're seated. Being seated with Christ isn't theological comfort — it's the source of the authority your words carry right now, today."
       },
       {
         type: 'completion',
-        sentence: "Mephibosheth in 2 Samuel 9 illustrates that spiritual authority in Christ is ___, not earned through personal performance.",
-        options: ["given conditionally", "earned gradually", "inherited", "demonstrated publicly"],
-        correct: 2,
-        explanation: "Mephibosheth had nothing to offer — hiding in Lo-debar with no claim of merit. David brought him to the king's table because of the covenant with his father Jonathan. Believers receive spiritual authority through their position in Christ (Eph 2:6), not through spiritual performance."
+        sentence: "When the disciples couldn't cast out the demon in Mark 9, Jesus explained that 'this kind only comes out through prayer.' This means ___.",
+        options: ["they should have asked Jesus to do it for them", "some levels of authority require being developed through consistent private discipline", "they didn't have enough faith for this type of demon", "Jesus was withdrawing their authority because of a specific failure"],
+        correct: 1,
+        scripture: "Mark 9:29",
+        scriptureText: "He replied, 'This kind can only be cast out by prayer.'",
+        explanation: "The disciples had been given authority — Jesus granted it. But some situations require more than a granted authority; they require a built-up authority that comes from consistent private discipline. Authority in the kingdom is like a muscle: it must be trained, not just assigned. The storehouse has to be filled before the battle, not during it."
+      },
+      {
+        type: 'completion',
+        sentence: "Mephibosheth's story (2 Samuel 9) illustrates that the authority believers walk in is ___.",
+        options: ["received through the Father's covenant — not earned", "proportional to how long they've been walking with God", "primarily demonstrated in public ministry and service", "available once they've proven themselves trustworthy"],
+        correct: 0,
+        scripture: "2 Samuel 9:7",
+        scriptureText: "Don't be afraid! David said. 'I intend to show kindness to you because of my promise to your father, Jonathan. I will give you all the property that once belonged to your grandfather Saul, and you will eat here at my table!'",
+        explanation: "Mephibosheth was hiding in Lo-debar with nothing to offer — crippled, with no claim of merit. David restored everything and seated him at the king's table because of a covenant with his father Jonathan. You inherit your seat at the Father's table not through what you've done, but through the covenant your Father made through Christ."
       }
     ],
 
@@ -901,42 +914,48 @@ const MODULES = {
     preAssessment: [
       {
         type: 'completion',
-        sentence: "God called Abraham to Moriah not to give him a mountain to stand on, but to give him a ___.",
-        options: ["platform", "test of endurance", "meeting place", "reward for obedience"],
-        correct: 2,
-        explanation: "The sermon's first exchange corrects a common misreading: Moriah was a meeting place — where the presence of God would eventually dwell in the temple. God was never calling Abraham to altitude; He was calling him to atmosphere. The mountain was always about encounter, not elevation."
+        sentence: "Most believers think God's invitation to 'go higher' in ministry means ___.",
+        options: ["facing a test that will prepare them for more responsibility", "an increase in influence and visible platform", "a deeper invitation into private spiritual discipline", "a meeting place with God's presence, not just an altitude to stand at"],
+        correct: 3,
+        scripture: "Genesis 22:2",
+        scriptureText: "Take your son, your only son, whom you love — Isaac — and go to the land of Moriah. Go and sacrifice him as a burnt offering on one of the mountains, which I will show you.",
+        explanation: "Moriah is where the temple would eventually stand — the dwelling place of God's presence. God wasn't calling Abraham to a mountain to stand on. He was calling him to a meeting place to bow down at. Altitude is about being seen; atmosphere is about encountering God. The first exchange is giving up the pursuit of elevation for the cultivation of presence."
       },
       {
         type: 'completion',
-        sentence: "Pastor Jimmy says Abraham chose a donkey instead of horses because some things in the kingdom can only be carried ___.",
-        options: ["by others on your behalf", "with great visible faith", "slowly", "at night in secret"],
-        correct: 2,
-        explanation: "Abraham had horses — faster and more dignified. He chose a donkey. Two to three miles per hour with the weight of his greatest sacrifice. Alignment requires slowness. God interrupts momentum not to derail you, but to align you. Some breakthroughs can only be carried at donkey pace."
-      },
-      {
-        type: 'match',
-        instruction: "Match each outrageous exchange to what is surrendered and what is received:",
-        pairs: [
-          { left: "Altitude for atmosphere", right: "Give up the platform; receive the presence" },
-          { left: "Acceleration for alignment", right: "Give up speed; receive trustworthy character" },
-          { left: "Audiences for assignments", right: "Give up people-pleasing; receive your specific call" },
-          { left: "Altars for announcements", right: "Give up what you're holding; receive Yahweh Yireh" }
-        ],
-        explanation: "Each exchange costs something real — and each return is greater than what was offered. The outrageous part is not that God takes. The outrageous part is what God gives back."
+        sentence: "When your best season is interrupted — momentum is building and God suddenly calls you to a sacrifice — most believers assume ___.",
+        options: ["the enemy is trying to steal what God gave them", "God is testing their commitment before the next level", "God is calling them to a season of prayer and waiting", "God is preparing them for a larger public platform"],
+        correct: 0,
+        scripture: "Proverbs 3:5–6",
+        scriptureText: "Trust in the LORD with all your heart; do not depend on your own understanding. Seek his will in all you do, and he will show you which path to take.",
+        explanation: "Abraham had Isaac — 25 years of waiting finally fulfilled. Then God said 'go to Moriah.' Right in the middle of his best season. The sermon's answer: this was not an attack. It was alignment. God will interrupt your momentum to line you up. Not every interruption is the enemy — some are God adjusting your trajectory before the next season."
       },
       {
         type: 'completion',
-        sentence: "When Abraham told his servants to stay behind, it was because some assignments require going without those who can only see ___, not the seed.",
-        options: ["the promise", "the mountain", "the son", "the sacrifice"],
-        correct: 2,
-        explanation: "The sermon suggests Sarah isn't in the story because all she could see was Isaac — a son. Abraham saw a seed that would become many nations. Some people who love you deeply will only see what currently exists; they cannot see what God is about to create through your sacrifice."
+        sentence: "Abraham chose a donkey to travel to Moriah when he had faster options available. The spiritual reason was ___.",
+        options: ["he wanted to appear humble to his servants before the sacrifice", "some things in the kingdom can only be carried at alignment pace — too fast means misalignment", "horses were associated with military pride and inappropriate for worship", "the donkey was the prescribed animal for this type of journey in the law"],
+        correct: 1,
+        scripture: "Galatians 5:25",
+        scriptureText: "Since we live by the Spirit, let us keep in step with the Spirit.",
+        explanation: "Abraham was rich enough for horses — speed was available. He chose the donkey: two to three miles per hour with the weight of his greatest sacrifice. 'Keeping in step with the Spirit' is a donkey-pace concept. Acceleration makes you impressive; alignment makes you trustworthy. The promotion in the kingdom comes by donkey."
       },
       {
         type: 'completion',
-        sentence: "Abraham named the place Yahweh Yireh after discovering that what he needed was already ___.",
-        options: ["promised before creation", "earned by his faithfulness", "there — caught in the thicket", "given at the very last moment"],
+        sentence: "When God asks you to release something you waited years to receive, most people ___.",
+        options: ["surrender immediately because of their deep trust in God", "ask God to confirm the request a second time before acting", "try to find a partial offering that satisfies the requirement", "hold something back in case God doesn't fully come through"],
+        correct: 3,
+        scripture: "Genesis 22:12",
+        scriptureText: "Do not lay a hand on the boy! Do not hurt him in any way, for now I know that you truly fear God. You have not withheld from me even your son, your only son.",
+        explanation: "God's words to Abraham are specific: 'you have not withheld from me even your son, your only son.' God doesn't want your surplus — He wants the thing you've been keeping in reserve. The just-in-case is what we hold back to manage the risk of full surrender. Complete trust means releasing even the backup plan."
+      },
+      {
+        type: 'completion',
+        sentence: "After an act of significant surrender at an altar, what Abraham walked away with was ___.",
+        options: ["peace that he had obeyed and done his part", "Isaac returned to him completely unchanged", "a new name for that place — a declaration that would become a proverb for all generations", "confirmation that the sacrifice had been accepted"],
         correct: 2,
-        explanation: "The ram was already caught in the thicket before Abraham completed his ascent — the provision in place before the test was finished. Yahweh Yireh means 'the Lord will provide,' and in this case the provision was already there. God never asks for anything He doesn't plan to fill."
+        scripture: "Genesis 22:14",
+        scriptureText: "Abraham named the place Yahweh-Yireh (which means 'the Lord will provide'). To this day, people still use that name as a proverb: 'On the mountain of the Lord it will be provided.'",
+        explanation: "Abraham didn't just get Isaac back — he walked away with a NAME. Yahweh Yireh became a declaration that outlasted his lifetime and still echoes today. Every altar you build becomes more than a moment of obedience — it becomes an announcement. You don't just receive your one back; you receive the declaration that God has already provided."
       }
     ],
 
@@ -1093,42 +1112,48 @@ const MODULES = {
     preAssessment: [
       {
         type: 'completion',
-        sentence: "Seeking God has no regimented pattern — it is first and fundamentally a matter of your ___ for God.",
-        options: ["theology", "quest", "discipline", "performance"],
+        sentence: "Most believers evaluate their relationship with God primarily by ___.",
+        options: ["whether their prayers seem to get answered", "how peaceful and fulfilling their spiritual life feels", "whether they can sense God's presence during worship", "how their hunger for God is driving their pursuit of Him"],
+        correct: 3,
+        scripture: "Jeremiah 29:13",
+        scriptureText: "You will seek me and find me when you seek me with all your heart.",
+        explanation: "God doesn't evaluate the sophistication of your method — He responds to the wholeness of your hunger. Most believers measure their spiritual health through felt presence, answered prayers, or emotional experience. God's stated standard is different: whether you are seeking Him with all your heart. The question isn't 'Am I doing this right?' — it's 'Is my hunger real?'"
+      },
+      {
+        type: 'completion',
+        sentence: "A person can love God sincerely and still be spiritually vulnerable because ___.",
+        options: ["genuine love for God does not substitute for knowledge of how He operates", "love without fasting cannot sustain a deep relationship", "sincerity requires visible commitment to be recognized by God", "love must be tested through suffering to become genuine"],
+        correct: 0,
+        scripture: "Hosea 4:6",
+        scriptureText: "My people are destroyed for lack of knowledge.",
+        explanation: "Hosea 4:6 doesn't say God's people are destroyed for lack of love or sincerity — it's knowledge. You can have deep genuine love for God and still be destroyed by ignorance of how the spiritual realm operates. Love and knowledge are not substitutes for each other; they are both required."
+      },
+      {
+        type: 'completion',
+        sentence: "Prayer is best understood as ___.",
+        options: ["a channel for expressing your genuine heart desires to God", "a conversation where you can be honest about doubt and confusion", "a believer aligning with and activating what God has already purposed on earth", "a petition that moves God's hand when offered with enough faith"],
+        correct: 2,
+        scripture: "Matthew 6:10",
+        scriptureText: "Your kingdom come, your will be done, on earth as it is in heaven.",
+        explanation: "Prayer is not persuasion — you don't inform God of something He doesn't know or convince Him of something He wasn't planning. Prayer is the mechanism of alignment. The model prayer is 'your will be done on earth as in heaven' — the believer is partnering to actualize on earth what God has already purposed in heaven."
+      },
+      {
+        type: 'completion',
+        sentence: "The reason God processes significant people through extended seasons of obscurity is ___.",
+        options: ["to give them time to learn from their past mistakes", "to form in them the character required for the impact ahead", "to test whether they will stay faithful without visible encouragement", "to build humility by preventing early success from producing pride"],
         correct: 1,
-        explanation: "Jeremiah 29:13 — 'when you seek me with all your heart.' God is not evaluating the sophistication of your method. He is responding to the wholeness of your desire. The question is not 'Am I doing this right?' but 'Is my hunger real?'"
+        scripture: "1 Peter 5:6",
+        scriptureText: "Humble yourselves, therefore, under the mighty hand of God so that at the proper time he may exalt you.",
+        explanation: "Moses had 40 years in Midian before the burning bush. David was anointed king and spent years running from Saul. Jesus had 30 years of Nazareth before 3 years of ministry. God's hidden season is sacred investment in forming the character that the platform will eventually require."
       },
       {
         type: 'completion',
-        sentence: "You cannot sustain a real relationship with what you have no ___ of.",
-        options: ["experience", "feelings", "knowledge", "desire"],
-        correct: 2,
-        explanation: "Hosea 4:6 — 'My people are destroyed for lack of knowledge.' Sincerity toward God is not enough to sustain a relationship. Love requires knowledge — knowing how He moves, how He operates, and how the spiritual realm functions."
-      },
-      {
-        type: 'match',
-        instruction: "Match each concept to how the sermon defines it:",
-        pairs: [
-          { left: "Seeking God", right: "A quest driven by hunger, not a formula driven by method" },
-          { left: "Prayer", right: "Heaven-earth partnership — actualizing what God has already purposed" },
-          { left: "Sovereign faith", right: "Holding convictions when circumstances contradict what you believe" },
-          { left: "The hidden season", right: "Sacred investment in character before public impact" }
-        ],
-        explanation: "Each of these redefinitions dismantles a surface-level assumption. Seeking is not technique; prayer is not petition; faith is not comfort; hiddenness is not waste."
-      },
-      {
-        type: 'completion',
-        sentence: "Prayer is not informing God of what He doesn't know — it is the believer ___ with heaven to actualize what God has already purposed on earth.",
-        options: ["arguing", "pleading", "cooperating", "negotiating"],
-        correct: 2,
-        explanation: "Matthew 6:10 — 'Your kingdom come, your will be done, on earth as it is in heaven.' The believer is not initiating something God was waiting to be convinced of. Prayer is the mechanism of alignment, not of persuasion."
-      },
-      {
-        type: 'completion',
-        sentence: "God deliberately processes significant believers in seasons of ___ before displaying them in impact.",
-        options: ["ministry", "visible success", "obscurity", "fellowship"],
-        correct: 2,
-        explanation: "Moses had 40 years in the wilderness before the burning bush. David was anointed king and spent years running from Saul. Jesus Himself had 30 years of obscurity before 3 years of ministry. The hidden season is not wasted time — it is sacred investment."
+        sentence: "Sovereign faith, as the sermon defines it, is faith that ___.",
+        options: ["grows stronger with each answered prayer", "multiplies when practiced in community with other believers", "reaches its full potential only through long periods of worship", "holds its convictions even when circumstances directly contradict what God said"],
+        correct: 3,
+        scripture: "Hebrews 11:1",
+        scriptureText: "Now faith is confidence in what we hope for and assurance about what we do not see.",
+        explanation: "Sovereign faith doesn't recalibrate based on visible outcomes. It holds its ground when everything you can see contradicts what God said. The Hall of Faith in Hebrews 11 describes people who 'died in faith' without receiving the promise — but they held their convictions to the end. That is increasingly rare in a culture that treats changed circumstances as confirmation and unchanged circumstances as denial."
       }
     ],
 
@@ -1283,42 +1308,48 @@ const MODULES = {
     preAssessment: [
       {
         type: 'completion',
-        sentence: "Ephesians 6:12 says our warfare is not against flesh and blood, but against rulers, authorities, and spiritual forces of evil in ___ realms.",
-        options: ["earthly", "heavenly", "natural", "hidden"],
+        sentence: "When believers experience consistent spiritual opposition, most assume it is ___.",
+        options: ["caused by unconfessed sin creating an opening for the enemy", "random — spiritual opposition doesn't follow a predictable pattern", "an organized, ranked resistance specifically assigned to their circumstances", "a sign that God is testing their endurance through difficulty"],
+        correct: 2,
+        scripture: "Ephesians 6:12",
+        scriptureText: "For we are not fighting against flesh-and-blood enemies, but against evil rulers and authorities of the unseen world, against mighty powers in this dark world, and against evil spirits in the heavenly places.",
+        explanation: "Paul uses four distinct terms — rulers, authorities, powers of this dark world, spiritual forces in heavenly places — each describing a different tier in a deliberate hierarchy. Spiritual opposition is not random or disorganized. It is ranked, structured, and specifically deployed. Understanding the structure is the beginning of effective resistance."
+      },
+      {
+        type: 'completion',
+        sentence: "Most believers who struggle with persistent spiritual defeat are primarily suffering from ___.",
+        options: ["an unresolved sin that needs to be dealt with", "ignorance of how the enemy operates and how to conduct spiritual warfare", "insufficient faith for their current level of opposition", "a lack of accountability and community covering"],
         correct: 1,
-        explanation: "Paul uses four distinct terms — rulers, authorities, powers of this dark world, spiritual forces of evil in heavenly realms — each describing a different tier in a deliberate hierarchy. Spiritual opposition is organized, not chaotic."
+        scripture: "2 Corinthians 2:11",
+        scriptureText: "We are not unaware of his schemes.",
+        explanation: "2 Corinthians 2:11 frames ignorance as a choice — Paul says 'we are not unaware' as if awareness is something a believer is responsible for. The sermon names two ignorances that rob believers of authority: not knowing how the enemy operates, and not knowing how to engage in spiritual warfare. Together, they produce believers designed to win who live as though they're losing."
       },
       {
         type: 'completion',
-        sentence: "Two ___ rob believers of their authority: not knowing how the enemy operates, and not knowing how to conduct spiritual warfare.",
-        options: ["sins", "fears", "ignorances", "mistakes"],
-        correct: 2,
-        explanation: "2 Corinthians 2:11 says Paul was not ignorant of Satan's schemes — implying that ignorance is a choice. Together, these two knowledge gaps produce believers designed to win who live as though they are losing."
-      },
-      {
-        type: 'match',
-        instruction: "Match each concept to what the sermon reveals about it:",
-        pairs: [
-          { left: "The sons of Sceva", right: "Spiritual authority invoked without a consecrated life behind it" },
-          { left: "Ephesians 6:12", right: "Four distinct ranks of organized demonic opposition" },
-          { left: "Consecration", right: "The credential that makes spiritual authority credible" },
-          { left: "Territorial spirits", right: "Demonic forces assigned to resist the gospel in specific regions" }
-        ],
-        explanation: "These four concepts define the theology of the sermon. The central insight: authority in the spiritual realm is backed by a life aligned with Christ, not merely claimed by title."
+        sentence: "A believer can invoke the name of Jesus in prayer and still lack genuine spiritual authority because ___.",
+        options: ["the name of Jesus requires specific prayer techniques to be effective", "authority depends on being a recognized leader in the local church", "enough faith must accompany the invocation for it to carry real power", "the name's authority is backed by a consecrated life — without that, the invocation is hollow"],
+        correct: 3,
+        scripture: "Acts 19:13–15",
+        scriptureText: "'Jesus I know, and Paul I know, but who are you?' — The evil spirit answered them.",
+        explanation: "The sons of Sceva invoked the right name — 'the Jesus whom Paul proclaims' — and lost badly. The demonic response was 'who are you?' The name of Jesus is powerful; but the life behind the invocation determines whether the authority is real. A consecrated life is not a spiritual luxury — it is the credential that makes the invocation credible."
       },
       {
         type: 'completion',
-        sentence: "The believer who is not ___ has no business going into battle — it is the credential that makes the invocation credible.",
-        options: ["gifted", "educated", "consecrated", "trained"],
-        correct: 2,
-        explanation: "Acts 19 — the sons of Sceva invoked authority they didn't carry. The demonic response: 'Jesus I know, Paul I know — but who are you?' The lesson is not about volume or title. It is about the life behind the prayer."
+        sentence: "The reason nations are not easily evangelized is primarily ___.",
+        options: ["every territory is supernaturally contested by demonic forces assigned to resist the gospel there", "people groups have cultural barriers that take generations to overcome", "the church hasn't developed the right evangelism methods for each region", "God's timing for specific people groups hasn't arrived yet"],
+        correct: 0,
+        scripture: "Psalm 2:8",
+        scriptureText: "Ask me, and I will make the nations your inheritance, the ends of the earth your possession.",
+        explanation: "Psalm 2:8 frames the nations as something that must be actively asked for and taken in partnership with God. Paul fighting 'wild beasts' in Ephesus was encountering organized spiritual resistance against the gospel's advance. Nations are not casually evangelized — every territory is supernaturally contested, and gospel advancement requires prevailing in both visible and invisible dimensions."
       },
       {
         type: 'completion',
-        sentence: "Nations are not casually evangelized — every ___ on earth is supernaturally contested.",
-        options: ["church", "city", "territory", "believer"],
+        sentence: "The most important factor that determines whether spiritual warfare is effective is ___.",
+        options: ["the intensity and length of the prayer intercession", "how many believers are united in prayer together", "the consecration and alignment of the life from which it's launched", "whether it includes fasting alongside prayer"],
         correct: 2,
-        explanation: "Psalm 2:8 — 'Ask me, and I will make the nations your inheritance.' The nations must be actively taken in partnership with God. 1 Corinthians 15:32 shows Paul fighting 'wild beasts' in Ephesus — organized spiritual resistance encountered advancing the gospel."
+        scripture: "2 Timothy 2:21",
+        scriptureText: "If you keep yourself pure, you will be a special utensil for honorable use. Your life will be clean, and you will be ready for the Master to use you for every good work.",
+        explanation: "Volume, numbers, and fasting are all legitimate — but they are not the primary credential. The sons of Sceva were bold, they used the right name, and they lost because the life behind the prayer wasn't consecrated. 2 Timothy 2:21 ties readiness in God's hands to personal purity. Holiness is the authority credential; everything else is technique."
       }
     ],
 

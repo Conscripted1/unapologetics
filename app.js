@@ -381,6 +381,10 @@ function renderCompletionQ(m, el, q, idx, total) {
       }).join('')}
     </div>
     ${submitted ? `
+    ${q.scripture ? `<div style="background:#0B3D91;border-radius:12px;padding:14px 16px;margin-bottom:10px;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8ba3e0;margin-bottom:6px;">${q.scripture}</p>
+      <p style="font-size:13px;color:#e8eeff;line-height:1.65;font-style:italic;">"${q.scriptureText}"</p>
+    </div>` : ''}
     <div style="background:#f4f3f1;border-radius:12px;padding:14px;margin-bottom:14px;">
       <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">Why this matters</p>
       <p style="font-size:13px;color:#52504B;line-height:1.65;">${q.explanation}</p>
@@ -518,6 +522,141 @@ function preAssessSummaryHTML(m) {
     </div>
     <button onclick="advancePipeline()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
       Watch the Sermon →
+    </button>
+  </div>`;
+}
+
+// ── DAILY REVIEW ──────────────────────────────────────────────────────────────
+let reviewState = { questions: [], idx: 0, selected: null, submitted: false, score: 0 };
+
+function buildReviewPool(dayWindow) {
+  const now = new Date();
+  const cutoff = new Date(now.getTime() - (dayWindow || 60) * 86400000);
+  const pool = [];
+  Object.values(MODULES).forEach(mod => {
+    const d = new Date(mod.date);
+    if (isNaN(d)) return;
+    if (d >= cutoff) {
+      (mod.assessment || []).forEach(q => pool.push({ ...q, modTitle: mod.title, modId: mod.id }));
+    }
+  });
+  if (pool.length < 5) {
+    Object.values(MODULES).forEach(mod => {
+      (mod.assessment || []).forEach(q => {
+        if (!pool.find(p => p.text === q.text)) pool.push({ ...q, modTitle: mod.title, modId: mod.id });
+      });
+    });
+  }
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, 5);
+}
+
+function openReview() {
+  reviewState = { questions: buildReviewPool(), idx: 0, selected: null, submitted: false, score: 0 };
+  const el = document.getElementById('screen-review');
+  if (el) { el.classList.add('active'); }
+  renderReviewQuestion();
+}
+
+function closeReview() {
+  const el = document.getElementById('screen-review');
+  if (el) el.classList.remove('active');
+}
+
+function renderReviewQuestion() {
+  const { questions, idx, selected, submitted, score } = reviewState;
+  if (idx >= questions.length) { renderReviewComplete(); return; }
+  const q = questions[idx];
+  const total = questions.length;
+  const el = document.getElementById('review-content');
+  if (!el) return;
+
+  const optionLetters = ['A', 'B', 'C', 'D'];
+  const isCorrect = submitted && selected === q.correct;
+
+  el.innerHTML = `<div class="fade-in" style="padding:0 0 24px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+      <span style="font-size:12px;font-weight:600;color:#7A7570;">Question ${idx + 1} of ${total}</span>
+      <span style="font-size:11px;font-weight:600;color:#0B3D91;background:#dae2ff;padding:4px 10px;border-radius:100px;">${q.modTitle}</span>
+    </div>
+    <div style="background:#e8eeff;border-radius:6px;height:5px;margin-bottom:22px;">
+      <div style="background:#0B3D91;height:5px;border-radius:6px;width:${Math.round((idx / total) * 100)}%;transition:width 0.3s;"></div>
+    </div>
+    <p style="font-size:17px;font-weight:700;color:#1a1a1a;line-height:1.55;margin-bottom:20px;font-family:'Playfair Display',serif;">${q.text}</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
+      ${q.options.map((opt, i) => {
+        let bg = '#fff', border = '1.5px solid #e2ddd8', color = '#1a1a1a', icon = '';
+        if (submitted) {
+          if (i === q.correct) { bg = '#d4edda'; border = '1.5px solid #28a745'; color = '#155724'; icon = '✓ '; }
+          else if (i === selected) { bg = '#f8d7da'; border = '1.5px solid #dc3545'; color = '#721c24'; icon = '✗ '; }
+        } else if (i === selected) { bg = '#dae2ff'; border = '1.5px solid #0B3D91'; color = '#0B3D91'; }
+        return `<button onclick="reviewSelectOption(${i})" ${submitted ? 'disabled' : ''}
+          style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:${bg};border:${border};border-radius:12px;cursor:${submitted ? 'default' : 'pointer'};text-align:left;font-family:'Plus Jakarta Sans',sans-serif;width:100%;">
+          <span style="min-width:24px;height:24px;border-radius:50%;background:${submitted && i === q.correct ? '#28a745' : submitted && i === selected ? '#dc3545' : '#e8eeff'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:${submitted && (i === q.correct || i === selected) ? '#fff' : '#0B3D91'};">${optionLetters[i]}</span>
+          <span style="font-size:14px;color:${color};line-height:1.45;">${icon}${opt}</span>
+        </button>`;
+      }).join('')}
+    </div>
+    ${submitted ? `
+    ${q.explanation ? `<div style="background:#f4f3f1;border-radius:12px;padding:14px;margin-bottom:12px;">
+      <p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7570;margin-bottom:6px;">Why this matters</p>
+      <p style="font-size:13px;color:#52504B;line-height:1.65;">${q.explanation}</p>
+    </div>` : ''}
+    <button onclick="reviewNext()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+      ${idx + 1 < total ? 'Next →' : 'See Results →'}
+    </button>` : `
+    <button onclick="reviewSubmitAnswer()" ${selected === null ? 'disabled' : ''} style="background:${selected !== null ? '#0B3D91' : '#c8c4c0'};color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:${selected !== null ? 'pointer' : 'default'};width:100%;font-family:'Plus Jakarta Sans',sans-serif;">
+      Submit Answer
+    </button>`}
+  </div>`;
+}
+
+function reviewSelectOption(i) {
+  if (reviewState.submitted) return;
+  reviewState.selected = i;
+  renderReviewQuestion();
+}
+
+function reviewSubmitAnswer() {
+  if (reviewState.selected === null || reviewState.submitted) return;
+  reviewState.submitted = true;
+  const q = reviewState.questions[reviewState.idx];
+  if (reviewState.selected === q.correct) reviewState.score++;
+  renderReviewQuestion();
+}
+
+function reviewNext() {
+  reviewState.idx++;
+  reviewState.selected = null;
+  reviewState.submitted = false;
+  if (reviewState.idx >= reviewState.questions.length) { renderReviewComplete(); return; }
+  renderReviewQuestion();
+}
+
+function renderReviewComplete() {
+  const { score, questions } = reviewState;
+  const total = questions.length;
+  const pct = Math.round((score / total) * 100);
+  const msgs = ['Keep grinding — the Word is working on you.', 'Good start — keep coming back to the material.', 'Solid. Your roots are going deeper.', 'Strong. You\'re building on what you\'ve heard.', 'Excellent. This is what formation looks like.'];
+  const msgIdx = Math.min(Math.floor(pct / 25), 4);
+  const el = document.getElementById('review-content');
+  if (!el) return;
+  el.innerHTML = `<div class="fade-in" style="padding:20px 0;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="width:80px;height:80px;border-radius:50%;background:#dae2ff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <span style="font-size:32px;font-weight:800;color:#0B3D91;">${pct}%</span>
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#0B3D91;margin-bottom:8px;">${score} of ${total} Correct</h2>
+      <p style="font-size:14px;color:#52504B;line-height:1.5;">${msgs[msgIdx]}</p>
+    </div>
+    <button onclick="openReview()" style="background:#0B3D91;color:#fff;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px;">
+      Try Again
+    </button>
+    <button onclick="closeReview()" style="background:transparent;color:#0B3D91;border-radius:100px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif;border:1.5px solid #0B3D91;">
+      Back to Learn
     </button>
   </div>`;
 }
