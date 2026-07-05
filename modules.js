@@ -629,6 +629,394 @@ const MODULES = {
     ]
   },
 
+  'im-authorized': {
+    id: 'im-authorized',
+    title: "I'm Authorized",
+    series: 'Union Church',
+    community: 'Union Church',
+    date: 'Jan 21, 2026',
+    type: 'Theology',
+    duration: '40 min',
+    scripture: 'Matthew 8:5–13',
+    videoId: 'VgJuzq3tDmw',
+
+    preSortStatements: [
+      { text:"I can walk in spiritual authority without being in spiritual submission — my personal relationship with God is what matters most.", topic:"Authority", correct:2, community:[5,72,8,10,5], mirrorNote:"The centurion's entire revelation was that because he was under authority, he had authority. 'I am a man under authority.' He understood that Jesus' power came from His submission to the Father. You cannot command what you do not carry, and you cannot carry what you're not connected to." },
+      { text:"There is no meaningful difference between praying to God about a problem and speaking directly to the problem under the authority of Christ.", topic:"Prayer", correct:2, community:[8,55,22,10,5], mirrorNote:"Jesus did not pray to the Father when the storm was raging. He spoke to the elements: 'Peace, be still.' Pastor Wayne draws the distinction: stop praying about the situation and start speaking to the situation. Authority is voiced, not just petitioned." },
+      { text:"Every believer inherits spiritual authority in Christ through their identity as God's child, not through their spiritual performance.", topic:"Identity", correct:1, community:[74,4,5,12,5], mirrorNote:"Mephibosheth was brought to the king's table not because of anything he had done, but because of his father's legacy and the covenant David had made. You inherit your authority through your position in Christ (Eph 2:6), not through your spiritual résumé." },
+      { text:"When you speak the Word over a situation in submission to God's authority, your voice carries the weight of heaven.", topic:"Spoken Word", correct:1, community:[70,4,5,16,5], mirrorNote:"Ephesians 2:6 says we are seated with Christ in heavenly places. The badge doesn't get its power from the officer who holds it — it gets its power from the legal system behind it. When you operate in the authority of Christ, your words carry the full weight of heaven behind them." },
+      { text:"Authority in the spirit is like a muscle — it must be developed through consistent private discipline, not only activated when a crisis arrives.", topic:"Spiritual Discipline", correct:4, community:[42,4,6,43,5], mirrorNote:"A black belt doesn't develop their skill during the fight — they develop it in training sessions when nobody is watching. Jesus said of the demon-possessed boy: 'this kind only comes out through prayer and fasting.' Some authority only develops in private when nothing is happening." },
+      { text:"Accountability structures in the church — small groups, spiritual covering — are optional for mature believers who have direct access to God.", topic:"Accountability", correct:2, community:[5,58,22,10,5], mirrorNote:"God's design from the beginning was against isolation: 'It is not good for man to be alone.' Accountability places you under a spiritual covering. The authority you can exercise is connected to the covering you operate within. Staying under covering is how you stay under authority." },
+      { text:"Knowing your identity as a son or daughter in Christ transforms how you pray — from begging to asking from a place of relationship.", topic:"Identity", correct:4, community:[44,4,6,41,5], mirrorNote:"Pastor Wayne's son doesn't write on a cardboard box begging for food. He says 'Dad, I'm hungry.' A son asks from relationship. The sermon calls believers to shift their prayers from begging to asking as sons and daughters — not demanding, but speaking from the place of who their Father is." },
+      { text:"When believers don't see breakthrough in an area, it often means they are attempting to exercise authority they haven't fully submitted to.", topic:"Authority", correct:1, community:[68,5,5,17,5], mirrorNote:"If you're not seeing breakthrough, go back and check: am I truly under authority? Obedience to what God has already told you to do is the prerequisite for commanding what He has given you authority over. The chain is: submission → carrying → commanding." },
+    ],
+
+    arguments: [
+      { text:'"You cannot command what you do not carry, and you cannot carry what you\'re not connected to."', timestamp:'13:13' },
+      { text:'"True power is not seized — it\'s assigned. Authority flows down from submission, not up from striving."', timestamp:'12:54' },
+      { text:'"When I\'m under authority, I have authority."', timestamp:'12:23' },
+      { text:'"Authority remains dormant until it\'s voiced. It\'s a command, not a request."', timestamp:'20:18' },
+      { text:'"You don\'t earn authority through works. You inherit it through your seat next to Christ."', timestamp:'22:06' },
+      { text:'"Stop praying about the situation — start speaking to the situation."', timestamp:'25:12' },
+      { text:'"Authority is like a muscle. It must be conditioned through a lifestyle of prayer, fasting, and reading the Word."', timestamp:'29:12' },
+      { text:'"You\'re not a servant. You\'re a king\'s kid. And when you understand who you are in Christ, the way you think about yourself changes."', timestamp:'22:42' },
+    ],
+
+    sortStatements: [
+      { text:'"True authority is not seized by force — it flows from submission. The one who is under authority is the one who has authority."', topic:"Authority", correct:1, community:[76,3,4,12,5] },
+      { text:'"Stop praying about the storm. Speak to the storm — Jesus didn\'t ask the Father to stop it, He spoke to the elements directly."', topic:"Prayer", correct:1, community:[74,4,4,13,5] },
+      { text:'"You are a king\'s kid — you inherit your authority through who your Father is, not through your spiritual performance."', topic:"Identity", correct:1, community:[78,3,4,10,5] },
+      { text:'"My voice carries the weight of what I\'m connected to — not who I am, but Whose I am."', topic:"Authority", correct:1, community:[75,4,4,12,5] },
+      { text:'"When I\'m not submitted to God in an area, my authority is limited there — the devil will remind me of what God already told me to do."', topic:"Submission", correct:4, community:[44,5,6,40,5] },
+      { text:'"Just say the word. The centurion\'s revelation was that Jesus\' authority transcends distance — it just needs to be spoken."', topic:"Faith", correct:1, community:[73,4,4,14,5] },
+      { text:'"Building the storehouse means gaining spiritual strength before the crisis hits — when nobody else is watching."', topic:"Spiritual Discipline", correct:4, community:[43,5,6,41,5] },
+      { text:'"When accountability feels optional, that\'s when it matters most — being under covering is what maintains the authority you have."', topic:"Accountability", correct:4, community:[44,5,7,39,5] },
+    ],
+
+    formation: [
+      {
+        title: "The Chain of Command",
+        icon: "account_tree",
+        scripture: "Matthew 8:8–9",
+        verseText: "The officer said, 'Lord, I am not worthy to have you come into my home. Just say the word from where you are, and my servant will be healed. I know this because I am under the authority of my superior officers, and I have authority over my soldiers.'",
+        body: "The Roman centurion's revelation was not sophisticated theology. It was military logic applied to the spiritual realm. He understood a chain of command that governs how authority actually works: the authority you exercise downward is directly tied to the authority you submit to upward. He recognized something about Jesus that the religious leaders had missed — that Jesus operated from a posture of total submission to the Father, and that this submission was the source of His power. When I'm under authority, I have authority. True power is not seized — it is assigned. You cannot command what you do not carry, and you cannot carry what you're not connected to. This is why Jesus said in John 15: 'I am the vine and you are the branches. You can do nothing apart from me.' The question the centurion's faith forces is this: is my submission to God real, or is it selective? Am I obeying what He has already told me to do while simultaneously expecting authority over what I'm praying about? The breakthrough in one area is often connected to obedience in another. What has God been telling you to do that you've been postponing?"
+      },
+      {
+        title: "Your Voice Has Weight",
+        icon: "campaign",
+        scripture: "Ephesians 2:6",
+        verseText: "For he raised us from the dead along with Christ and seated us with him in the heavenly realms because we are united with Christ Jesus.",
+        body: "Authority remains dormant until it's voiced. Jesus didn't pray about the storm — He spoke to it: 'Peace, be still.' Paul declares in Ephesians 2:6 that believers are seated with Christ in heavenly places. This is not a future aspiration — it is a present reality. And from that position, your voice carries the weight of the authority in which it speaks. Pastor Wayne draws a critical distinction: there is a difference between praying to God about a problem and speaking to the problem under the authority of Christ. Both are valid; they are not identical. When you know who you are in Christ, your prayer language shifts from begging to asking — from 'God please do something' to 'in the name of Jesus, peace be still.' The badge doesn't get its power from the police officer who holds it. It gets its power from the entire legal and governmental system behind it. When you operate in the authority of Christ, your words carry the full weight of heaven. Speak to the situation. Call your child's name. Declare the diagnosis wrong. Not because your willpower is strong, but because of Whose you are and what position you occupy."
+      },
+      {
+        title: "Building the Storehouse",
+        icon: "fitness_center",
+        scripture: "Mark 9:29",
+        verseText: "He replied, 'This kind can only be cast out by prayer.'",
+        body: "When the disciples couldn't cast out the demon that had tormented the boy, Jesus diagnosed the problem: this kind only comes out through prayer and fasting. The disciples had been given authority — Jesus had granted it. But there are levels of spiritual authority that only develop through consistent, private discipline. Authority is like a muscle. It must be conditioned through a lifestyle of prayer, fasting, and deep engagement with the Word — not just exercised in crisis moments. A black belt doesn't develop their strength during a fight. They develop it in training sessions when nobody is watching, when they don't feel like it, when there's no emergency to justify the investment. And when the fight comes, they're ready. This is what Pastor Wayne calls 'building the storehouse' — gaining spiritual strength before the crisis arrives so you have something to draw from when it does. What does your Tuesday look like? Your Thursday morning? The authority you want in public is conditioned in private. If you've been trying to exercise authority in a situation but aren't seeing results, the question isn't 'is God listening?' The question is: what does my private spiritual practice actually look like?"
+      },
+      {
+        title: "You're a King's Kid",
+        icon: "crown",
+        scripture: "2 Samuel 9:7",
+        verseText: "Don't be afraid! David said. 'I intend to show kindness to you because of my promise to your father, Jonathan. I will give you all the property that once belonged to your grandfather Saul, and you will eat here at my table!'",
+        body: "Mephibosheth was hiding in a place called Lo-debar — which means 'no pasture,' a wasteland — when King David sent for him. He had every reason to expect the worst: he was the grandson of the king David had replaced, and in ancient politics, new dynasties eliminated the previous royal family. Instead, David invited him to the king's table. Not because of anything Mephibosheth had done. Not because of his ability or performance. But because of a covenant David had made with his father Jonathan — a covenant that extended to descendants. You are not a slave. You are not a servant trying to earn a seat. You are a king's kid, and you inherit your authority through your Father — through who He is and the covenant He has established through Christ. Your position at the Father's table is not something you work your way into; it is something you receive by grace, then learn to walk in. The breakthrough isn't 'if I can just do enough to earn more authority.' The breakthrough is understanding the authority you already have because of Whose table you are already seated at."
+      }
+    ],
+
+    preAssessment: [
+      {
+        type: 'completion',
+        sentence: "The centurion explained that he believed Jesus could heal from a distance because Jesus was ___ — the same reason the centurion's own orders were obeyed.",
+        options: ["beloved by the Father", "well-known in the region", "under authority himself", "proven through miracles"],
+        correct: 2,
+        explanation: "The centurion's revelation was about how authority works in a chain of command: because he was under authority, he had authority. He recognized that Jesus, submitted to the Father, carried authority that transcended physical proximity — 'just say the word.'"
+      },
+      {
+        type: 'completion',
+        sentence: "Pastor Wayne's key principle: 'You cannot ___ what you do not carry, and you cannot carry what you're not connected to.'",
+        options: ["receive", "inherit", "command", "speak"],
+        correct: 2,
+        explanation: "This is the architecture of authority in the kingdom: connection → carrying → commanding. When you're disconnected from the vine (John 15), you cannot carry the authority. When you cannot carry it, you cannot exercise it over the situations in your life."
+      },
+      {
+        type: 'match',
+        instruction: "Match each dimension of authority to its meaning:",
+        pairs: [
+          { left: "Founded on submission", right: "Being under authority is what gives you authority" },
+          { left: "Activated by spoken word", right: "Authority remains dormant until it's voiced" },
+          { left: "Maintained through discipline", right: "Conditioned through prayer, fasting, and the Word" },
+          { left: "Inherited through identity", right: "You're a king's kid, not a servant earning a spot" }
+        ],
+        explanation: "These four dimensions form a complete theology of spiritual authority: its source (submission), its activation (voice), its maintenance (discipline), and its basis (identity). Weakness in any one affects the others."
+      },
+      {
+        type: 'completion',
+        sentence: "The sermon says Jesus modeled a shift from praying 'about' a problem to speaking ___ a problem.",
+        options: ["for", "with", "to", "around"],
+        correct: 2,
+        explanation: "When the storm raged, Jesus didn't petition the Father to calm it — He spoke directly to the wind and waves: 'Peace, be still.' The sermon applies this: stop praying about the sickness or situation in petition mode, and start speaking to it as someone who carries authority in Christ."
+      },
+      {
+        type: 'completion',
+        sentence: "Mephibosheth in 2 Samuel 9 illustrates that spiritual authority in Christ is ___, not earned through personal performance.",
+        options: ["given conditionally", "earned gradually", "inherited", "demonstrated publicly"],
+        correct: 2,
+        explanation: "Mephibosheth had nothing to offer — hiding in Lo-debar with no claim of merit. David brought him to the king's table because of the covenant with his father Jonathan. Believers receive spiritual authority through their position in Christ (Eph 2:6), not through spiritual performance."
+      }
+    ],
+
+    discernmentQuestions: [
+      { text:"I can walk in spiritual authority without being in spiritual submission — authority and submission are separate matters.", topic:"Authority", correct:2, community:[5,72,8,10,5], mirrorNote:"The centurion's insight was specifically that being under authority is what gives authority. 'I am a man under authority.' You cannot command what you do not carry, and you cannot carry what you're not connected to. The chain goes: submission → carrying → commanding." },
+      { text:"The Roman centurion's faith amazed Jesus because he understood that Jesus' authority flowed from His submission to the Father.", topic:"Matthew 8", correct:1, community:[74,4,4,12,6], mirrorNote:"The centurion didn't just ask for healing — he explained his understanding: 'I am a man under authority.' He recognized that being submitted to a higher authority was what gave him authority over those below. He saw the same principle operating in Jesus' relationship with the Father." },
+      { text:"True power in the kingdom is not seized through striving — it is assigned through relationship and covenant.", topic:"Authority", correct:1, community:[75,4,4,12,5], mirrorNote:"True power is not seized — it is assigned. This is the kingdom's operating system. The centurion didn't grab authority; he received it through the chain of command he submitted to. The same principle governs spiritual authority." },
+      { text:"Speaking directly to a sickness or situation is arrogant presumption — all prayer should be addressed to God alone.", topic:"Prayer", correct:2, community:[5,65,15,10,5], mirrorNote:"Jesus spoke to the storm directly — He didn't pray to the Father to stop it. The disciples were given authority to cast out demons. Speaking to situations under the authority of Christ is not arrogance — it is exercising the delegated authority God has given believers." },
+      { text:"When I'm not submitted to God in an area of my life, my authority may be limited in that area.", topic:"Submission", correct:1, community:[71,4,5,15,5], mirrorNote:"If you take off the badge, you lose the authority behind it. If you step out from under spiritual covering through disobedience, the authority you carry is affected. Connection to authority requires ongoing submission." },
+      { text:"Praying about a situation and speaking to a situation are spiritually equivalent — what matters is the faith behind it.", topic:"Prayer", correct:3, community:[10,30,40,15,5], mirrorNote:"The sermon presents these as distinct, not equivalent — praying about a problem is petition; speaking to a problem is exercising delegated authority. However, sincere students may reasonably conclude that the distinction is secondary compared to the substance of faith. This is a matter of genuine theological nuance, not a simple lie." },
+      { text:"Every believer — regardless of spiritual maturity or discipline — carries identical spiritual authority in Christ.", topic:"Authority", correct:3, community:[10,25,40,20,5], mirrorNote:"All believers are seated in Christ (Eph 2:6). Yet Jesus said of certain demons: 'this kind only comes out through prayer and fasting.' There appears to be a dimension of authority that is developed, not merely granted. Whether this means levels of positional authority or effective exercise of authority is a genuine theological question." },
+      { text:"Accountability in the church — being under spiritual covering — is a biblical element of maintaining spiritual authority.", topic:"Accountability", correct:1, community:[73,4,5,13,5], mirrorNote:"God said from the beginning it is not good for man to be alone. Accountability places you under a spiritual covering. The authority you exercise is connected to the submission and covering you operate within." },
+      { text:"My identity as a king's kid in Christ means I have authority that is inherited through covenant, not earned through works.", topic:"Identity", correct:1, community:[75,4,4,12,5], mirrorNote:"Mephibosheth received a seat at the king's table not because of his accomplishments — he was hiding in Lo-debar — but because of the covenant David made with his father. We are seated with Christ in heavenly places (Eph 2:6). That position is received, not achieved." },
+      { text:"The fact that some demons 'only come out through prayer and fasting' implies there are levels of spiritual authority that develop over time.", topic:"Spiritual Discipline", correct:4, community:[44,4,6,41,5], mirrorNote:"The sermon presents this as evidence that authority must be developed. Whether 'levels' is the right framework — or whether prayer and fasting simply positions you to wield what was already given — is a theological nuance worth holding. The practical conclusion either way: private discipline matters." },
+      { text:"Announcing spiritual authority publicly is more spiritually effective than exercising it in private.", topic:"Spiritual Discipline", correct:2, community:[5,68,10,12,5], mirrorNote:"Authority is built in private before it's effective in public. The black belt develops their skill in training sessions when nobody is watching. Jesus said when you fast, do it privately. Building the storehouse happens before the public moment arrives." },
+      { text:"A believer's voice carries weight in the spirit proportional to their level of submission and connection to God.", topic:"Authority", correct:4, community:[44,5,5,41,5], mirrorNote:"The principle of the sermon supports this: the deeper the submission and connection, the more weight the voice carries. But quantifying this proportionality is wisdom territory — the relationship is real; the exact mechanics remain with God." },
+      { text:"God is the only one who can move obstacles — a believer's role is only to pray and wait for God to act sovereignly.", topic:"Authority", correct:2, community:[5,68,10,12,5], mirrorNote:"The centurion did not ask Jesus to pray. He asked Jesus to speak the word. Jesus gave His disciples authority to cast out demons and heal the sick. God consistently acts through delegated human authority — not bypassing human action but working through it." },
+      { text:"Building a consistent private life with God is preparation for the public moments of authority God will call you into.", topic:"Spiritual Discipline", correct:4, community:[44,4,6,41,5], mirrorNote:"This is the black belt principle: training in private prepares for the fight in public. This is also wisdom — private discipline that is primarily for public display misses the point. True storehouse-building is about relationship, not positioning." },
+      { text:"The authority Jesus exercised was unique to His divine nature — believers today cannot operate in the same kind of spiritual authority.", topic:"Authority", correct:2, community:[5,70,10,10,5], mirrorNote:"Jesus told His disciples: 'As the Father has sent me, so I send you.' He gave them authority over all the power of the enemy. Mark 16 says these signs will follow those who believe. The authority believers carry is delegated from Christ. It is not identical to His, but it is real and substantial." }
+    ],
+
+    assessment: [
+      {
+        q: "What was the centurion's key revelation about how spiritual authority works?",
+        options: [
+          "Authority comes from military rank and personal experience",
+          "Being under authority to the Father was the source of Jesus' power, and the same chain governs spiritual authority",
+          "Faith alone grants unlimited authority to any believer who asks",
+          "Jesus had unique divine authority that believers cannot access"
+        ],
+        correct: 1,
+        explanation: "The centurion explained his logic: 'I am a man under authority.' He recognized that being submitted to a higher authority was what gave him authority over those below him — and saw the same principle in Jesus' relationship with the Father. Pastor Wayne's application: 'When I'm under authority, I have authority.'"
+      },
+      {
+        q: "What key distinction does the sermon draw between praying 'about' a problem and speaking 'to' it?",
+        options: [
+          "Praying about problems is more humble; speaking to them can be spiritually arrogant",
+          "Praying about a problem is petition; speaking to a problem is exercising the authority you carry in Christ",
+          "Spoken declarations are only for mature spiritual leaders, not ordinary believers",
+          "Jesus prayed to the Father about the storm before speaking to it"
+        ],
+        correct: 1,
+        explanation: "When the storm raged, Jesus didn't ask the Father to calm it — He spoke directly to the elements: 'Peace, be still.' The sermon calls believers to the same shift: stop praying about the sickness or situation in petition mode, and start speaking to it as someone who has been given authority in Christ."
+      },
+      {
+        q: "What does Mephibosheth's story in 2 Samuel 9 illustrate about spiritual authority?",
+        options: [
+          "Believers must prove their worthiness before receiving authority from God",
+          "God restores those who have sinned when they confess and repent",
+          "Authority in Christ is inherited through covenant position, not earned through performance",
+          "Kings are uniquely authorized to represent God's authority on earth"
+        ],
+        correct: 2,
+        explanation: "Mephibosheth had nothing to offer — hiding in Lo-debar with no claim of merit. David brought him to the king's table because of the covenant with his father Jonathan. You don't work your way into authority. You receive it through your position in Christ, seated with Him in heavenly places (Eph 2:6)."
+      },
+      {
+        q: "What does the black belt illustration explain about how spiritual authority is maintained?",
+        options: [
+          "Believers who are naturally gifted operate in authority without much personal discipline",
+          "Authority can only be demonstrated in public settings where others witness it",
+          "Spiritual authority is developed through private, consistent discipline long before it's needed in crisis",
+          "The more theological training a person has, the more authority they carry"
+        ],
+        correct: 2,
+        explanation: "A black belt doesn't develop their skill during the fight — every training session when nobody was watching built the capacity that shows up in the moment. The disciples couldn't cast out the demon because they hadn't built the spiritual muscle (Mark 9:29). Some things in the spirit only come through private investment before the public moment arrives."
+      },
+      {
+        q: "What does Pastor Wayne call the practice of developing spiritual strength before a crisis arrives?",
+        options: [
+          "Storing up merit",
+          "Building the storehouse",
+          "Laying the foundation",
+          "Training in the wilderness"
+        ],
+        correct: 1,
+        explanation: "Building the storehouse is gaining spiritual strength when nothing is happening so you have something to draw from when situations arise. You want a well to draw from before you're thirsty — which means digging it consistently, not only when the crisis has already hit."
+      }
+    ]
+  },
+
+  'outrageous-exchange': {
+    id: 'outrageous-exchange',
+    title: "Outrageous Exchange",
+    series: 'Union Church',
+    community: 'Union Church',
+    date: 'Jan 26, 2026',
+    type: 'Formation',
+    duration: '60 min',
+    scripture: 'Genesis 22:9–14',
+    videoId: 'D928rXwuX64',
+
+    preSortStatements: [
+      { text:"Altitude — being elevated, successful, and visible in ministry — is a primary indicator that you are in the center of God's will.", topic:"Purpose", correct:2, community:[5,68,8,14,5], mirrorNote:"God called Abraham to a meeting place, not a mountain. Many have turned the meeting place into a mountain — 'look at how successful I am.' It was never about altitude; it was always about atmosphere. The higher you go, the lower you must remain." },
+      { text:"When God slows down your momentum season, it can be His way of aligning you — not the enemy delaying you.", topic:"Alignment", correct:4, community:[42,5,6,42,5], mirrorNote:"Abraham had everything finally happening — Isaac born, momentum building — when God said 'go to Moriah.' Right in the middle of momentum, God interrupted it. Not to derail Abraham, but to align him. God will always slow you down to line you up." },
+      { text:"Your gift will take you where your character can't keep you if you prioritize altitude over atmosphere.", topic:"Character", correct:4, community:[44,5,5,41,5], mirrorNote:"When you get elevated without the sacrifice — without staying low and choosing presence over platform — the nasty in you also gets elevated. Old temptations return. Your gift can take you further than your character can sustain if you skip the altar." },
+      { text:"God's kingdom exchanges are always proportional — He only asks for something in line with what you can afford to give up.", topic:"Sacrifice", correct:2, community:[5,72,8,10,5], mirrorNote:"God's exchanges are outrageous, not proportional. He asked Abraham for his only son — the exact thing he waited 25 years for. The sacrifice will always cost you more than expected, but the altar will always transform you more than you can imagine." },
+      { text:"A person with God's anointing can take the fastest path to their destiny without compromising the spiritual process.", topic:"Process", correct:2, community:[5,65,10,15,5], mirrorNote:"Abraham had horses — faster, more dignified. He chose a donkey. Two to three miles per hour. Some things can't be carried at speed. 'You only get promoted in the kingdom by donkey.' Jesus entered Jerusalem on a donkey. Alignment requires process, and process is often slower than acceleration." },
+      { text:"There are some kingdom assignments where you cannot bring everyone who loves you — some paths are yours alone to walk.", topic:"Calling", correct:4, community:[44,5,6,40,5], mirrorNote:"Abraham told his servants: 'Stay here with the donkey.' Some people will only see a son, not a seed. Some assignments require you to go without people who love you, because they can only see what currently exists, not what God is bringing into being." },
+      { text:"God wants you to surrender your 'just-in-case' — the thing you're holding back in case He doesn't come through.", topic:"Surrender", correct:1, community:[72,4,5,14,5], mirrorNote:"God doesn't want your just-in-case. He wants your one — the thing you've been keeping. He asked Abraham not for a substitute but for Isaac himself. The outrageous exchange happens when you stop holding on to your backup plan and give God your only." },
+      { text:"Building an altar means working through resentment about what God is asking you to sacrifice.", topic:"Surrender", correct:2, community:[5,75,5,10,5], mirrorNote:"Abraham didn't build a case. He built an altar. He didn't build up resentment. He built an altar. He didn't build an audience to tell him why he shouldn't do it. He built an altar. The altar is the opposite of resentment — it is the place where surrender becomes worship." },
+    ],
+
+    arguments: [
+      { text:'"The sacrifice will always cost you more than expected, but the altar will always transform you more than you can imagine."', timestamp:'10:46' },
+      { text:'"It was never about altitude. It was always about atmosphere — about staying in the presence."', timestamp:'26:39' },
+      { text:'"The higher you go, the lower you have to remain."', timestamp:'27:00' },
+      { text:'"God will always slow you down to line you up."', timestamp:'31:10' },
+      { text:'"You only get promoted in the kingdom by donkey."', timestamp:'34:14' },
+      { text:'"There are some assignments where nobody can go with you."', timestamp:'40:15' },
+      { text:'"God never asks for anything He doesn\'t plan to fill."', timestamp:'14:30' },
+      { text:'"Abraham didn\'t build a case. He didn\'t build resentment. He built an altar."', timestamp:'52:04' },
+    ],
+
+    sortStatements: [
+      { text:'"The sacrifice will always cost you more than expected, but the altar will always transform you more than you can imagine."', topic:"Sacrifice", correct:1, community:[76,3,4,12,5] },
+      { text:'"It was never about altitude — it was always about atmosphere. Are you climbing for a platform or a meeting place?"', topic:"Purpose", correct:1, community:[74,4,4,13,5] },
+      { text:'"God will always slow you down to line you up — slow is not the enemy\'s stall, it\'s God\'s alignment."', topic:"Alignment", correct:4, community:[44,5,5,41,5] },
+      { text:'"You only get promoted in the kingdom by donkey — put the horses away and embrace the process."', topic:"Process", correct:4, community:[43,5,5,42,5] },
+      { text:'"There are some assignments where nobody can go with you — not because they don\'t love you, but because they only see a son, not a seed."', topic:"Calling", correct:4, community:[42,5,6,42,5] },
+      { text:'"God never asks for anything He doesn\'t plan to fill — the outrageous exchange is always in your favor."', topic:"Trust", correct:1, community:[75,4,4,12,5] },
+      { text:'"Abraham didn\'t build a case. He didn\'t build resentment. He didn\'t build an audience. He built an altar."', topic:"Surrender", correct:1, community:[76,3,4,12,5] },
+      { text:'"When you make an altar, you can leave declaring: Yahweh Yireh — the Lord has already provided."', topic:"Yahweh Yireh", correct:1, community:[77,3,4,11,5] },
+    ],
+
+    formation: [
+      {
+        title: "Exchange Altitude for Atmosphere",
+        icon: "keyboard_double_arrow_down",
+        scripture: "Genesis 22:2",
+        verseText: "Take your son, your only son — yes, Isaac, whom you love so much — and go to the land of Moriah. Go and sacrifice him as a burnt offering on one of the mountains, which I will show you.",
+        body: "God did not call Abraham to a mountain. He called him to a meeting place. In the geography of Scripture, Moriah is where the temple would eventually stand, where the presence of God would dwell among His people. It was never arbitrary terrain; it was always about encounter. But a pervasive spiritual disease of the current age is this: we have sacrificed atmospheres for altitudes. We have turned meeting places into mountains — platforms to demonstrate how high we've risen rather than altars where we bow low in His presence. The pursuit of altitude — visibility, success, being seen — is not wrong in itself. God takes people to high places. But there is a difference between a mountain you climb to be seen and a mountain you climb to surrender. Abraham didn't plant a flag. He built an altar. He didn't raise a platform. He raised a knife. A man is not measured by how tall he stands after he falls, but rather how low he remains after he stands. When you prioritize altitude over atmosphere, your gift will take you further than your character can sustain — old temptations surface, the nasty in you gets elevated alongside your status. If it took the presence to get you up the mountain, it's going to take the presence to keep you there. The question is not how high you are climbing. The question is whether you're climbing toward a meeting place or a monument."
+      },
+      {
+        title: "Exchange Acceleration for Alignment",
+        icon: "directions_bike",
+        scripture: "Proverbs 3:5–6",
+        verseText: "Trust in the Lord with all your heart; do not depend on your own understanding. Seek his will in all you do, and he will show you which path to take.",
+        body: "Abraham was rich. He had horses. He could have gotten to Moriah fast. He chose a donkey — two to three miles per hour, carrying the weight of the most painful assignment of his life. This is not incidental. There is a category of spiritual breakthrough that cannot be carried at speed. Acceleration makes you impressive; alignment makes you trustworthy. Everyone wants to go zero to sixty. But God is often not asking to accelerate you — He is asking to align you. He interrupts your momentum not because He is against your progress, but because something in you still needs the donkey's pace to develop properly. Anxiety is the inability to slow your thoughts down — worrying about something that only alignment takes care of. David was anointed in the mail room and went right back to tending sheep. The promise had come, but the donkey was still the mode of travel. Your character must be developed enough to carry what your gift has secured. If promotion comes before alignment, the nasty in you gets elevated too. Some prayers aren't answered at the speed you want because God is taking you by donkey — slow, low, aligned. Don't neglect your donkey mission. Put the horses away."
+      },
+      {
+        title: "Exchange Audiences for Assignments",
+        icon: "person_remove",
+        scripture: "Genesis 22:5–6",
+        verseText: "Abraham told the servants, 'Stay here with the donkey while the boy and I go over there. We will worship there, and then we will come right back.' So Abraham placed the wood for a burnt offering on Isaac's shoulders while he himself carried the fire and the knife. As the two of them walked on together...",
+        body: "There is a detail in Genesis 22 that goes unnoticed on first reading: Abraham tells the servants to stay behind. Sarah is absent from this moment — and the sermon suggests a reason: some people can only see a son. Abraham saw a seed. When you are carrying a kingdom assignment that requires sacrifice at an unprecedented level, not everyone in your life will be equipped to accompany you. This is not disloyalty — it is the nature of certain calls. There are some assignments where nobody can go with you. Not because they don't love you, but because they will only see what currently exists, not what God is bringing into being. Some things that have been holding you back — the relationship, the old job, the number in your phone — must be left behind not because they are evil but because they cannot carry what God is asking you to lay down. There is always a counterfeit before the real thing arrives. And sometimes God asks you to stop holding on to your just-in-case so that He can give you what you've actually been believing for. God wants to make you many. But many always starts with releasing your one."
+      },
+      {
+        title: "Exchange Altars for Announcements",
+        icon: "campaign",
+        scripture: "Genesis 22:14",
+        verseText: "Abraham named the place Yahweh-Yireh (which means 'the Lord will provide'). To this day, people still use that name as a proverb: 'On the mountain of the Lord it will be provided.'",
+        body: "After Abraham laid Isaac on the altar and lifted the knife, an angel stopped him. He looked behind him and saw a ram caught in the thicket — already there before he started his ascent. The ram's horn specifically — the shofar — was left after the offering. This was the horn that would announce war. The horn blown in the year of Jubilee. The horn blown when entering God's presence. And Abraham named the place Yahweh Yireh — the Lord has provided. This is the final exchange: every altar becomes an announcement. When you lay down what is precious, what you've waited years for, what costs more than you thought it would — the altar does not end in loss. It ends in a declaration. Now look back over your shoulder. There is something caught in the thicket of your past — a victory you didn't fully praise God for, a provision you passed without noticing, a moment He came through when the odds were impossible. The praise is caught in your pain, waiting to be released. God never asks for anything He doesn't plan to fill. If He is asking for it, He has already prepared what comes after. When you walk away from the altar, you walk away with a new name for the place: Yahweh Yireh — the Lord has provided, and He will provide again."
+      }
+    ],
+
+    preAssessment: [
+      {
+        type: 'completion',
+        sentence: "God called Abraham to Moriah not to give him a mountain to stand on, but to give him a ___.",
+        options: ["platform", "test of endurance", "meeting place", "reward for obedience"],
+        correct: 2,
+        explanation: "The sermon's first exchange corrects a common misreading: Moriah was a meeting place — where the presence of God would eventually dwell in the temple. God was never calling Abraham to altitude; He was calling him to atmosphere. The mountain was always about encounter, not elevation."
+      },
+      {
+        type: 'completion',
+        sentence: "Pastor Jimmy says Abraham chose a donkey instead of horses because some things in the kingdom can only be carried ___.",
+        options: ["by others on your behalf", "with great visible faith", "slowly", "at night in secret"],
+        correct: 2,
+        explanation: "Abraham had horses — faster and more dignified. He chose a donkey. Two to three miles per hour with the weight of his greatest sacrifice. Alignment requires slowness. God interrupts momentum not to derail you, but to align you. Some breakthroughs can only be carried at donkey pace."
+      },
+      {
+        type: 'match',
+        instruction: "Match each outrageous exchange to what is surrendered and what is received:",
+        pairs: [
+          { left: "Altitude for atmosphere", right: "Give up the platform; receive the presence" },
+          { left: "Acceleration for alignment", right: "Give up speed; receive trustworthy character" },
+          { left: "Audiences for assignments", right: "Give up people-pleasing; receive your specific call" },
+          { left: "Altars for announcements", right: "Give up what you're holding; receive Yahweh Yireh" }
+        ],
+        explanation: "Each exchange costs something real — and each return is greater than what was offered. The outrageous part is not that God takes. The outrageous part is what God gives back."
+      },
+      {
+        type: 'completion',
+        sentence: "When Abraham told his servants to stay behind, it was because some assignments require going without those who can only see ___, not the seed.",
+        options: ["the promise", "the mountain", "the son", "the sacrifice"],
+        correct: 2,
+        explanation: "The sermon suggests Sarah isn't in the story because all she could see was Isaac — a son. Abraham saw a seed that would become many nations. Some people who love you deeply will only see what currently exists; they cannot see what God is about to create through your sacrifice."
+      },
+      {
+        type: 'completion',
+        sentence: "Abraham named the place Yahweh Yireh after discovering that what he needed was already ___.",
+        options: ["promised before creation", "earned by his faithfulness", "there — caught in the thicket", "given at the very last moment"],
+        correct: 2,
+        explanation: "The ram was already caught in the thicket before Abraham completed his ascent — the provision in place before the test was finished. Yahweh Yireh means 'the Lord will provide,' and in this case the provision was already there. God never asks for anything He doesn't plan to fill."
+      }
+    ],
+
+    discernmentQuestions: [
+      { text:"Success, elevation, and visibility in ministry are primary indicators that you are in the center of God's will.", topic:"Purpose", correct:2, community:[5,68,8,14,5], mirrorNote:"God called Abraham not to a mountain of visibility but to a meeting place. The first exchange is trading the pursuit of altitude for the cultivation of atmosphere. Visible success can accompany faithfulness — but it can never be the measure of it. Abraham climbed to surrender, not to be seen." },
+      { text:"God can interrupt your best momentum season not to stall you but to align you for something greater.", topic:"Alignment", correct:4, community:[44,5,5,41,5], mirrorNote:"Abraham had Isaac — momentum at last. Then God said 'go to Moriah.' Right in the middle of his best season, God interrupted it. The sermon presents this as alignment, not delay. But not every interruption is God — discernment is required to distinguish divine alignment from enemy attack or natural circumstance." },
+      { text:"Abraham's choice to travel by donkey instead of horse illustrates that God values character alignment over rapid achievement.", topic:"Process", correct:4, community:[44,5,5,41,5], mirrorNote:"The donkey was deliberate — slow, low, aligned. Acceleration makes you impressive; alignment makes you trustworthy. The promotion in the kingdom comes by donkey. This is the sermon's principle; the broader wisdom is that God cares more about who you're becoming than how fast you arrive." },
+      { text:"God's kingdom exchanges are always fair — He asks for something proportional to what He gives you in return.", topic:"Sacrifice", correct:2, community:[5,72,8,10,5], mirrorNote:"The exchanges in the kingdom are outrageous, not proportional. God asked for the only son Abraham had waited 25 years for. He exchanged Jesus' innocence for humanity's guilt. The transaction always feels unfair going in — and incomprehensibly generous coming out. That's what makes it outrageous." },
+      { text:"Familiarity is the kryptonite to faith — once faith produces something, it takes faith to maintain it and not become comfortable.", topic:"Faith", correct:1, community:[75,4,4,12,5], mirrorNote:"'If faith produced it, it takes faith to keep it.' This is a direct statement from the sermon. Don't get comfortable. Wake up every day saying 'God, show me something.' The thief of faith is becoming familiar with what God has already done." },
+      { text:"Your gift will take you where your character can't keep you if you prioritize altitude over atmosphere.", topic:"Character", correct:1, community:[74,4,4,13,5], mirrorNote:"When you get elevated without sacrifice — without choosing presence over platform — the nasty in you gets elevated too. Unresolved pride, old temptations, character gaps surface when success comes before alignment. The gift opens the door; the character determines whether you stay in the room." },
+      { text:"When a kingdom assignment requires going up the mountain, everyone who loves you should be part of the journey.", topic:"Calling", correct:2, community:[5,68,10,12,5], mirrorNote:"Abraham told his servants: 'Stay here.' Sarah isn't in the story. Some assignments can only be completed by those who can see the seed, not just the son. Not everyone who loves you can go with you — not because they're disloyal, but because the assignment is specifically yours to carry." },
+      { text:"Anxiety is the inability to slow your thoughts down, and only alignment — not acceleration — can address it.", topic:"Alignment", correct:4, community:[42,5,7,41,5], mirrorNote:"The sermon names this specifically: anxiety is the inability to slow your thoughts down — worrying about something that only alignment takes care of. The donkey pace is not just logistical; it's spiritual. Whether alignment is the only remedy for anxiety is overstated — but the principle that rushing makes it worse is sound." },
+      { text:"Abraham's exchange at Moriah was purely personal — the impact was only for him and his immediate family.", topic:"Genesis 22", correct:2, community:[5,74,5,11,5], mirrorNote:"The sermon opens with 'Father Abraham had many sons' — Abraham's surrender on Moriah became the foundation for a covenant that encompasses every believer. 'The reality of many always starts with the release of one.' The altar Isaac was laid on was the most generationally consequential act of Abraham's life." },
+      { text:"God's outrageous exchanges start with Him asking for your 'one' in order to make you 'many.'", topic:"Kingdom", correct:1, community:[74,4,4,13,5], mirrorNote:"'The reality of many always starts with the release of one.' God asked for Abraham's only son. He asked Moses to leave Pharaoh's palace. He asked the woman to give her last jar of oil. The pattern is consistent: offer your one, receive your many. This is the kingdom's operating logic." },
+      { text:"When you build an altar, the right expectation is to get back exactly what you put in.", topic:"Surrender", correct:2, community:[5,72,8,10,5], mirrorNote:"In the kingdom, you don't get back a teddy bear — you get back freedom, forgiveness, purpose, multiplication. You don't exchange your one to receive your one back unchanged. You exchange your one to receive many. The altar transforms; it doesn't merely return." },
+      { text:"Isaac was the promise God made to Abraham — not a gift to get to a deeper promise.", topic:"Genesis 22", correct:2, community:[5,70,10,10,5], mirrorNote:"'Isaac was never the promise. Isaac was the gift to get to the promise.' Sarah could only see a son; Abraham saw a seed that would become nations. What God has already given you is not your final destination — it is often the vehicle to a greater covenant reality." },
+      { text:"Once you lay something on the altar, it is permanently lost — the exchange is a one-way surrender.", topic:"Surrender", correct:2, community:[5,74,5,11,5], mirrorNote:"The ram was already caught in the thicket. The angel stopped Abraham. Isaac came back down the mountain with him. The outrageous exchange is not permanent loss — it is transformation. What you surrender is replaced by something greater: Yahweh Yireh, the announcement that God has already provided." },
+      { text:"The provision God has prepared for your situation is often already in place before you finish the act of surrender.", topic:"Providence", correct:1, community:[74,4,4,13,5], mirrorNote:"The ram was caught in the thicket on the way up the mountain — before Abraham reached the altar. The provision was already there. God never asks for anything He doesn't plan to fill. This does not mean the provision is visible before the surrender — it means it is in place, caught and waiting, before the act is complete." },
+      { text:"Holding on to your 'just-in-case' backup plan is the same as exercising good stewardship of what God has given you.", topic:"Surrender", correct:2, community:[5,70,10,10,5], mirrorNote:"The sermon distinguishes clearly: God doesn't want your just-in-case. He wants your one. The just-in-case represents what you're keeping in reserve — in case God doesn't come through. That is not stewardship; that is divided trust. Full surrender means releasing even the contingency plan." }
+    ],
+
+    assessment: [
+      {
+        q: "What is the first outrageous exchange the sermon calls believers to make?",
+        options: [
+          "Exchange suffering for success through persistent faith",
+          "Exchange altitude for atmosphere — give up the platform to prioritize the presence of God",
+          "Exchange old habits for new spiritual disciplines",
+          "Exchange your current assignment for a larger ministry calling"
+        ],
+        correct: 1,
+        explanation: "God called Abraham not to a visible mountain but to a meeting place. The first exchange is trading the pursuit of altitude — success, elevation, being seen — for the cultivation of atmosphere: the presence of God. Abraham didn't plant a flag; he built an altar. A man is not measured by how tall he stands after he falls, but how low he remains after he stands."
+      },
+      {
+        q: "What does Abraham's choice to ride a donkey instead of a horse represent in the sermon?",
+        options: [
+          "Abraham's limited financial resources at this point in his life",
+          "His desire to travel in public humility before those on the road",
+          "The exchange of acceleration for alignment — going slow to stay aligned with God's pace",
+          "A sign of mourning for the sacrifice he was about to offer"
+        ],
+        correct: 2,
+        explanation: "Abraham was rich and had horses. He chose a donkey — two to three miles per hour. Some things can only be carried at donkey pace. God interrupts momentum to align, not to delay. Acceleration makes you impressive; alignment makes you trustworthy. You only get promoted in the kingdom by donkey."
+      },
+      {
+        q: "Why weren't the servants — or Sarah — brought up the mountain with Abraham?",
+        options: [
+          "They were spiritually unworthy for the sacred nature of the assignment",
+          "Abraham didn't trust them with the details of what God had asked him to do",
+          "Some assignments can only be walked with those who see the seed — some people can only see what currently is, not what God is creating",
+          "God specifically required that worship at the altar be done in complete isolation"
+        ],
+        correct: 2,
+        explanation: "The sermon suggests Sarah could only see a son — the promise she had waited for. Abraham saw a seed: nations. When you carry a kingdom assignment that requires unprecedented sacrifice, some who love you can only see what currently exists, not what God is creating through your surrender. Some paths are specifically yours to walk."
+      },
+      {
+        q: "What does Yahweh Yireh mean, and what does it announce?",
+        options: [
+          "The Lord is here — declaring God's immediate presence in the crisis",
+          "The Lord has provided — declaring that every altar becomes an announcement of God's faithfulness",
+          "The Lord is my sacrifice — marking Abraham's complete act of surrender",
+          "The Lord sees — acknowledging that God witnessed Abraham's obedience"
+        ],
+        correct: 1,
+        explanation: "Yahweh Yireh means 'the Lord will provide.' Abraham named the place this after discovering the ram — provision already caught in the thicket before the ascent was complete. Every altar a believer builds becomes an announcement: the Lord has provided. And that announcement reverberates forward and backward in your story."
+      },
+      {
+        q: "What is the 'caught praise' Pastor Jimmy says is behind every believer?",
+        options: [
+          "Worship songs that were cut short in a past service and need to be completed",
+          "Praise stuck in the pain and disappointment of the past — provisions and victories not yet fully celebrated",
+          "A prophetic song God is calling you to write as an act of personal surrender",
+          "The applause of heaven that arrives at the exact moment of full surrender"
+        ],
+        correct: 1,
+        explanation: "The ram was already caught in the thicket — caught before Abraham got there. Look over your shoulder. There is something caught in your past — a time God came through, a provision that felt too small to fully acknowledge, a victory you passed without complete praise. The altar doesn't end in loss; it ends in an announcement. And the announcement is already there, caught and waiting."
+      }
+    ]
+  },
+
   // ── REMNANT CHRISTIAN NETWORK ─────────────────────────────────────────────
 
   'how-to-seek-god': {
